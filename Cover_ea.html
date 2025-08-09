@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EA Advanced Trading V1.00 Cover</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .cover-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e  50%, #0f3460 75%, #004080 100%);
+            overflow: hidden;
+            font-family: 'Kanit', sans-serif;
+        }
+        
+        .background-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(0, 255, 200, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 75% 75%, rgba(0, 150, 255, 0.1) 0%, transparent 40%),
+                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 200, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 200, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+        
+        .chart-lines {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cpath d='M50 250 Q150 180 250 120 T450 80' stroke='%2300ffcc' stroke-width='3' fill='none' opacity='0.6'/%3E%3Cpath d='M50 200 Q120 160 200 140 T380 100' stroke='%230096ff' stroke-width='2' fill='none' opacity='0.4'/%3E%3Cpath d='M80 220 Q180 140 280 160 T420 120' stroke='%2300ccff' stroke-width='2' fill='none' opacity='0.3'/%3E%3C/svg%3E") no-repeat center;
+            background-size: cover;
+        }
+        
+        .main-title {
+            position: absolute;
+            top: 120px;
+            left: 60px;
+            color: #ffffff;
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            max-width: 700px;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #00ffcc, #0096ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+        
+        .version {
+            position: absolute;
+            top: 60px;
+            left: 60px;
+            background: linear-gradient(135deg, #00ffcc, #0096ff);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+        }
+        
+        .subtitle {
+            position: absolute;
+            top: 280px;
+            left: 60px;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 400;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            max-width: 600px;
+            line-height: 1.3;
+        }
+        
+        .features {
+            position: absolute;
+            bottom: 80px;
+            left: 60px;
+            display: flex;
+            gap: 30px;
+        }
+        
+        .feature-badge {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            padding: 12px 24px;
+            border-radius: 30px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .robot-icon {
+            position: absolute;
+            top: 50%;
+            right: 100px;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #00ffcc22, #0096ff22);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid rgba(0, 255, 204, 0.3);
+            box-shadow: 
+                0 0 50px rgba(0, 255, 204, 0.2),
+                inset 0 0 50px rgba(0, 150, 255, 0.1);
+        }
+        
+        .robot-icon::before {
+            content: "🤖";
+            font-size: 120px;
+            filter: sepia(1) hue-rotate(180deg) brightness(1.5);
+        }
+        
+        .glow-effect {
+            position: absolute;
+            top: 50%;
+            right: 100px;
+            transform: translateY(-50%);
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(0, 255, 204, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.5; }
+            50% { transform: translateY(-50%) scale(1.1); opacity: 0.8; }
+        }
+        
+        .decoration-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(0, 255, 204, 0.2) 2px, transparent 2px);
+            background-size: 80px 80px;
+            opacity: 0.3;
+        }
+        
+        .launch-badge {
+            position: absolute;
+            top: 40px;
+            right: 60px;
+            background: linear-gradient(135deg, #ff4757, #ff3838);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cover-container">
+        <div class="background-pattern"></div>
+        <div class="grid-overlay"></div>
+        <div class="decoration-dots"></div>
+        <div class="chart-lines"></div>
+        <div class="glow-effect"></div>
+        
+        <div class="launch-badge">เปิดตัวใหม่</div>
+        <div class="version">V1.00</div>
+        
+        <h1 class="main-title">
+            <span class="highlight">Advanced Trading</span><br>
+            EA
+        </h1>
+        
+        <div class="subtitle">
+            สัมผัสการเทรดแบบไร้กังวล<br>
+            ด้วยระบบเทรดอัตโนมัติขั้นสูง
+        </div>
+        
+        <div class="features">
+            <div class="feature-badge">⚡ เทรดอัตโนมัติ</div>
+            <div class="feature-badge">📊 วิเคราะห์ขั้นสูง</div>
+            <div class="feature-badge">🔒 ควบคุมความเสี่ยง</div>
+        </div>
+        
+        <div class="robot-icon"></div>
+    </div>
+</body>
+</html>
