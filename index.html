@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คู่มือการใช้งาน Advanced Trading EA V1.00</title>
+    <title>คู่มือการใช้งาน Advanced Trading EA V1.00 - ฉบับสมบูรณ์</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,7 +14,7 @@
             color: #333;
         }
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 20px auto;
             padding: 20px;
             background: #fff;
@@ -71,12 +71,33 @@
             border-left: 4px solid #e74c3c;
             margin: 10px 0;
         }
+        .success {
+            background: #d4edda;
+            padding: 10px;
+            border-left: 4px solid #28a745;
+            margin: 10px 0;
+        }
         .disclaimer {
             background: #fff3cd;
             padding: 15px;
             border-left: 4px solid #ffc107;
             margin: 20px 0;
             font-weight: bold;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
         }
         footer {
             text-align: center;
@@ -93,12 +114,35 @@
         a:hover {
             text-decoration: underline;
         }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #3498db;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            background: #ecf0f1;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        .tab-button.active {
+            background: #3498db;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>คู่มือการใช้งาน Advanced Trading EA V1.00</h1>
-        <p>สำหรับ MetaTrader 5 | Version 1.00 | © 2024 UU School Trading</p>
+        <h1>🤖 คู่มือการใช้งาน Advanced Trading EA V1.00</h1>
+        <p style="text-align: center; font-style: italic;">สำหรับ MetaTrader 5 | Version 1.00 | © 2024 UU School Trading | ฉบับสมบูรณ์พร้อม Hybrid System</p>
 
         <div class="disclaimer">
             <h3>⚠️ คำเตือนความเสี่ยงและการปฏิเสธความรับผิด</h3>
@@ -106,269 +150,726 @@
         </div>
 
         <div class="section">
-            <h2>📋 ภาพรวม</h2>
-            <p>Advanced Trading EA V1.00 เป็นระบบเทรดอัตโนมัติสำหรับ MetaTrader 5 ออกแบบมาเพื่อช่วยให้การเทรดมีประสิทธิภาพและง่ายดาย</p>
-            <h3>✨ คุณสมบัติหลัก</h3>
-            <ul>
-                <li>10 Internal Signals</li>
-                <li>4 Trade Direction Modes</li>
-                <li>2 Close Systems</li>
-                <li>100% Automated</li>
-            </ul>
-            <h3>🏗️ สถาปัตยกรรมของ EA</h3>
-            <p>Authentication → Signal System → Trade Direction → TP/SL System → Close System</p>
+            <h2>📋 ภาพรวมและคุณสมบัติใหม่</h2>
+            <p>Advanced Trading EA V1.00 เป็นระบบเทรดอัตโนมัติสำหรับ MetaTrader 5 ที่ได้รับการอัปเดตใหม่ล่าสุด พร้อมระบบ Hybrid Signal ที่ทรงพลัง</p>
+            
+            <h3>✨ คุณสมบัติหลัก (อัปเดตใหม่)</h3>
+            <div class="success">
+                <ul>
+                    <li><span class="emoji">🎯</span> <strong>10 Internal Signals</strong> - สูตรสัญญาณภายในที่หลากหลาย</li>
+                    <li><span class="emoji">🔄</span> <strong>Hybrid Signal System</strong> - รวมสัญญาณ Internal + External</li>
+                    <li><span class="emoji">📈</span> <strong>4 Trade Direction Modes</strong> - ยืดหยุ่นในทุกสถานการณ์</li>
+                    <li><span class="emoji">🎯</span> <strong>TP/SL Management</strong> - จัดการ Take Profit/Stop Loss อัตโนมัติ</li>
+                    <li><span class="emoji">📊</span> <strong>Trailing Stop System</strong> - ติดตามกำไรอย่างฉลาด</li>
+                    <li><span class="emoji">🚪</span> <strong>Dual Close System</strong> - ระบบปิดสถานะแบบคู่</li>
+                    <li><span class="emoji">🖥️</span> <strong>Compact Display</strong> - แสดงผลกระทัดรัด ปรับแต่งได้</li>
+                    <li><span class="emoji">🤖</span> <strong>100% Automated</strong> - ทำงานอัตโนมัติ 24/7</li>
+                </ul>
+            </div>
+
+            <h3>🏗️ สถาปัตยกรรมของ EA (อัปเดต)</h3>
+            <div class="code-block">
+Authentication → Signal System (Internal/External/Hybrid) → Trade Direction → 
+Volume Management → TP/SL System → Trailing Stop → Dual Close System → Display
+            </div>
         </div>
 
         <div class="section">
             <h2>🔧 การติดตั้งและเตรียมความพร้อม</h2>
             <h3>📋 ความต้องการของระบบ</h3>
             <ul>
-                <li><b>Platform:</b> MetaTrader 5</li>
+                <li><b>Platform:</b> MetaTrader 5 (Build 3000+)</li>
                 <li><b>Account Type:</b> Demo หรือ Real Account</li>
                 <li><b>Internet Connection:</b> สำหรับ Authentication System</li>
                 <li><b>WebRequest Permission:</b> ต้องเปิดใช้งานใน MT5</li>
+                <li><b>RAM:</b> อย่างน้อย 4GB (แนะนำ 8GB+)</li>
+                <li><b>CPU:</b> Dual Core ขึ้นไป</li>
             </ul>
 
             <h3>📥 ขั้นตอนการติดตั้ง</h3>
             <ol>
-                <li>Download EA File</li>  
-                <li>Copy to MQL5/Experts</li>
-                <li>Enable WebRequest</li>
-                <li>Attach to Chart</li>
-                <li>Authentication</li>
+                <li><strong>Download EA File</strong> - ดาวน์โหลดไฟล์ EA</li>  
+                <li><strong>Copy to MQL5/Experts</strong> - คัดลอกไปยังโฟลเดอร์ที่ถูกต้อง</li>
+                <li><strong>Enable WebRequest</strong> - เปิดใช้งาน WebRequest</li>
+                <li><strong>Compile (if needed)</strong> - คอมไพล์หากจำเป็น</li>
+                <li><strong>Attach to Chart</strong> - แนบไปยังชาร์ต</li>
+                <li><strong>Authentication</strong> - รอการตรวจสอบ</li>
+                <li><strong>Configure Settings</strong> - ตั้งค่าตามต้องการ</li>
             </ol>
+
             <div class="note">
-                <p><b>รายละเอียด:</b></p>
+                <p><b>รายละเอียดการติดตั้ง:</b></p>
                 <ul>
                     <li>Download file EA: <b>Advanced Trading EA V1.00(MQL5).ex5</b></li> 
-                    <li>Download EA File: Advanced Trading EA V1.00 <b><a href="https://drive.google.com/file/d/1nd9z5joCsZMxrJb3MBvqoC8Sg_XwVEIk/view?usp=drive_link">Download EA File: Advanced Trading EA V1.00</a></b></li>
+                    <li>Download Link: <b><a href="https://drive.google.com/file/d/1nd9z5joCsZMxrJb3MBvqoC8Sg_XwVEIk/view?usp=drive_link">Download EA File: Advanced Trading EA V1.00</a></b></li>
                     <li>วางที่: <b>MQL5/Experts/</b> folder</li>
                     <li>Enable WebRequest สำหรับ: <b><a href="https://script.google.com">https://script.google.com</a></b></li>
                     <li>Attach EA ไปยัง Chart ที่ต้องการเทรด</li>
-                    <li>รอระบบ Authentication</li>
+                    <li>รอระบบ Authentication (ประมาณ 30-60 วินาที)</li>
                 </ul>
             </div>
 
-            <h3>📂 การหา MQL5/Experts Folder</h3>
-            <p><b>วิธีที่ 1 - ผ่าน MetaTrader 5:</b></p>
-            <ol>
-                <li>เปิด MetaTrader 5</li>
-                <li>ไปที่ File → Open Data Folder</li>
-                <li>เข้าไปใน folder MQL5 → Experts</li>
-                <li>วาง file <b>Advanced Trading EA V1.00(MQL5).ex5</b></li>
-            </ol>
-            <p><b>วิธีที่ 2 - Drag & Drop:</b></p>
-            <ol>
-                <li>เปิด Navigator panel (Ctrl+N)</li>
-                <li>ลากไฟล์ EA ไปวางใน Expert Advisors section</li>
-                <li>MT5 จะคัดลอกไฟล์ไปยัง folder ที่ถูกต้อง</li>
-            </ol>
-
-            <h3>⚠️ การเปิดใช้งาน WebRequest</h3>
+            <h3>⚠️ การเปิดใช้งาน WebRequest (สำคัญมาก)</h3>
             <div class="warning">
-                <p><b>สำคัญ:</b> ต้องเปิดใช้งาน WebRequest ก่อนใช้งาน EA</p>
+                <p><b>ขั้นตอนที่สำคัญ:</b> ต้องเปิดใช้งาน WebRequest ก่อนใช้งาน EA</p>
                 <ol>
-                    <li>เปิด MetaTrader 5 → Tools → Options</li>
+                    <li>เปิด MetaTrader 5 → Tools → Options (หรือกด Ctrl+O)</li>
                     <li>คลิก tab "Expert Advisors"</li>
                     <li>เปิดใช้งาน "Allow WebRequest for listed URL"</li>
                     <li>เพิ่ม URL: <b><a href="https://script.google.com">https://script.google.com</a></b></li>
-                    <li>กด "OK"</li>
+                    <li>กด "OK" และรีสตาร์ท MT5</li>
                 </ol>
                 <p><b>หากไม่ทำ:</b> EA จะไม่สามารถทำ Authentication ได้และจะไม่ทำงาน</p>
             </div>
         </div>
 
         <div class="section">
-            <h2>🔐 ระบบ Authentication</h2>
+            <h2>🔐 ระบบ Authentication (อัปเดต)</h2>
             <h3>🔄 การทำงานของ Authentication</h3>
-            <p>EA เริ่มทำงาน → ตรวจสอบ Strategy Tester → ส่งข้อมูลไป Google Sheets → รับผลการตรวจสอบ → เริ่มระบบเทรด</p>
+            <div class="code-block">
+EA Start → Check Strategy Tester → Internet Connection → Send Account Data → 
+Google Sheets Verification → Response Code → Initialize Trading System
+            </div>
+
             <h3>📊 ข้อมูลที่ส่งไปยัง Google Sheets</h3>
             <table>
-                <tr><th>ข้อมูล</th><th>คำอธิบาย</th></tr>
-                <tr><td>Account Login</td><td>หมายเลขบัญชี</td></tr>
-                <tr><td>Account Type</td><td>DEMO/REAL</td></tr>
-                <tr><td>Server</td><td>ชื่อเซิร์ฟเวอร์</td></tr>
-                <tr><td>Program Type</td><td>EA/INDICATOR/SCRIPT</td></tr>
-                <tr><td>Timestamp</td><td>เวลาที่เข้าใช้งาน</td></tr>
+                <tr><th>ข้อมูล</th><th>คำอธิบาย</th><th>ตัวอย่าง</th></tr>
+                <tr><td>Account Login</td><td>หมายเลขบัญชี</td><td>12345678</td></tr>
+                <tr><td>Account Type</td><td>ประเภทบัญชี</td><td>DEMO/REAL</td></tr>
+                <tr><td>Server</td><td>ชื่อเซิร์ฟเวอร์</td><td>ICMarkets-Demo01</td></tr>
+                <tr><td>Program Type</td><td>ประเภทโปรแกรม</td><td>EA</td></tr>
+                <tr><td>Platform</td><td>แพลตฟอร์ม</td><td>MT5</td></tr>
+                <tr><td>Timestamp</td><td>เวลาที่เข้าใช้งาน</td><td>2024.01.15 14:30:25</td></tr>
             </table>
-            <div class="note">
-                <p><b>ระหว่าง Authentication:</b></p>
-                <ul>
-                    <li><span class="emoji">🔍</span> ตรวจสอบว่า EA อยู่ใน Strategy Tester หรือไม่</li>
-                    <li><span class="emoji">🌐</span> ตรวจสอบการเชื่อมต่อ Internet</li>
-                    <li><span class="emoji">📊</span> ส่งข้อมูลบัญชีไป Google Sheets</li>
-                    <li><span class="emoji">⏰</span> บันทึกเวลาที่เข้าใช้งาน</li>
-                    <li><span class="emoji">✅</span> หากผ่าน: แสดง "Authentication completed successfully"</li>
-                    <li><span class="emoji">❌</span> หากไม่ผ่าน: แสดง "Authentication failed"</li>
-                </ul>
+
+            <h3>✅ สถานะ Authentication</h3>
+            <table>
+                <tr><th>Response Code</th><th>ความหมาย</th><th>การดำเนินการ</th></tr>
+                <tr><td>100.00</td><td>Authentication Success</td><td>EA เริ่มทำงานปกติ</td></tr>
+                <tr><td>อื่นๆ</td><td>Authentication Failed</td><td>EA หยุดทำงาน/แสดงคำเตือน</td></tr>
+                <tr><td>Strategy Tester</td><td>ในโหมดทดสอบ</td><td>ข้าม Authentication</td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🎯 ระบบสัญญาณใหม่ (Hybrid Signal System)</h2>
+            
+            <h3>🔄 โหมดการทำงานของสัญญาณ</h3>
+            <table>
+                <tr><th>โหมด</th><th>Internal Signal</th><th>External Signal</th><th>คำอธิบาย</th></tr>
+                <tr><td><span class="emoji">📊</span> Internal Only</td><td>✅</td><td>❌</td><td>ใช้สัญญาณภายในเท่านั้น</td></tr>
+                <tr><td><span class="emoji">📡</span> External Only</td><td>❌</td><td>✅</td><td>ใช้ Custom Indicator เท่านั้น</td></tr>
+                <tr><td><span class="emoji">🔄</span> Hybrid Confirmation</td><td>✅</td><td>✅</td><td>ต้องตรงกันถึงเทรด</td></tr>
+                <tr><td><span class="emoji">🎯</span> Hybrid Internal Priority</td><td>✅</td><td>✅</td><td>Internal เป็นหลัก External กรอง</td></tr>
+                <tr><td><span class="emoji">📈</span> Hybrid External Priority</td><td>✅</td><td>✅</td><td>External เป็นหลัก Internal กรอง</td></tr>
+                <tr><td><span class="emoji">⚡</span> Hybrid Independent</td><td>✅</td><td>✅</td><td>ต่างคนต่างเทรด</td></tr>
+            </table>
+
+            <h3>📊 10 Internal Signals (สูตรภายใน)</h3>
+            <table>
+                <tr><th>สูตร</th><th>ประเภท</th><th>Parameters หลัก</th><th>เหมาะสำหรับ</th></tr>
+                <tr><td>1.1 Double MA Cross</td><td>Trend Following</td><td>Period, Method</td><td>Trend Strong</td></tr>
+                <tr><td>1.2 MA Cross</td><td>Trend Following</td><td>Fast/Slow Period</td><td>Trend Clear</td></tr>
+                <tr><td>1.3 Support/Resistance Break</td><td>Breakout</td><td>Interval (Hours)</td><td>Range Market</td></tr>
+                <tr><td>1.4 BB Rejection</td><td>Mean Reversion</td><td>Period, Deviation</td><td>Sideways Market</td></tr>
+                <tr><td>1.5 MACD Cross Signal</td><td>Oscillator</td><td>Fast/Slow/Signal EMA</td><td>Trend Change</td></tr>
+                <tr><td>1.6 MACD Cross Zero</td><td>Oscillator</td><td>Fast/Slow/Signal EMA</td><td>Momentum</td></tr>
+                <tr><td>1.7 RSI OB/OS</td><td>Oscillator</td><td>Period, OB/OS Levels</td><td>Overbought/Oversold</td></tr>
+                <tr><td>1.8 Stochastic OB/OS</td><td>Oscillator</td><td>K/D Period, Levels</td><td>Short-term Reversal</td></tr>
+                <tr><td>1.9 MA+ATR Breakout</td><td>Volatility</td><td>MA Period, ATR Multiplier</td><td>Volatile Market</td></tr>
+                <tr><td>1.10 MA Cross + Trend</td><td>Trend Following</td><td>Fast/Slow/Trend MA</td><td>Strong Trend</td></tr>
+            </table>
+
+            <h3>⚙️ การตั้งค่า Hybrid Mode</h3>
+            <div class="code-block">
+// เปิดใช้ทั้งสองระบบ
+InpUseInternalSignal = true
+InpUseCustomIndicator = true
+
+// เลือกโหมดการรวมสัญญาณ
+InpHybridMode = HYBRID_CONFIRMATION      // ต้องตรงกัน (ปลอดภัยสุด)
+InpHybridMode = HYBRID_INTERNAL_PRIORITY // Internal หลัก (แนะนำ)
+InpHybridMode = HYBRID_EXTERNAL_PRIORITY // External หลัก
+InpHybridMode = HYBRID_INDEPENDENT       // ต่างคนต่างเทรด (โอกาสมาก)
             </div>
         </div>
 
         <div class="section">
-            <h2>⚙️ การตั้งค่าพื้นฐาน</h2>
-            <h3>📊 พารามิเตอร์หลัก</h3>
+            <h2>🎯 ระบบ TP/SL และ Trailing Stop (ใหม่)</h2>
+            
+            <h3>⚙️ พารามิเตอร์ TP/SL System</h3>
             <table>
-                <tr><th>Parameter</th><th>คำอธิบาย</th><th>ค่าเริ่มต้น</th></tr>
-                <tr><td>InpTradeDirection</td><td>ทิศทางการเทรด</td><td>TwoDirection</td></tr>
-                <tr><td>InpLotSize</td><td>ขนาด Lot เริ่มต้น</td><td>0.01</td></tr>
-                <tr><td>InpMagicNumber</td><td>หมายเลขประจำตัว EA</td><td>12345</td></tr>
-                <tr><td>InpSlippage</td><td>ค่า Slippage ที่ยอมรับได้</td><td>3</td></tr>
-                <tr><td>InpMaxOrdersPerSymbol</td><td>จำนวน Order สูงสุดต่อสัญลักษณ์</td><td>100</td></tr>
+                <tr><th>Parameter</th><th>คำอธิบาย</th><th>ค่าแนะนำ</th><th>หน่วย</th></tr>
+                <tr><td>InpEnableTPSL</td><td>เปิด/ปิดระบบ TP/SL</td><td>true</td><td>Boolean</td></tr>
+                <tr><td>InpTakeProfitPoints</td><td>ระยะ Take Profit</td><td>50-200</td><td>Points</td></tr>
+                <tr><td>InpStopLossPoints</td><td>ระยะ Stop Loss</td><td>30-100</td><td>Points</td></tr>
+                <tr><td>InpModifyAfterOpen</td><td>แก้ไข TP/SL หลังเปิด Position</td><td>true</td><td>Boolean</td></tr>
+                <tr><td>InpUseTrailingStop</td><td>ใช้ Trailing Stop</td><td>true</td><td>Boolean</td></tr>
+                <tr><td>InpTrailingStopDistance</td><td>ระยะ Trailing Stop</td><td>20-50</td><td>Points</td></tr>
+                <tr><td>InpTrailingStopStep</td><td>ขั้นต่ำในการย้าย Trailing</td><td>5-10</td><td>Points</td></tr>
             </table>
 
-            <h3>🎯 Template การตั้งค่า EA</h3>
-            <h4>Basic Trend Following</h4>
-            <pre>
-InpTradeDirection = OneDirection
-InpOneDirectionMode = AutoDetect
-InpSignalType = SIGNAL_MA_CROSS
-InpMACross_FastPeriod = 5
-InpMACross_SlowPeriod = 20
-InpLotSize = 0.01
-InpTakeProfitPoints = 50
-InpStopLossPoints = 30
-            </pre>
-            <h4>Conservative Scalping</h4>
-            <pre>
-InpTradeDirection = TwoDirection
-InpTwoDirectionMode = TwoDir_AutoDetect
-InpSignalType = SIGNAL_RSI_OVERBOUGHT_SOLD
-InpRSI_Period = 14
-InpLotSize = 0.01
-InpTakeProfitPoints = 15
-InpStopLossPoints = 20
-            </pre>
-            <h4>Aggressive Hedging</h4>
-            <pre>
-InpTradeDirection = TwoDirection
-InpTwoDirectionMode = TwoDir_Reverse
-InpSignalType = SIGNAL_SUPPORT_RESISTANCE_BREAK
-InpLotType = LotMartingale
-InpMartingaleMultiplier = 1.5
-InpCloseSystemMode = DualSystem
-            </pre>
+            <h3>📊 การทำงานของ Trailing Stop</h3>
+            <div class="note">
+                <p><strong>หลักการทำงาน:</strong></p>
+                <ol>
+                    <li>ตรวจสอบ Position ที่มีกำไรเท่านั้น</li>
+                    <li>คำนวณระยะ Trailing Stop จากราคาปัจจุบัน</li>
+                    <li>ย้าย Stop Loss เฉพาะเมื่อกำไรเพิ่มขึ้น</li>
+                    <li>ไม่ย้าย Stop Loss ให้ห่างจากราคาเปิด</li>
+                    <li>ย้ายทีละ Step ที่กำหนด</li>
+                </ol>
+            </div>
+
+            <h3>💡 ตัวอย่างการตั้งค่า TP/SL</h3>
+            <div class="tabs">
+                <button class="tab-button active" onclick="showTab('scalping')">Scalping</button>
+                <button class="tab-button" onclick="showTab('swing')">Swing Trading</button>
+                <button class="tab-button" onclick="showTab('longterm')">Long Term</button>
+            </div>
+
+            <div id="scalping" class="tab-content active">
+                <h4>🔥 Scalping Setup</h4>
+                <div class="code-block">
+InpTakeProfitPoints = 15        // TP 15 points
+InpStopLossPoints = 10          // SL 10 points  
+InpUseTrailingStop = true       // เปิด Trailing
+InpTrailingStopDistance = 8     // ระยะ Trailing 8 points
+InpTrailingStopStep = 2         // ขยับทีละ 2 points
+                </div>
+            </div>
+
+            <div id="swing" class="tab-content">
+                <h4>📈 Swing Trading Setup</h4>
+                <div class="code-block">
+InpTakeProfitPoints = 100       // TP 100 points
+InpStopLossPoints = 50          // SL 50 points
+InpUseTrailingStop = true       // เปิด Trailing
+InpTrailingStopDistance = 30    // ระยะ Trailing 30 points
+InpTrailingStopStep = 10        // ขยับทีละ 10 points
+                </div>
+            </div>
+
+            <div id="longterm" class="tab-content">
+                <h4>📊 Long Term Setup</h4>
+                <div class="code-block">
+InpTakeProfitPoints = 500       // TP 500 points  
+InpStopLossPoints = 200         // SL 200 points
+InpUseTrailingStop = true       // เปิด Trailing
+InpTrailingStopDistance = 100   // ระยะ Trailing 100 points
+InpTrailingStopStep = 20        // ขยับทีละ 20 points
+                </div>
+            </div>
         </div>
 
         <div class="section">
-            <h2>📡 ระบบสัญญาณ</h2>
-            <h3>🔄 Internal Signal System</h3>
+            <h2>🖥️ ระบบแสดงผลแบบใหม่ (Compact Display)</h2>
+            
+            <h3>🎛️ การควบคุมการแสดงผล</h3>
             <table>
-                <tr><th>สูตร</th><th>ประเภท</th><th>คำอธิบาย</th></tr>
-                <tr><td>Double MA Cross</td><td>Trend Following</td><td>MA เส้นเดียวกันแต่คำนวณซ้อนกัน</td></tr>
-                <tr><td>MA Cross</td><td>Trend Following</td><td>Fast MA ตัด Slow MA</td></tr>
-                <tr><td>Support/Resistance Break</td><td>Breakout</td><td>ราคาทะลุ S/R จากช่วงเวลาที่กำหนด</td></tr>
-                <tr><td>BB Rejection</td><td>Mean Reversion</td><td>การ Reject จาก Bollinger Bands</td></tr>
-                <tr><td>MACD Cross Signal</td><td>Oscillator</td><td>MACD Main ตัด Signal Line</td></tr>
-                <tr><td>MACD Cross Zero</td><td>Oscillator</td><td>MACD ตัดเส้น Zero</td></tr>
-                <tr><td>RSI OB/OS</td><td>Oscillator</td><td>RSI ออกจากโซน Overbought/Oversold</td></tr>
-                <tr><td>Stochastic OB/OS</td><td>Oscillator</td><td>Stochastic ออกจากโซน OB/OS</td></tr>
-                <tr><td>MA+ATR Breakout</td><td>Volatility</td><td>ราคาทะลุ MA ± ATR</td></tr>
-                <tr><td>MA Cross + Trend</td><td>Trend Following</td><td>MA Cross พร้อมการกรอง Trend</td></tr>
+                <tr><th>Parameter</th><th>คำอธิบาย</th><th>แนะนำ</th></tr>
+                <tr><td>InpCompactMode</td><td>โหมดกระทัดรัด</td><td>true (หน้าจอเล็ก)</td></tr>
+                <tr><td>InpShowProfitDetails</td><td>แสดงรายละเอียดกำไร</td><td>false</td></tr>
+                <tr><td>InpShowTradingCosts</td><td>แสดงค่าใช้จ่าย</td><td>false</td></tr>
+                <tr><td>InpShowStatistics</td><td>แสดงสถิติ</td><td>false</td></tr>
+                <tr><td>InpShowTPSLInfo</td><td>แสดงข้อมูล TP/SL</td><td>true</td></tr>
+                <tr><td>InpShowDualCloseInfo</td><td>แสดงข้อมูล Close System</td><td>false</td></tr>
+                <tr><td>InpShowPositionInfo</td><td>แสดงข้อมูล Position</td><td>true</td></tr>
+                <tr><td>InpShowSystemSettings</td><td>แสดงการตั้งค่าระบบ</td><td>false</td></tr>
+                <tr><td>InpShowSRInfo</td><td>แสดงข้อมูล S/R</td><td>false</td></tr>
             </table>
+
+            <h3>📱 การตั้งค่าตามขนาดหน้าจอ</h3>
+            <div class="note">
+                <p><strong>หน้าจอเล็ก (1366x768 หรือเล็กกว่า):</strong></p>
+                <div class="code-block">
+InpCompactMode = true
+InpShowProfitDetails = false
+InpShowTradingCosts = false  
+InpShowStatistics = false
+InpShowDualCloseInfo = false
+InpShowSystemSettings = false
+InpShowSRInfo = false
+                </div>
+
+                <p><strong>หน้าจอใหญ่ (1920x1080 ขึ้นไป):</strong></p>
+                <div class="code-block">
+InpCompactMode = false
+InpShowProfitDetails = true
+InpShowTPSLInfo = true
+InpShowPositionInfo = true
+InpShowDualCloseInfo = true
+                </div>
+            </div>
         </div>
 
         <div class="section">
-            <h2>🎯 ระบบจัดการการเทรด</h2>
-            <h3>📈 OneDirection Mode</h3>
+            <h2>🎯 ระบบจัดการการเทรด (อัปเดต)</h2>
+            
+            <h3>📈 OneDirection Mode (เทรดทิศทางเดียว)</h3>
             <table>
-                <tr><th>Mode</th><th>คำอธิบาย</th></tr>
-                <tr><td>AutoDetect</td><td>รอสัญญาณแรกแล้วล็อคทิศทาง</td></tr>
-                <tr><td>BuyOnly</td><td>เทรด BUY เท่านั้น</td></tr>
-                <tr><td>SellOnly</td><td>เทรด SELL เท่านั้น</td></tr>
+                <tr><th>Mode</th><th>คำอธิบาย</th><th>เหมาะสำหรับ</th></tr>
+                <tr><td>AutoDetect</td><td>รอสัญญาณแรกแล้วล็อคทิศทาง</td><td>Trend Following</td></tr>
+                <tr><td>BuyOnly</td><td>เทรด BUY เท่านั้น</td><td>Bull Market</td></tr>
+                <tr><td>SellOnly</td><td>เทรด SELL เท่านั้น</td><td>Bear Market</td></tr>
             </table>
-            <h3>📊 TwoDirection Mode</h3>
-            <table>
-                <tr><th>Mode</th><th>คำอธิบาย</th></tr>
-                <tr><td>AutoDetect</td><td>BUY Signal → BUY Trade, SELL Signal → SELL Trade</td></tr>
-                <tr><td>Reverse</td><td>BUY Signal → SELL Trade, SELL Signal → BUY Trade</td></tr>
-                <tr><td>BuyOnly</td><td>ทุกสัญญาณ → BUY Trade</td></tr>
-                <tr><td>SellOnly</td><td>ทุกสัญญาณ → SELL Trade</td></tr>
-            </table>
-        </div>
 
-        <div class="section">
-            <h2>🎯 ระบบ TP/SL</h2>
-            <h3>⚙️ การตั้งค่า TP/SL</h3>
+            <h3>📊 TwoDirection Mode (เทรดสองทิศทาง)</h3>
             <table>
-                <tr><th>Parameter</th><th>คำอธิบาย</th><th>หน่วย</th></tr>
-                <tr><td>InpEnableTPSL</td><td>เปิด/ปิดระบบ TP/SL</td><td>Boolean</td></tr>
-                <tr><td>InpTakeProfitPoints</td><td>ระยะ Take Profit</td><td>Points</td></tr>
-                <tr><td>InpStopLossPoints</td><td>ระยะ Stop Loss</td><td>Points</td></tr>
-                <tr><td>InpModifyAfterOpen</td><td>แก้ไข TP/SL หลังเปิด Position</td><td>Boolean</td></tr>
-                <tr><td>InpUseTrailingStop</td><td>ใช้ Trailing Stop</td><td>Boolean</td></tr>
-                <tr><td>InpTrailingStopDistance</td><td>ระยะ Trailing Stop</td><td>Points</td></tr>
-                <tr><td>InpTrailingStopStep</td><td>ขั้นต่ำในการย้าย Trailing</td><td>Points</td></tr>
+                <tr><th>Mode</th><th>คำอธิบาย</th><th>เหมาะสำหรับ</th></tr>
+                <tr><td>AutoDetect</td><td>BUY Signal → BUY, SELL Signal → SELL</td><td>Clear Signals</td></tr>
+                <tr><td>Reverse</td><td>BUY Signal → SELL, SELL Signal → BUY</td><td>Counter Trend</td></tr>
+                <tr><td>BuyOnly</td><td>ทุกสัญญาณ → BUY Trade</td><td>Strong Uptrend</td></tr>
+                <tr><td>SellOnly</td><td>ทุกสัญญาณ → SELL Trade</td><td>Strong Downtrend</td></tr>
+            </table>
+
+            <h3>💰 ระบบจัดการ Volume</h3>
+            <table>
+                <tr><th>LotSize Type</th><th>คำอธิบาย</th><th>สูตร</th><th>เหมาะสำหรับ</th></tr>
+                <tr><td>FixLotSize</td><td>ขนาด Lot คงที่</td><td>Lot = InpLotSize</td><td>Conservative Trading</td></tr>
+                <tr><td>LotMartingale</td><td>เพิ่ม Lot แบบ Martingale</td><td>Lot = Base × Multiplier^Positions</td><td>Recovery Strategy</td></tr>
+                <tr><td>LotPlus</td><td>เพิ่ม Lot เป็นจำนวนคงที่</td><td>Lot = Base + (Plus × Positions)</td><td>Gradual Increase</td></tr>
             </table>
         </div>
 
         <div class="section">
             <h2>🚪 ระบบปิดสถานะ (Dual Close System)</h2>
-            <h3>🏗️ โครงสร้าง</h3>
+            
+            <h3>🏗️ โครงสร้างระบบ</h3>
             <ul>
-                <li><b>Basic System:</b> Cut Loss & Profit Target</li>
-                <li><b>Advanced System:</b> Time & Drawdown</li>
-                <li><b>Partial Close:</b> ปิดบางส่วน</li>
+                <li><strong>Basic System:</strong> Cut Loss & Profit Target (ตาม Balance)</li>
+                <li><strong>Advanced System:</strong> Time & Drawdown Based</li>
+                <li><strong>Partial Close:</strong> ปิดบางส่วนเมื่อถึงเงื่อนไข</li>
+                <li><strong>Priority System:</strong> กำหนดระบบไหนทำงานก่อน</li>
             </ul>
+
             <h3>📋 Close System Modes</h3>
             <table>
-                <tr><th>Mode</th><th>คำอธิบาย</th></tr>
-                <tr><td>BasicOnly</td><td>ใช้เฉพาะ Basic System</td></tr>
-                <tr><td>AdvancedOnly</td><td>ใช้เฉพาะ Advanced System</td></tr>
-                <tr><td>DualSystem</td><td>ใช้ทั้งสองระบบพร้อมกัน</td></tr>
-                <tr><td>CustomCombination</td><td>ปรับแต่งการผสมผสาน</td></tr>
+                <tr><th>Mode</th><th>คำอธิบาย</th><th>เหมาะสำหรับ</th></tr>
+                <tr><td>BasicOnly</td><td>ใช้เฉพาะ Basic System</td><td>Simple Trading</td></tr>
+                <tr><td>AdvancedOnly</td><td>ใช้เฉพาะ Advanced System</td><td>Time/DD Based</td></tr>
+                <tr><td>DualSystem</td><td>ใช้ทั้งสองระบบพร้อมกัน</td><td>Complete Protection</td></tr>
+                <tr><td>CustomCombination</td><td>ปรับแต่งการผสมผสาน</td><td>Advanced Users</td></tr>
+            </table>
+
+            <h3>⚙️ Basic Close System</h3>
+            <table>
+                <tr><th>Parameter</th><th>คำอธิบาย</th><th>ตัวอย่าง</th></tr>
+                <tr><td>InpCutlossType</td><td>ประเภท Cut Loss</td><td>percentCut / dollarsCut</td></tr>
+                <tr><td>InpCutlossPercent</td><td>Cut Loss เป็น % ของ Balance</td><td>5.0 = 5%</td></tr>
+                <tr><td>InpCutlossDollars</td><td>Cut Loss เป็นจำนวนเงิน</td><td>100.0 = $100</td></tr>
+                <tr><td>InpProfitType</td><td>ประเภท Profit Target</td><td>percentProfit / dollarsProfit</td></tr>
+                <tr><td>InpProfitPercent</td><td>Profit Target เป็น %</td><td>10.0 = 10%</td></tr>
+                <tr><td>InpProfitDollars</td><td>Profit Target เป็นจำนวนเงิน</td><td>200.0 = $200</td></tr>
+            </table>
+
+            <h3>📊 Advanced Close System</h3>
+            <table>
+                <tr><th>Parameter</th><th>คำอธิบาย</th><th>ตัวอย่าง</th></tr>
+                <tr><td>InpEnableTimeBasedClose</td><td>เปิดการปิดตามเวลา</td><td>true/false</td></tr>
+                <tr><td>InpCloseHour</td><td>ชั่วโมงที่ปิด</td><td>17 = 5 PM</td></tr>
+                <tr><td>InpCloseMinute</td><td>นาทีที่ปิด</td><td>0 = XX:00</td></tr>
+                <tr><td>InpCloseFridayOnly</td><td>ปิดเฉพาะวันศุกร์</td><td>true/false</td></tr>
+                <tr><td>InpEnableDrawdownClose</td><td>เปิดการปิดตาม Drawdown</td><td>true/false</td></tr>
+                <tr><td>InpMaxDrawdownPercent</td><td>Drawdown สูงสุดที่ยอมรับ</td><td>20.0 = 20%</td></tr>
+            </table>
+
+            <h3>🔄 Partial Close System</h3>
+            <table>
+                <tr><th>Parameter</th><th>คำอธิบาย</th><th>ค่าแนะนำ</th></tr>
+                <tr><td>InpEnablePartialClose</td><td>เปิดการปิดบางส่วน</td><td>false (เริ่มต้น)</td></tr>
+                <tr><td>InpPartialClosePercent</td><td>เปอร์เซ็นต์ที่ปิด</td><td>50.0 = 50%</td></tr>
+                <tr><td>InpPartialOnBasicTrigger</td><td>ปิดบางส่วนเมื่อ Basic Trigger</td><td>true</td></tr>
+                <tr><td>InpPartialOnAdvancedTrigger</td><td>ปิดบางส่วนเมื่อ Advanced Trigger</td><td>false</td></tr>
             </table>
         </div>
 
         <div class="section">
-            <h2>🔧 การ Troubleshooting</h2>
+            <h2>📋 Template การตั้งค่า (อัปเดต)</h2>
+            
+            <div class="tabs">
+                <button class="tab-button active" onclick="showTab('conservative')">Conservative</button>
+                <button class="tab-button" onclick="showTab('balanced')">Balanced</button>
+                <button class="tab-button" onclick="showTab('aggressive')">Aggressive</button>
+                <button class="tab-button" onclick="showTab('hybrid')">Hybrid</button>
+            </div>
+
+            <div id="conservative" class="tab-content active">
+                <h4>🛡️ Conservative Trading (ปลอดภัย)</h4>
+                <div class="code-block">
+// สัญญาณและทิศทาง
+InpUseInternalSignal = true
+InpSignalType = SIGNAL_MA_CROSS
+InpMACross_FastPeriod = 10
+InpMACross_SlowPeriod = 25
+InpTradeDirection = OneDirection
+InpOneDirectionMode = AutoDetect
+
+// Volume และความเสี่ยง
+InpLotType = FixLotSize
+InpLotSize = 0.01
+InpMaxOrdersPerSymbol = 5
+InpMaxRiskPercent = 2.0
+
+// TP/SL
+InpEnableTPSL = true
+InpTakeProfitPoints = 100
+InpStopLossPoints = 50
+InpUseTrailingStop = true
+InpTrailingStopDistance = 30
+
+// Close System
+InpCloseSystemMode = BasicOnly
+InpCutlossType = percentCut
+InpCutlossPercent = 3.0
+InpProfitType = percentProfit
+InpProfitPercent = 5.0
+
+// Display
+InpCompactMode = true
+InpShowProfitDetails = false
+                </div>
+            </div>
+
+            <div id="balanced" class="tab-content">
+                <h4>⚖️ Balanced Trading (สมดุล)</h4>
+                <div class="code-block">
+// สัญญาณและทิศทาง
+InpUseInternalSignal = true
+InpSignalType = SIGNAL_RSI_OVERBOUGHT_SOLD
+InpRSI_Period = 14
+InpRSI_Overbought = 70
+InpRSI_Oversold = 30
+InpTradeDirection = TwoDirection
+InpTwoDirectionMode = TwoDir_AutoDetect
+
+// Volume และความเสี่ยง
+InpLotType = LotPlus
+InpLotSize = 0.01
+InpLotPlus = 0.01
+InpMaxOrdersPerSymbol = 10
+InpMaxRiskPercent = 5.0
+
+// TP/SL
+InpEnableTPSL = true
+InpTakeProfitPoints = 80
+InpStopLossPoints = 40
+InpUseTrailingStop = true
+InpTrailingStopDistance = 25
+InpTrailingStopStep = 5
+
+// Close System
+InpCloseSystemMode = DualSystem
+InpCutlossType = percentCut
+InpCutlossPercent = 5.0
+InpProfitType = dollarsProfit
+InpProfitDollars = 50.0
+InpEnableDrawdownClose = true
+InpMaxDrawdownPercent = 15.0
+                </div>
+            </div>
+
+            <div id="aggressive" class="tab-content">
+                <h4>🔥 Aggressive Trading (รุกราน)</h4>
+                <div class="code-block">
+// สัญญาณและทิศทาง
+InpUseInternalSignal = true
+InpSignalType = SIGNAL_SUPPORT_RESISTANCE_BREAK
+InpSR_Interval = 6
+InpTradeDirection = TwoDirection
+InpTwoDirectionMode = TwoDir_Reverse
+
+// Volume และความเสี่ยง
+InpLotType = LotMartingale
+InpLotSize = 0.01
+InpMartingaleMultiplier = 1.5
+InpMaxOrdersPerSymbol = 20
+InpMaxRiskPercent = 10.0
+
+// TP/SL
+InpEnableTPSL = true
+InpTakeProfitPoints = 50
+InpStopLossPoints = 30
+InpUseTrailingStop = true
+InpTrailingStopDistance = 15
+InpTrailingStopStep = 3
+
+// Close System
+InpCloseSystemMode = DualSystem
+InpCutlossType = dollarsCut
+InpCutlossDollars = 200.0
+InpProfitType = dollarsProfit
+InpProfitDollars = 100.0
+InpEnablePartialClose = true
+InpPartialClosePercent = 50.0
+                </div>
+            </div>
+
+            <div id="hybrid" class="tab-content">
+                <h4>🔄 Hybrid Signal System (ผสมผสาน)</h4>
+                <div class="code-block">
+// สัญญาณแบบผสม
+InpUseInternalSignal = true
+InpUseCustomIndicator = true
+InpSignalType = SIGNAL_MACD_CROSS_SIGNAL
+InpIndicatorName = "YourCustomIndicator"
+InpHybridMode = HYBRID_CONFIRMATION
+
+// ทิศทางการเทรด
+InpTradeDirection = TwoDirection
+InpTwoDirectionMode = TwoDir_AutoDetect
+
+// Volume และความเสี่ยง
+InpLotType = LotPlus
+InpLotSize = 0.01
+InpLotPlus = 0.005
+InpMaxOrdersPerSymbol = 15
+InpMaxRiskPercent = 7.0
+
+// TP/SL
+InpEnableTPSL = true
+InpTakeProfitPoints = 75
+InpStopLossPoints = 35
+InpUseTrailingStop = true
+InpTrailingStopDistance = 20
+InpTrailingStopStep = 5
+
+// Close System
+InpCloseSystemMode = DualSystem
+InpClosePriority = Simultaneous
+InpCutlossType = percentCut
+InpCutlossPercent = 8.0
+InpProfitType = percentProfit
+InpProfitPercent = 12.0
+
+// Display (Compact for Multi-Signal)
+InpCompactMode = true
+InpShowProfitDetails = true
+InpShowTPSLInfo = true
+InpShowPositionInfo = true
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 การ Troubleshooting (ปัญหาใหม่)</h2>
+            
+            <h3>⚠️ ปัญหาทั่วไปและการแก้ไข</h3>
             <table>
                 <tr><th>ปัญหา</th><th>สาเหตุ</th><th>วิธีแก้ไข</th></tr>
-                <tr><td>ไม่เห็น EA ใน Navigator</td><td>ไฟล์ไม่ได้อยู่ใน MQL5/Experts</td><td>ตรวจสอบ path และคัดลอกไฟล์ใหม่</td></tr>
-                <tr><td>EA ไม่ทำงาน (มี ✖️)</td><td>Auto Trading ปิดอยู่</td><td>กด Auto Trading button หรือ F7</td></tr>
+                <tr><td>EA ไม่ปรากฏใน Navigator</td><td>ไฟล์ไม่ได้อยู่ใน MQL5/Experts</td><td>ตรวจสอบ path และคัดลอกไฟล์ใหม่</td></tr>
+                <tr><td>EA มีเครื่องหมาย ✖️</td><td>Auto Trading ปิดอยู่</td><td>กด Auto Trading button หรือ F7</td></tr>
                 <tr><td>Authentication Failed</td><td>WebRequest ไม่ได้เปิด</td><td>ตรวจสอบ Options → Expert Advisors</td></tr>
                 <tr><td>ไม่มี Internet Connection</td><td>ไม่มีเน็ต หรือ Firewall บล็อค</td><td>ตรวจสอบการเชื่อมต่อและ Firewall</td></tr>
                 <tr><td>EA หยุดทำงานเอง</td><td>Error ในการทำงาน</td><td>ดู Experts tab และรีสตาร์ท EA</td></tr>
+                <tr><td>Hybrid Signals ไม่ทำงาน</td><td>ไม่มี Custom Indicator</td><td>ตรวจสอบชื่อ Indicator และ Buffer</td></tr>
+                <tr><td>TP/SL ไม่ถูกตั้ง</td><td>Broker ไม่รองรับ</td><td>เปิด InpModifyAfterOpen = true</td></tr>
+                <tr><td>Trailing Stop ไม่ขยับ</td><td>ยังไม่มีกำไร</td><td>รอให้มีกำไรก่อน</td></tr>
+                <tr><td>Display ยาวเกินจอ</td><td>ไม่ได้เปิด Compact Mode</td><td>ตั้ง InpCompactMode = true</td></tr>
+            </table>
+
+            <h3>🐛 Debug Mode และ Log Analysis</h3>
+            <div class="note">
+                <p><strong>การใช้ Debug Mode:</strong></p>
+                <ol>
+                    <li>ตั้งค่า <code>InpDebugMode = true</code></li>
+                    <li>ดู Experts tab ใน MT5</li>
+                    <li>สังเกต Log Messages ที่ขึ้นต้นด้วย 🎯, ✅, ❌</li>
+                    <li>บันทึก Log เมื่อเกิดปัญหา</li>
+                    <li>ส่ง Log ให้ Support เพื่อวิเคราะห์</li>
+                </ol>
+
+                <p><strong>ตัวอย่าง Log Messages:</strong></p>
+                <div class="code-block">
+✅ Internal Signal System loaded: MA Cross
+🎯 HYBRID CONFIRMATION: Both signals agree - BUY
+📈 Attempting to open BUY position (Volume: 0.01)
+✅ Position opened: 123456
+🔧 Modified position 123456: TP: 1.2050 SL: 1.1950
+                </div>
+            </div>
+
+            <h3>📱 Performance Optimization</h3>
+            <table>
+                <tr><th>ปัญหา</th><th>สาเหตุ</th><th>การแก้ไข</th></tr>
+                <tr><td>EA ทำงานช้า</td><td>แสดงผลมากเกินไป</td><td>เปิด Compact Mode, ปิด Debug</td></tr>
+                <tr><td>CPU สูง</td><td>คำนวณสัญญาณบ่อยเกินไป</td><td>เพิ่ม InpMinBarsBetweenTrades</td></tr>
+                <tr><td>Memory ใช้เยอะ</td><td>ข้อมูลสะสมมากเกินไป</td><td>รีสตาร์ท EA ทุก 1-2 สัปดาห์</td></tr>
+                <tr><td>Chart กระตุก</td><td>Update Display บ่อยเกินไป</td><td>ปิดการแสดงผลที่ไม่จำเป็น</td></tr>
             </table>
         </div>
 
         <div class="section">
-            <h2>📞 การติดต่อและสนับสนุน</h2>
+            <h2>📊 การวิเคราะห์ผลการเทรด</h2>
+            
+            <h3>📈 ตัวชี้วัดที่สำคัญ</h3>
             <ul>
-                <li><b>Facebook: UU School Trading</b><a href="https://www.facebook.com/uutrader"> Facebook : uutrader </a></b></li>
-                <li><b>Line ID:</b> uutrader</li>
-                <li><b>Telegram:</b> <a href="#">@teleuutrader</a></li>
-                <li><b>Support:</b> ตอบกลับภายใน 24-48 ชั่วโมง</li>
+                <li><strong>Net P/L:</strong> กำไรขาดทุนรวม</li>
+                <li><strong>Profit by Source:</strong> กำไรจาก Manual vs Signal</li>
+                <li><strong>Profit by Direction:</strong> กำไรจาก Buy vs Sell</li>
+                <li><strong>Daily Average:</strong> กำไรเฉลี่ยต่อวัน</li>
+                <li><strong>Trading Costs:</strong> ค่า Commission และ Swap</li>
+                <li><strong>Max Drawdown:</strong> การขาดทุนสูงสุด</li>
+                <li><strong>Close Statistics:</strong> จำนวนครั้งที่ระบบปิดออเดอร์</li>
             </ul>
-        </div>
 
-        <div class="section">
-            <h2>🆘 Emergency Procedures</h2>
-            <div class="warning">
-                <p><b>หากต้องการหยุด EA ฉุกเฉิน:</b></p>
+            <h3>🎯 การปรับแต่งตามผลลัพธ์</h3>
+            <table>
+                <tr><th>สถานการณ์</th><th>ปัญหา</th><th>การปรับแต่ง</th></tr>
+                <tr><td>กำไร Manual > Signal</td><td>สัญญาณไม่ดี</td><td>เปลี่ยนสูตรสัญญาณ หรือปรับ Parameters</td></tr>
+                <tr><td>กำไร Buy > Sell มาก</td><td>Trend ขาขึ้น</td><td>ใช้ BuyOnly Mode ชั่วคราว</td></tr>
+                <tr><td>Drawdown สูงเกินไป</td><td>ความเสี่ยงมาก</td><td>ลด Lot Size หรือเพิ่ม Stop Loss</td></tr>
+                <tr><td>Close บ่อยเกินไป</td><td>เงื่อนไขเข้มเกินไป</td><td>ปรับ Cut Loss/Profit Target</td></tr>
+                <tr><td>Commission สูง</td><td>เทรดบ่อยเกินไป</td><td>เพิ่ม MinBarsBetweenTrades</td></tr>
+            </table>
+
+            <h3>📋 Checklist การตรวจสอบประจำ</h3>
+            <div class="success">
+                <p><strong>รายสัปดาห์:</strong></p>
                 <ul>
-                    <li>กดปุ่ม "Remove" จาก Chart</li>
-                    <li>กด F7 → เปลี่ยน "Allow live trading" เป็น false</li>
-                    <li>ปิด Terminal ทั้งหมด</li>
+                    <li>✅ ตรวจสอบ Net P/L และ Daily Average</li>
+                    <li>✅ เปรียบเทียบ Manual vs Signal Performance</li>
+                    <li>✅ ดู Max Drawdown และ Close Statistics</li>
+                    <li>✅ ตรวจสอบ Log ในกรณีมี Error</li>
                 </ul>
-                <p><b>หากเกิดข้อผิดพลาดร้ายแรง:</b></p>
+
+                <p><strong>รายเดือน:</strong></p>
                 <ul>
-                    <li>Screenshot Error Messages</li>
-                    <li>บันทึก Log Files</li>
-                    <li>ปิด EA ทันที</li>
-                    <li>ติดต่อ Support ทันที</li>
-                    <li>อย่าแก้ไข Settings โดยไม่มีคำแนะนำ</li>
+                    <li>✅ วิเคราะห์ Performance โดยรวม</li>
+                    <li>✅ ปรับแต่ง Parameters ตามผลลัพธ์</li>
+                    <li>✅ Backup การตั้งค่าที่ดี</li>
+                    <li>✅ อัปเดต EA เป็นเวอร์ชันใหม่ (หากมี)</li>
                 </ul>
             </div>
         </div>
 
+        <div class="section">
+            <h2>📞 การติดต่อและสนับสนุน</h2>
+            <div class="note">
+                <h3>🔗 ช่องทางการติดต่อ</h3>
+                <ul>
+                    <li><strong>Facebook:</strong> <a href="https://www.facebook.com/uutrader">UU School Trading</a></li>
+                    <li><strong>Line ID:</strong> uutrader</li>
+                    <li><strong>Telegram:</strong> <a href="#">@teleuutrader</a></li>
+                    <li><strong>Email Support:</strong> support@uutrader.com</li>
+                </ul>
+
+                <h3>⏰ เวลาให้บริการ</h3>
+                <ul>
+                    <li><strong>Support Hours:</strong> 9:00 - 18:00 น. (จ-ศ)</li>
+                    <li><strong>Response Time:</strong> ภายใน 24-48 ชั่วโมง</li>
+                    <li><strong>Emergency:</strong> ติดต่อผ่าน Telegram สำหรับปัญหาเร่งด่วน</li>
+                </ul>
+
+                <h3>📝 การขอความช่วยเหลือ</h3>
+                <p><strong>ข้อมูลที่ควรส่งมาด้วย:</strong></p>
+                <ul>
+                    <li>Screenshot ของ Error Message</li>
+                    <li>Log จาก Experts Tab</li>
+                    <li>การตั้งค่า EA (Parameters)</li>
+                    <li>ประเภทบัญชี (Demo/Real)</li>
+                    <li>Broker และ Server Name</li>
+                    <li>เวอร์ชัน MT5</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🆘 Emergency Procedures (อัปเดต)</h2>
+            <div class="warning">
+                <h3>🚨 การหยุด EA ฉุกเฉิน</h3>
+                <p><strong>วิธีที่ 1 - ปิด EA:</strong></p>
+                <ol>
+                    <li>คลิกขวาบน Chart → Expert Advisors → Remove</li>
+                    <li>หรือลาก EA ออกจาก Chart</li>
+                </ol>
+
+                <p><strong>วิธีที่ 2 - ปิด Auto Trading:</strong></p>
+                <ol>
+                    <li>กดปุ่ม "Auto Trading" ใน Toolbar (หรือกด F7)</li>
+                    <li>หรือไปที่ Tools → Options → Expert Advisors → ยกเลิก "Allow live trading"</li>
+                </ol>
+
+                <p><strong>วิธีที่ 3 - ปิด Terminal:</strong></p>
+                <ol>
+                    <li>ปิด MetaTrader 5 ทั้งหมด</li>
+                    <li>หยุด VPS (หากใช้)</li>
+                </ol>
+
+                <h3>⚠️ การจัดการเมื่อเกิดปัญหาร้ายแรง</h3>
+                <p><strong>ขั้นตอนฉุกเฉิน:</strong></p>
+                <ol>
+                    <li><strong>หยุด EA ทันที</strong> (ใช้วิธีข้างต้น)</li>
+                    <li><strong>Screenshot</strong> ทุกอย่างที่ผิดปกติ</li>
+                    <li><strong>บันทึก Log</strong> จาก Experts Tab</li>
+                    <li><strong>ปิด Position ด้วยตนเอง</strong> (หากจำเป็น)</li>
+                    <li><strong>ติดต่อ Support ทันที</strong></li>
+                    <li><strong>อย่าแก้ไขการตั้งค่า</strong> โดยไม่มีคำแนะนำ</li>
+                </ol>
+
+                <h3>🛡️ การป้องกันปัญหา</h3>
+                <ul>
+                    <li>ใช้ Demo Account ทดสอบก่อน</li>
+                    <li>เริ่มต้นด้วย Lot Size เล็ก</li>
+                    <li>ตั้ง Max Risk ไม่เกิน 5%</li>
+                    <li>ติดตาม EA อย่างสม่ำเสมอ</li>
+                    <li>เตรียม Emergency Plan ไว้</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔄 การอัปเดตและเวอร์ชันใหม่</h2>
+            <div class="note">
+                <h3>📋 Version History</h3>
+                <ul>
+                    <li><strong>V1.00 (2024):</strong> เวอร์ชันปัจจุบัน - Hybrid Signal System</li>
+                    <li><strong>อัปเดตล่าสุด:</strong> TP/SL Management + Compact Display</li>
+                    <li><strong>กำลังพัฒนา:</strong> Machine Learning Signals, Cloud Sync</li>
+                </ul>
+
+                <h3>🔔 การรับแจ้งอัปเดต</h3>
+                <ul>
+                    <li>ติดตาม Facebook Page สำหรับข่าวสาร</li>
+                    <li>เข้าร่วม Line Group เพื่อรับอัปเดต</li>
+                    <li>ตรวจสอบ Email สำหรับแจ้งเตือนสำคัญ</li>
+                </ul>
+
+                <h3>⬆️ วิธีอัปเดต EA</h3>
+                <ol>
+                    <li>Download ไฟล์ใหม่จากลิงก์ที่ส่งให้</li>
+                    <li>ปิด EA เก่าจาก Chart</li>
+                    <li>แทนที่ไฟล์ใน MQL5/Experts</li>
+                    <li>รีสตาร์ท MetaTrader 5</li>
+                    <li>แนบ EA ใหม่และตั้งค่าใหม่</li>
+                </ol>
+            </div>
+        </div>
+
+        <script>
+        function showTab(tabName) {
+            // ซ่อน tab ทั้งหมด
+            var tabContents = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // ซ่อนปุ่ม active ทั้งหมด
+            var tabButtons = document.getElementsByClassName('tab-button');
+            for (var i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+            
+            // แสดง tab ที่เลือก
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        </script>
+
         <footer>
-            <p>© 2024 UU School Trading. Advanced Trading EA V1.00 - All Rights Reserved.</p>
+            <p>© 2024 UU School Trading. Advanced Trading EA V1.00 - Complete Manual with Hybrid System</p>
+            <p style="font-size: 12px; margin-top: 10px;">คู่มือฉบับสมบูรณ์ อัปเดตล่าสุด: มกราคม 2025 | พร้อมระบบ Hybrid Signal & Compact Display</p>
         </footer>
     </div>
 </body>
-
 </html>
-
-
-
-
