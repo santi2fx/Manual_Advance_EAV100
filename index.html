@@ -125,6 +125,26 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         
+        .manual-link {
+            background: linear-gradient(135deg, #00ffcc, #0096ff);
+            color: #000;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 255, 204, 0.4);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .manual-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 204, 0.6);
+            background: linear-gradient(135deg, #00ffcc, #00ccff);
+        }
+        
         .robot-icon {
             position: absolute;
             top: 50%;
@@ -225,6 +245,7 @@
             <div class="feature-badge">⚡ เทรดอัตโนมัติ</div>
             <div class="feature-badge">📊 วิเคราะห์ขั้นสูง</div>
             <div class="feature-badge">🔒 ควบคุมความเสี่ยง</div>
+            <a href="ea_manual.html" class="manual-link">📖 ดูคู่มือ</a>
         </div>
         
         <div class="robot-icon"></div>
