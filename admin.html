@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ติดต่อ Admin - UU School Trading</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #004080 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 204, 0.2);
+        }
+        
+        .back-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .back-button::before {
+            content: '←';
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(0, 255, 204, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffcc, #0096ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .header .subtitle {
+            font-size: 18px;
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+        
+        .admin-info {
+            background: rgba(0, 255, 204, 0.1);
+            border: 2px solid rgba(0, 255, 204, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .admin-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #00ffcc, #0096ff);
+        }
+        
+        .admin-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #00ffcc, #0096ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
+        }
+        
+        .admin-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        
+        .admin-title {
+            font-size: 16px;
+            color: #00ffcc;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .contact-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #00ffcc, #0096ff);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 255, 204, 0.2);
+            border-color: rgba(0, 255, 204, 0.5);
+        }
+        
+        .contact-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .contact-platform {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+        
+        .contact-details {
+            font-size: 16px;
+            color: #cccccc;
+            margin-bottom: 25px;
+        }
+        
+        .contact-button {
+            background: linear-gradient(135deg, #00ffcc, #0096ff);
+            color: #000;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 6px 20px rgba(0, 255, 204, 0.4);
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 204, 0.6);
+            background: linear-gradient(135deg, #00ffcc, #00ccff);
+        }
+        
+        .facebook { --platform-color: #1877F2; }
+        .line { --platform-color: #00B900; }
+        .telegram { --platform-color: #0088CC; }
+        .email { --platform-color: #EA4335; }
+        
+        .support-info {
+            background: rgba(0, 150, 255, 0.1);
+            border: 1px solid #0096ff;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .support-info h3 {
+            color: #0096ff;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .support-info p {
+            color: #e0e0e0;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .response-time {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 18px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .faq-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .faq-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #00ffcc;
+        }
+        
+        .faq-question {
+            font-size: 16px;
+            font-weight: 600;
+            color: #00ffcc;
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            font-size: 14px;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+        
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid #FFC107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .warning-box h4 {
+            color: #FFC107;
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .warning-box p {
+            color: #e0e0e0;
+            font-size: 15px;
+            margin: 0;
+        }
+        
+        .business-hours {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid #4CAF50;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .business-hours h4 {
+            color: #4CAF50;
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+        
+        .hours-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .hours-day {
+            font-size: 14px;
+            color: #4CAF50;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .hours-time {
+            font-size: 16px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .admin-info {
+                padding: 25px 20px;
+            }
+            
+            .admin-avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 50px;
+            }
+            
+            .admin-name {
+                font-size: 24px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .contact-card {
+                padding: 25px 20px;
+            }
+            
+            .contact-icon {
+                font-size: 40px;
+            }
+            
+            .contact-platform {
+                font-size: 20px;
+            }
+            
+            .contact-button {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+            
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="javascript:history.back()" class="back-button">กลับหน้าหลัก</a>
+        
+        <div class="header">
+            <h1>ติดต่อ Admin</h1>
+            <div class="subtitle">UU School Trading - ผู้เชี่ยวชาญด้านการเทรด EA</div>
+        </div>
+        
+        <div class="admin-info">
+            <div class="admin-avatar">👨‍💼</div>
+            <div class="admin-name">UU School Trading</div>
+            <div class="admin-title">Expert EA Developer & Trading Mentor</div>
+        </div>
+        
+        <div class="contact-grid">
+            <div class="contact-card facebook">
+                <div class="contact-icon">📘</div>
+                <div class="contact-platform">Facebook</div>
+                <div class="contact-details">UU School Trading<br>เพจหลักสำหรับข้อมูลข่าวสาร</div>
+                <a href="https://www.facebook.com/uutrader" target="_blank" class="contact-button">
+                    เข้าไปดูเพจ
+                </a>
+            </div>
+            
+            <div class="contact-card line">
+                <div class="contact-icon">💬</div>
+                <div class="contact-platform">Line ID</div>
+                <div class="contact-details">uutrader<br>แชทตรง สะดวก รวดเร็ว</div>
+                <a href="https://line.me/ti/p/uutrader" target="_blank" class="contact-button">
+                    เพิ่มเพื่อน
+                </a>
+            </div>
+            
+            <div class="contact-card telegram">
+                <div class="contact-icon">✈️</div>
+                <div class="contact-platform">Telegram</div>
+                <div class="contact-details">@teleuutrader<br>รับข้อมูลสัญญาณเทรด</div>
+                <a href="https://t.me/teleuutrader" target="_blank" class="contact-button">
+                    เข้าร่วมแชท
+                </a>
+            </div>
+        </div>
+        
+        <div class="support-info">
+            <h3>📞 การให้บริการ Support</h3>
+            <p>เรายินดีให้ความช่วยเหลือและแก้ไขปัญหาการใช้งาน EA ให้กับลูกค้าทุกท่าน</p>
+            <div class="response-time">⏰ ตอบกลับภายใน 24-48 ชั่วโมง</div>
+        </div>
+        
+        <div class="business-hours">
+            <h4>🕐 เวลาให้บริการ</h4>
+            <div class="hours-grid">
+                <div class="hours-item">
+                    <div class="hours-day">จันทร์ - ศุกร์</div>
+                    <div class="hours-time">09:00 - 18:00 น.</div>
+                </div>
+                <div class="hours-item">
+                    <div class="hours-day">เสาร์ - อาทิตย์</div>
+                    <div class="hours-time">10:00 - 16:00 น.</div>
+                </div>
+                <div class="hours-item">
+                    <div class="hours-day">ฉุกเฉิน</div>
+                    <div class="hours-time">ทุกวัน 24 ชม.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-section">
+            <div class="faq-title">❓ คำถามที่พบบ่อย</div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: EA ใช้งานได้กับ MT4 และ MT5 หรือไม่?</div>
+                <div class="faq-answer">A: ใช่ครับ EA รองรับทั้ง MetaTrader 4 และ MetaTrader 5 สามารถใช้งานได้ทั้งคู่</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: ต้องใช้ VPS ในการรัน EA หรือไม่?</div>
+                <div class="faq-answer">A: แนะนำให้ใช้ VPS เพื่อให้ EA ทำงานได้ 24 ชั่วโมงไม่หยุด แต่สามารถใช้คอมพิวเตอร์ส่วนตัวได้เช่นกัน</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: มีการอัพเดท EA หรือไม่?</div>
+                <div class="faq-answer">A: มีการอัพเดทเป็นระยะเพื่อปรับปรุงประสิทธิภาพ ลูกค้าจะได้รับแจ้งผ่านช่องทางต่างๆ</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: หาก EA มีปัญหาจะติดต่อได้อย่างไร?</div>
+                <div class="faq-answer">A: สามารถติดต่อผ่านช่องทางใดก็ได้ที่แสดงด้านบน เราพร้อมให้ความช่วยเหลือตลอด 24 ชั่วโมง</div>
+            </div>
+        </div>
+        
+        <div class="warning-box">
+            <h4>⚠️ ข้อปฏิบัติในการติดต่อ</h4>
+            <p>
+                • กรุณาแจ้งปัญหาหรือคำถามอย่างชัดเจน<br>
+                • แนบรูปหน้าจอหากมีข้อผิดพลาด<br>
+                • ระบุเวอร์ชัน EA และ MetaTrader ที่ใช้<br>
+                • อดทนรอการตอบกลับเล็กน้อย เนื่องจากมีผู้ติดต่อเยอะ
+            </p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="color: #cccccc; font-size: 16px; margin-bottom: 20px;">
+                🙏 ขอบคุณที่ไว้วางใจใช้บริการ EA ของเรา
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <a href="downloadFile.html" class="back-button" style="margin: 0;">📥 ดาวน์โหลด EA</a>
+                <a href="ea_manual.html" class="back-button" style="margin: 0;">📖 ดูคู่มือ</a>
+                <a href="example_ea.html" class="back-button" style="margin: 0;">⚙️ ตัวอย่างการตั้งค่า</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
