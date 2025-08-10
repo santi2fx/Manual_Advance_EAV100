@@ -137,10 +137,38 @@
             background: #3498db;
             color: white;
         }
+        .back-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .back-button::before {
+            content: '←';
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container"> 
+        <a href="javascript:history.back()" class="back-button">กลับหน้าหลัก</a>
+        
         <h1>🤖 คู่มือการใช้งาน Advanced Trading EA V1.00</h1>
         <p style="text-align: center; font-style: italic;">สำหรับ MetaTrader 5 | Version 1.00 | © 2024 UU School Trading | ฉบับสมบูรณ์พร้อม Hybrid System</p>
 
@@ -873,3 +901,4 @@ InpShowPositionInfo = true
     </div>
 </body>
 </html>
+
