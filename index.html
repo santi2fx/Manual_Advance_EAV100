@@ -19,10 +19,12 @@
             align-items: center;
             min-height: 100vh;
             background: #000;
+            padding: 10px;
         }
         
         .cover-container {
-            width: 1280px;
+            width: 100%;
+            max-width: 1280px;
             height: 720px;
             position: relative;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e  50%, #0f3460 75%, #004080 100%);
@@ -116,10 +118,11 @@
         
         .features {
             position: absolute;
-            bottom: 80px;
+            bottom: 120px;
             left: 60px;
             display: flex;
             gap: 30px;
+            flex-wrap: wrap;
         }
         
         .feature-badge {
@@ -133,9 +136,24 @@
             font-weight: 500;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: glow 2s ease-in-out infinite alternate;
         }
         
-        .manual-link {
+        @keyframes glow {
+            from { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 5px rgba(0, 255, 204, 0.3); }
+            to { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 255, 204, 0.6); }
+        }
+        
+        .navigation-links {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
             background: linear-gradient(135deg, #00ffcc, #0096ff);
             color: #000;
             text-decoration: none;
@@ -149,7 +167,7 @@
             display: inline-block;
         }
         
-        .manual-link:hover {
+        .nav-link:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 255, 204, 0.6);
             background: linear-gradient(135deg, #00ffcc, #00ccff);
@@ -228,6 +246,180 @@
             40% { transform: translateY(-10px); }
             60% { transform: translateY(-5px); }
         }
+        
+        /* Mobile Portrait Styles */
+        @media screen and (orientation: portrait) and (max-width: 768px) {
+            .cover-container {
+                height: auto;
+                min-height: 100vh;
+                padding: 20px;
+            }
+            
+            .main-title {
+                position: relative;
+                top: 40px;
+                left: 0;
+                font-size: 36px;
+                text-align: center;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .version {
+                position: relative;
+                top: 0;
+                left: 0;
+                font-size: 16px;
+                display: inline-block;
+                margin-bottom: 30px;
+            }
+            
+            .subtitle {
+                position: relative;
+                top: 0;
+                left: 0;
+                font-size: 20px;
+                text-align: center;
+                max-width: 100%;
+                margin-bottom: 40px;
+            }
+            
+            .features {
+                position: relative;
+                bottom: auto;
+                left: 0;
+                justify-content: center;
+                margin-bottom: 30px;
+                gap: 15px;
+            }
+            
+            .feature-badge {
+                font-size: 14px;
+                padding: 10px 18px;
+            }
+            
+            .navigation-links {
+                position: relative;
+                bottom: auto;
+                left: 0;
+                justify-content: center;
+                margin-bottom: 40px;
+                gap: 15px;
+            }
+            
+            .nav-link {
+                font-size: 14px;
+                padding: 10px 18px;
+            }
+            
+            .robot-icon {
+                position: relative;
+                top: auto;
+                right: auto;
+                transform: none;
+                margin: 0 auto 30px;
+                width: 200px;
+                height: 200px;
+            }
+            
+            .robot-icon::before {
+                font-size: 80px;
+            }
+            
+            .glow-effect {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 220px;
+                height: 220px;
+            }
+            
+            .launch-badge {
+                position: relative;
+                top: auto;
+                right: auto;
+                font-size: 14px;
+                padding: 8px 20px;
+                margin-bottom: 20px;
+                display: inline-block;
+            }
+            
+            .chart-lines {
+                display: none;
+            }
+            
+            .decoration-dots {
+                background-size: 40px 40px;
+            }
+            
+            .grid-overlay {
+                background-size: 25px 25px;
+            }
+            
+            /* Stack elements vertically */
+            body {
+                align-items: flex-start;
+                padding: 10px;
+            }
+            
+            .cover-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 30px 20px;
+            }
+        }
+        
+        /* Mobile Landscape Styles */
+        @media screen and (orientation: landscape) and (max-height: 600px) {
+            .main-title {
+                font-size: 36px;
+                top: 80px;
+            }
+            
+            .subtitle {
+                font-size: 20px;
+                top: 200px;
+            }
+            
+            .robot-icon {
+                width: 200px;
+                height: 200px;
+                right: 50px;
+            }
+            
+            .robot-icon::before {
+                font-size: 80px;
+            }
+            
+            .glow-effect {
+                width: 220px;
+                height: 220px;
+                right: 50px;
+            }
+            
+            .features {
+                bottom: 80px;
+                gap: 15px;
+            }
+            
+            .feature-badge {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            
+            .navigation-links {
+                bottom: 40px;
+                gap: 15px;
+            }
+            
+            .nav-link {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -252,11 +444,17 @@
         </div>
         
         <div class="features">
-            <div class="feature-badge">⚡ เทรดอัตโนมัติ</div>
-            <div class="feature-badge">📊 วิเคราะห์ขั้นสูง</div>
-            <div class="feature-badge">🔒 ควบคุมความเสี่ยง</div>
-            <a href="ea_manual.html" class="manual-link">📖 ดูคู่มือ</a>
-            <a href="terms_conditions.html" class="manual-link">📋 เงื่อนไขการใช้งาน</a>
+            <div class="feature-badge">⚡ เทรดได้ทุกวันไม่หยุด</div>
+            <div class="feature-badge">📊 AI วิเคราะห์แม่นยำ</div>
+            <div class="feature-badge">🔒 จำกัดขาดทุนอัตโนมัติ</div>
+        </div>
+        
+        <div class="navigation-links">
+            <a href="ea_manual.html" class="nav-link">📖 ดูคู่มือ</a>
+            <a href="example_ea.html" class="nav-link">⚙️ ตัวอย่างการตั้งค่า</a>
+            <a href="downloadFile.html" class="nav-link">📥 ดาวน์โหลด EA</a>
+            <a href="admin.html" class="nav-link">📞 ติดต่อ Admin</a>
+            <a href="terms_conditions.html" class="nav-link">📋 เงื่อนไขการใช้งาน</a>
         </div>
         
         <div class="robot-icon"></div>
