@@ -3,902 +3,2710 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คู่มือการใช้งาน Advanced Trading EA V1.00 - ฉบับสมบูรณ์</title>
+    <title>คู่มือการใช้งาน Advanced Trading EA V1.00</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #667eea, #764ba2);
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --dark-text: #333;
+            --gray-text: #6c757d;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Kanit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .container {
-            max-width: 1000px;
-            margin: 20px auto;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-        h1 {
-            text-align: center;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        h2 {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
             margin-top: 20px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255,255,255,0.2);
         }
-        table {
+
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            margin: -20px -20px 30px -20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+
+        .version {
+            background: rgba(255,255,255,0.25);
+            padding: 8px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .header-subtitle {
+            margin-top: 15px;
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 30px 0;
+            border-left: 6px solid #d63031;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning::before {
+            content: '⚠️';
+            font-size: 3rem;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.3;
+        }
+
+        .warning h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            background: var(--success-color);
+            height: 100%;
+            width: 0%;
+            border-radius: 3px;
+            transition: width 2s ease;
+            animation: progressFill 3s ease-in-out;
+        }
+
+        @keyframes progressFill {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .nav-menu {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-menu h3 {
+            color: var(--gray-text);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 6px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .section {
+            margin: 40px 0;
+            padding: 30px;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border-left: 6px solid #667eea;
+            position: relative;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(102,126,234,0.1), transparent);
+            pointer-events: none;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            border-bottom: 3px solid #eee;
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+
+        .section h3 {
+            color: var(--gray-text);
+            margin: 25px 0 20px 0;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .section h4 {
+            color: #6c757d;
+            margin: 20px 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .parameter-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #3498db;
-            color: #fff;
-        }
-        ul, ol {
-            margin: 10px 0;
-            padding-left: 20px;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .emoji {
-            font-size: 1.2em;
-            margin-right: 5px;
-        }
-        .note {
-            background: #e8f4f8;
-            padding: 10px;
-            border-left: 4px solid #3498db;
-            margin: 10px 0;
-        }
-        .warning {
-            background: #fce4e4;
-            padding: 10px;
-            border-left: 4px solid #e74c3c;
-            margin: 10px 0;
-        }
-        .success {
-            background: #d4edda;
-            padding: 10px;
-            border-left: 4px solid #28a745;
-            margin: 10px 0;
-        }
-        .disclaimer {
-            background: #fff3cd;
-            padding: 15px;
-            border-left: 4px solid #ffc107;
             margin: 20px 0;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .parameter-table th,
+        .parameter-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f1f3f4;
+            font-size: 0.95rem;
+        }
+
+        .parameter-table th {
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .parameter-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .parameter-table tr:hover {
+            background-color: #e3f2fd;
+            transition: var(--transition);
+            transform: scale(1.01);
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid var(--success-color);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h4 {
+            color: var(--success-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-card h4::before {
+            content: '✓';
+            background: var(--success-color);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .signal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .signal-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            border-top: 5px solid var(--info-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--info-color), #667eea, var(--info-color));
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 200% 0; }
+            50% { background-position: -200% 0; }
+        }
+
+        .signal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .signal-card h4 {
+            color: var(--info-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .contact-info {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .contact-info a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .contact-info a:hover {
+            color: #ffed4e;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #4299e1;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: '{ }';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #4299e1;
             font-weight: bold;
         }
-        .code-block {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 4px;
-            padding: 15px;
-            margin: 10px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            overflow-x: auto;
+
+        .tip {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #856404;
+            position: relative;
+            overflow: hidden;
         }
-        .highlight {
-            background: #fff3cd;
-            padding: 2px 4px;
-            border-radius: 3px;
+
+        .tip::before {
+            content: '💡';
+            font-size: 2rem;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.5;
         }
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 10px 0;
-            background: #2c3e50;
-            color: #fff;
-            border-radius: 0 0 8px 8px;
+
+        .tip strong {
+            color: #856404;
+            font-weight: 600;
         }
-        a {
-            color: #3498db;
-            text-decoration: none;
+
+        .accordion {
+            margin: 20px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
         }
-        a:hover {
-            text-decoration: underline;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #3498db;
-            margin-bottom: 20px;
-        }
-        .tab-button {
-            background: #ecf0f1;
-            border: none;
-            padding: 10px 20px;
+
+        .accordion-header {
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+            padding: 20px;
             cursor: pointer;
-            border-radius: 5px 5px 0 0;
-            margin-right: 5px;
+            font-weight: 600;
+            color: var(--gray-text);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        .tab-button.active {
-            background: #3498db;
-            color: white;
+
+        .accordion-header::after {
+            content: '▼';
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
         }
+
+        .accordion-header.active::after {
+            transform: rotate(180deg);
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(135deg, #dee2e6, #ced4da);
+            transform: translateX(5px);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            background: #f8f9fa;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 1000px;
+        }
+
+        .accordion-content-inner {
+            padding: 20px;
+        }
+
         .back-button {
-            background: rgba(52, 152, 219, 0.8);
+            background: rgba(52, 152, 219, 0.9);
             color: #ffffff;
             text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 25px;
+            padding: 15px 30px;
+            border-radius: 30px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             display: inline-flex;
             align-items: center;
             margin-bottom: 30px;
             border: 1px solid #3498db;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
         }
         
         .back-button:hover {
             background: rgba(52, 152, 219, 1);
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
         }
         
         .back-button::before {
             content: '←';
-            margin-right: 8px;
-            font-size: 16px;
+            margin-right: 10px;
+            font-size: 18px;
+            transition: var(--transition);
         }
 
-        
+        .back-button:hover::before {
+            transform: translateX(-3px);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border-top: 4px solid #667eea;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--gray-text);
+            font-weight: 500;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-content {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            border-left: 4px solid #667eea;
+        }
+
+        .floating-action {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .floating-action:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .search-box {
+            background: var(--white);
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            padding: 12px 20px;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            display: block;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .signal-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .parameter-table {
+                font-size: 0.85rem;
+            }
+            
+            .parameter-table th,
+            .parameter-table td {
+                padding: 10px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .floating-action {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .container {
+                background: rgba(30, 30, 30, 0.97);
+                color: #e0e0e0;
+            }
+            
+            .section {
+                background: rgba(40, 40, 40, 0.9);
+                color: #e0e0e0;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .nav-menu,
+            .back-button,
+            .floating-action {
+                display: none;
+            }
+            
+            .container {
+                box-shadow: none;
+                background: white;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container"> 
-        <a href="javascript:history.back()" class="back-button">กลับหน้าหลัก</a>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <div class="container fade-in">
         
-        <h1>🤖 คู่มือการใช้งาน Advanced Trading EA V1.00</h1>
-        <p style="text-align: center; font-style: italic;">สำหรับ MetaTrader 5 | Version 1.00 | © 2024 UU School Trading | ฉบับสมบูรณ์พร้อม Hybrid System</p>
+        
+        <div class="header">
+            <a href="javascript:history.back()" class="back-button">กลับหน้าหลัก</a>
+            <h1>🚀 Advanced Trading EA V1.00</h1>
+            <div class="version">Complete Enhanced Version</div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <p class="header-subtitle">Created with ❤️ UU School Trading | สำหรับ MetaTrader 5</p>
+        </div>
 
-        <div class="disclaimer">
+        <div class="warning">
             <h3>⚠️ คำเตือนความเสี่ยงและการปฏิเสธความรับผิด</h3>
-            <p>การซื้อขายมีความเสี่ยงสูงและอาจนำไปสู่การสูญเสียเงินลงทุนทั้งหมด Advanced Trading EA V1.00 เป็นเพียงเครื่องมือช่วยในการเทรดเท่านั้น ผู้พัฒนาไม่รับประกันผลกำไรและไม่รับผิดชอบต่อความสูญเสียใด ๆ ที่เกิดขึ้น ผู้ใช้ต้องรับผิดชอบต่อการตัดสินใจและผลลัพธ์ทั้งหมดด้วยตนเอง</p>
+            <p><strong>การซื้อขายมีความเสี่ยงสูงและอาจนำไปสู่การสูญเสียเงินลงทุนทั้งหมด</strong> Advanced Trading EA V1.00 เป็นเพียงเครื่องมือช่วยในการเทรดเท่านั้น ผู้พัฒนาไม่รับประกันผลกำไรและไม่รับผิดชอบต่อความสูญเสียใด ๆ ที่เกิดขึ้น ผู้ใช้ต้องรับผิดชอบต่อการตัดสินใจและผลลัพธ์ทั้งหมดด้วยตนเอง</p>
         </div>
 
-        <div class="section">
-            <h2>📋 ภาพรวมและคุณสมบัติใหม่</h2>
-            <p>Advanced Trading EA V1.00 เป็นระบบเทรดอัตโนมัติสำหรับ MetaTrader 5 ที่ได้รับการอัปเดตใหม่ล่าสุด พร้อมระบบ Hybrid Signal ที่ทรงพลัง</p>
+        <input type="text" class="search-box" placeholder="🔍 ค้นหาในคู่มือ..." id="searchBox">
+
+        <div class="nav-menu">
+            <h3>📋 เมนูนำทาง</h3>
+            <div class="nav-grid">
+                <a href="#overview" class="nav-btn">📊 ภาพรวม</a>
+                <a href="#features" class="nav-btn">🌟 คุณสมบัติ</a>
+                <a href="#installation" class="nav-btn">⚙️ การติดตั้ง</a>
+                <a href="#quick-start" class="nav-btn">⚡ เริ่มต้นอย่างรวดเร็ว</a>
+                <a href="#basic-settings" class="nav-btn">🔧 การตั้งค่าพื้นฐาน</a>
+                <a href="#signal-system" class="nav-btn">📈 ระบบสัญญาณ</a>
+                <a href="#risk-management" class="nav-btn">🛡️ จัดการความเสี่ยง</a>
+                <a href="#close-system" class="nav-btn">🎯 ระบบปิดออเดอร์</a>
+                <a href="#optimization" class="nav-btn">🚀 การปรับแต่ง</a>
+                <a href="#troubleshooting" class="nav-btn">🔍 แก้ไขปัญหา</a>
+                <a href="#updates" class="nav-btn">🔄 อัพเดต</a>
+                <a href="#contact" class="nav-btn">📞 ติดต่อ</a>
+            </div>
+        </div>
+
+        <section id="overview" class="section slide-in-left">
+            <h2>📊 ภาพรวม EA</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 25px;">Advanced Trading EA V1.00 เป็น Expert Advisor ที่พัฒนาขึ้นสำหรับแพลตฟอร์ม MetaTrader 5 โดยมีฟีเจอร์ครบครันสำหรับการเทรดอัตโนมัติ รองรับทั้งนักเทรดมือใหม่และมืออาชีพ</p>
             
-            <h3>✨ คุณสมบัติหลัก (อัปเดตใหม่)</h3>
-            <div class="success">
-                <ul>
-                    <li><span class="emoji">🎯</span> <strong>10 Internal Signals</strong> - สูตรสัญญาณภายในที่หลากหลาย</li>
-                    <li><span class="emoji">🔄</span> <strong>Hybrid Signal System</strong> - รวมสัญญาณ Internal + External</li>
-                    <li><span class="emoji">📈</span> <strong>4 Trade Direction Modes</strong> - ยืดหยุ่นในทุกสถานการณ์</li>
-                    <li><span class="emoji">🎯</span> <strong>TP/SL Management</strong> - จัดการ Take Profit/Stop Loss อัตโนมัติ</li>
-                    <li><span class="emoji">📊</span> <strong>Trailing Stop System</strong> - ติดตามกำไรอย่างฉลาด</li>
-                    <li><span class="emoji">🚪</span> <strong>Dual Close System</strong> - ระบบปิดสถานะแบบคู่</li>
-                    <li><span class="emoji">🖥️</span> <strong>Compact Display</strong> - แสดงผลกระทัดรัด ปรับแต่งได้</li>
-                    <li><span class="emoji">🤖</span> <strong>100% Automated</strong> - ทำงานอัตโนมัติ 24/7</li>
-                </ul>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">สูตรสัญญาณ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">โหมดไฮบริด</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">ระบบปิดออเดอร์</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">การทำงาน</div>
+                </div>
             </div>
+        </section>
 
-            <h3>🏗️ สถาปัตยกรรมของ EA (อัปเดต)</h3>
-            <div class="code-block">
-Authentication → Signal System (Internal/External/Hybrid) → Trade Direction → 
-Volume Management → TP/SL System → Trailing Stop → Dual Close System → Display
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>🔧 การติดตั้งและเตรียมความพร้อม</h2>
-            <h3>📋 ความต้องการของระบบ</h3>
-            <ul>
-                <li><b>Platform:</b> MetaTrader 5 (Build 3000+)</li>
-                <li><b>Account Type:</b> Demo หรือ Real Account</li>
-                <li><b>Internet Connection:</b> สำหรับ Authentication System</li>
-                <li><b>WebRequest Permission:</b> ต้องเปิดใช้งานใน MT5</li>
-                <li><b>RAM:</b> อย่างน้อย 4GB (แนะนำ 8GB+)</li>
-                <li><b>CPU:</b> Dual Core ขึ้นไป</li>
-            </ul>
-
-            <h3>📥 ขั้นตอนการติดตั้ง</h3>
-            <ol>
-                <li><strong>Download EA File</strong> - ดาวน์โหลดไฟล์ EA</li>  
-                <li><strong>Copy to MQL5/Experts</strong> - คัดลอกไปยังโฟลเดอร์ที่ถูกต้อง</li>
-                <li><strong>Enable WebRequest</strong> - เปิดใช้งาน WebRequest</li>
-                <li><strong>Compile (if needed)</strong> - คอมไพล์หากจำเป็น</li>
-                <li><strong>Attach to Chart</strong> - แนบไปยังชาร์ต</li>
-                <li><strong>Authentication</strong> - รอการตรวจสอบ</li>
-                <li><strong>Configure Settings</strong> - ตั้งค่าตามต้องการ</li>
-            </ol>
-
-            <div class="note">
-                <p><b>รายละเอียดการติดตั้ง:</b></p>
-                <ul>
-                    <li>Download file EA: <b>Advanced Trading EA V1.00(MQL5).ex5</b></li> 
-                    <li>Download Link: <b><a href="https://drive.google.com/file/d/1nd9z5joCsZMxrJb3MBvqoC8Sg_XwVEIk/view?usp=drive_link">Download EA File: Advanced Trading EA V1.00</a></b></li>
-                    <li>วางที่: <b>MQL5/Experts/</b> folder</li>
-                    <li>Enable WebRequest สำหรับ: <b><a href="https://script.google.com">https://script.google.com</a></b></li>
-                    <li>Attach EA ไปยัง Chart ที่ต้องการเทรด</li>
-                    <li>รอระบบ Authentication (ประมาณ 30-60 วินาที)</li>
-                </ul>
-            </div>
-
-            <h3>⚠️ การเปิดใช้งาน WebRequest (สำคัญมาก)</h3>
-            <div class="warning">
-                <p><b>ขั้นตอนที่สำคัญ:</b> ต้องเปิดใช้งาน WebRequest ก่อนใช้งาน EA</p>
-                <ol>
-                    <li>เปิด MetaTrader 5 → Tools → Options (หรือกด Ctrl+O)</li>
-                    <li>คลิก tab "Expert Advisors"</li>
-                    <li>เปิดใช้งาน "Allow WebRequest for listed URL"</li>
-                    <li>เพิ่ม URL: <b><a href="https://script.google.com">https://script.google.com</a></b></li>
-                    <li>กด "OK" และรีสตาร์ท MT5</li>
-                </ol>
-                <p><b>หากไม่ทำ:</b> EA จะไม่สามารถทำ Authentication ได้และจะไม่ทำงาน</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>🔐 ระบบ Authentication (อัปเดต)</h2>
-            <h3>🔄 การทำงานของ Authentication</h3>
-            <div class="code-block">
-EA Start → Check Strategy Tester → Internet Connection → Send Account Data → 
-Google Sheets Verification → Response Code → Initialize Trading System
-            </div>
-
-            <h3>📊 ข้อมูลที่ส่งไปยัง Google Sheets</h3>
-            <table>
-                <tr><th>ข้อมูล</th><th>คำอธิบาย</th><th>ตัวอย่าง</th></tr>
-                <tr><td>Account Login</td><td>หมายเลขบัญชี</td><td>12345678</td></tr>
-                <tr><td>Account Type</td><td>ประเภทบัญชี</td><td>DEMO/REAL</td></tr>
-                <tr><td>Server</td><td>ชื่อเซิร์ฟเวอร์</td><td>ICMarkets-Demo01</td></tr>
-                <tr><td>Program Type</td><td>ประเภทโปรแกรม</td><td>EA</td></tr>
-                <tr><td>Platform</td><td>แพลตฟอร์ม</td><td>MT5</td></tr>
-                <tr><td>Timestamp</td><td>เวลาที่เข้าใช้งาน</td><td>2024.01.15 14:30:25</td></tr>
-            </table>
-
-            <h3>✅ สถานะ Authentication</h3>
-            <table>
-                <tr><th>Response Code</th><th>ความหมาย</th><th>การดำเนินการ</th></tr>
-                <tr><td>100.00</td><td>Authentication Success</td><td>EA เริ่มทำงานปกติ</td></tr>
-                <tr><td>อื่นๆ</td><td>Authentication Failed</td><td>EA หยุดทำงาน/แสดงคำเตือน</td></tr>
-                <tr><td>Strategy Tester</td><td>ในโหมดทดสอบ</td><td>ข้าม Authentication</td></tr>
-            </table>
-        </div>
-
-        <div class="section">
-            <h2>🎯 ระบบสัญญาณใหม่ (Hybrid Signal System)</h2>
+        <section id="features" class="section">
+            <h2>🌟 คุณสมบัติหลัก</h2>
             
-            <h3>🔄 โหมดการทำงานของสัญญาณ</h3>
-            <table>
-                <tr><th>โหมด</th><th>Internal Signal</th><th>External Signal</th><th>คำอธิบาย</th></tr>
-                <tr><td><span class="emoji">📊</span> Internal Only</td><td>✅</td><td>❌</td><td>ใช้สัญญาณภายในเท่านั้น</td></tr>
-                <tr><td><span class="emoji">📡</span> External Only</td><td>❌</td><td>✅</td><td>ใช้ Custom Indicator เท่านั้น</td></tr>
-                <tr><td><span class="emoji">🔄</span> Hybrid Confirmation</td><td>✅</td><td>✅</td><td>ต้องตรงกันถึงเทรด</td></tr>
-                <tr><td><span class="emoji">🎯</span> Hybrid Internal Priority</td><td>✅</td><td>✅</td><td>Internal เป็นหลัก External กรอง</td></tr>
-                <tr><td><span class="emoji">📈</span> Hybrid External Priority</td><td>✅</td><td>✅</td><td>External เป็นหลัก Internal กรอง</td></tr>
-                <tr><td><span class="emoji">⚡</span> Hybrid Independent</td><td>✅</td><td>✅</td><td>ต่างคนต่างเทรด</td></tr>
-            </table>
-
-            <h3>📊 10 Internal Signals (สูตรภายใน)</h3>
-            <table>
-                <tr><th>สูตร</th><th>ประเภท</th><th>Parameters หลัก</th><th>เหมาะสำหรับ</th></tr>
-                <tr><td>1.1 Double MA Cross</td><td>Trend Following</td><td>Period, Method</td><td>Trend Strong</td></tr>
-                <tr><td>1.2 MA Cross</td><td>Trend Following</td><td>Fast/Slow Period</td><td>Trend Clear</td></tr>
-                <tr><td>1.3 Support/Resistance Break</td><td>Breakout</td><td>Interval (Hours)</td><td>Range Market</td></tr>
-                <tr><td>1.4 BB Rejection</td><td>Mean Reversion</td><td>Period, Deviation</td><td>Sideways Market</td></tr>
-                <tr><td>1.5 MACD Cross Signal</td><td>Oscillator</td><td>Fast/Slow/Signal EMA</td><td>Trend Change</td></tr>
-                <tr><td>1.6 MACD Cross Zero</td><td>Oscillator</td><td>Fast/Slow/Signal EMA</td><td>Momentum</td></tr>
-                <tr><td>1.7 RSI OB/OS</td><td>Oscillator</td><td>Period, OB/OS Levels</td><td>Overbought/Oversold</td></tr>
-                <tr><td>1.8 Stochastic OB/OS</td><td>Oscillator</td><td>K/D Period, Levels</td><td>Short-term Reversal</td></tr>
-                <tr><td>1.9 MA+ATR Breakout</td><td>Volatility</td><td>MA Period, ATR Multiplier</td><td>Volatile Market</td></tr>
-                <tr><td>1.10 MA Cross + Trend</td><td>Trend Following</td><td>Fast/Slow/Trend MA</td><td>Strong Trend</td></tr>
-            </table>
-
-            <h3>⚙️ การตั้งค่า Hybrid Mode</h3>
-            <div class="code-block">
-// เปิดใช้ทั้งสองระบบ
-InpUseInternalSignal = true
-InpUseCustomIndicator = true
-
-// เลือกโหมดการรวมสัญญาณ
-InpHybridMode = HYBRID_CONFIRMATION      // ต้องตรงกัน (ปลอดภัยสุด)
-InpHybridMode = HYBRID_INTERNAL_PRIORITY // Internal หลัก (แนะนำ)
-InpHybridMode = HYBRID_EXTERNAL_PRIORITY // External หลัก
-InpHybridMode = HYBRID_INDEPENDENT       // ต่างคนต่างเทรด (โอกาสมาก)
+            <div class="feature-card">
+                <h4>🎯 ระบบสัญญาณแบบไฮบริด</h4>
+                <p>รองรับทั้งสัญญาณภายในและภายนอก พร้อมโหมดการทำงานที่หลากหลาย สามารถปรับเปลี่ยนได้ตามสไตล์การเทรด</p>
             </div>
-        </div>
-
-        <div class="section">
-            <h2>🎯 ระบบ TP/SL และ Trailing Stop (ใหม่)</h2>
             
-            <h3>⚙️ พารามิเตอร์ TP/SL System</h3>
-            <table>
-                <tr><th>Parameter</th><th>คำอธิบาย</th><th>ค่าแนะนำ</th><th>หน่วย</th></tr>
-                <tr><td>InpEnableTPSL</td><td>เปิด/ปิดระบบ TP/SL</td><td>true</td><td>Boolean</td></tr>
-                <tr><td>InpTakeProfitPoints</td><td>ระยะ Take Profit</td><td>50-200</td><td>Points</td></tr>
-                <tr><td>InpStopLossPoints</td><td>ระยะ Stop Loss</td><td>30-100</td><td>Points</td></tr>
-                <tr><td>InpModifyAfterOpen</td><td>แก้ไข TP/SL หลังเปิด Position</td><td>true</td><td>Boolean</td></tr>
-                <tr><td>InpUseTrailingStop</td><td>ใช้ Trailing Stop</td><td>true</td><td>Boolean</td></tr>
-                <tr><td>InpTrailingStopDistance</td><td>ระยะ Trailing Stop</td><td>20-50</td><td>Points</td></tr>
-                <tr><td>InpTrailingStopStep</td><td>ขั้นต่ำในการย้าย Trailing</td><td>5-10</td><td>Points</td></tr>
-            </table>
-
-            <h3>📊 การทำงานของ Trailing Stop</h3>
-            <div class="note">
-                <p><strong>หลักการทำงาน:</strong></p>
-                <ol>
-                    <li>ตรวจสอบ Position ที่มีกำไรเท่านั้น</li>
-                    <li>คำนวณระยะ Trailing Stop จากราคาปัจจุบัน</li>
-                    <li>ย้าย Stop Loss เฉพาะเมื่อกำไรเพิ่มขึ้น</li>
-                    <li>ไม่ย้าย Stop Loss ให้ห่างจากราคาเปิด</li>
-                    <li>ย้ายทีละ Step ที่กำหนด</li>
-                </ol>
+            <div class="feature-card">
+                <h4>📈 สูตรสัญญาณภายใน 30 แบบ</h4>
+                <p>ตั้งแต่สูตรพื้นฐานไปจนถึงสูตรขั้นสูง เช่น Smart Money Concepts, ICT, และสูตรเฉพาะทองคำ</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>🛡️ ระบบปิดออเดอร์คู่</h4>
+                <p>Basic และ Advanced Close System ทำงานควบคู่กันเพื่อควบคุมความเสี่ยงและเพิ่มประสิทธิภาพ</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>⚙️ การจัดการเงินแบบยืดหยุ่น</h4>
+                <p>รองรับ Fix Lot, Martingale และ Lot Plus พร้อมระบบควบคุมความเสี่ยงแบบอัตโนมัติ</p>
             </div>
 
-            <h3>💡 ตัวอย่างการตั้งค่า TP/SL</h3>
-            <div class="tabs">
-                <button class="tab-button active" onclick="showTab('scalping')">Scalping</button>
-                <button class="tab-button" onclick="showTab('swing')">Swing Trading</button>
-                <button class="tab-button" onclick="showTab('longterm')">Long Term</button>
+            <div class="feature-card">
+                <h4>🕐 ตัวกรองเวลาอัจฉริยะ</h4>
+                <p>สามารถกำหนดเวลาเทรด หลีกเลี่ยงข่าวสำคัญ และปรับตามเขตเวลาต่างๆ ได้</p>
             </div>
 
-            <div id="scalping" class="tab-content active">
-                <h4>🔥 Scalping Setup</h4>
-                <div class="code-block">
-InpTakeProfitPoints = 15        // TP 15 points
-InpStopLossPoints = 10          // SL 10 points  
-InpUseTrailingStop = true       // เปิด Trailing
-InpTrailingStopDistance = 8     // ระยะ Trailing 8 points
-InpTrailingStopStep = 2         // ขยับทีละ 2 points
+            <div class="feature-card">
+                <h4>📊 ระบบแสดงผลครบครัน</h4>
+                <p>แสดงข้อมูลกำไร-ขาดทุน สถิติการเทรด และสถานะระบบแบบ Real-time</p>
+            </div>
+        </section>
+
+        <section id="installation" class="section">
+            <h2>⚙️ การติดตั้งและตั้งค่าเบื้องต้น</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>1. การติดตั้ง EA <a href="downloadFile.html" target="_blank" style="color: #28a745; text-decoration: none; font-size: 0.9rem; margin-left: 10px; padding: 5px 10px; background: rgba(40, 167, 69, 0.1); border-radius: 5px; border: 1px solid #28a745; transition: all 0.3s ease;">📥 ดาวน์โหลด EA</a></h4>
+                        <ol style="padding-left: 20px; margin-top: 10px;">
+                            <li>เปิด MetaTrader 5</li>
+                            <li>กด <span class="highlight">File → Open Data Folder</span></li>
+                            <li>เข้าโฟลเดอร์ <span class="highlight">MQL5 → Experts</span></li>
+                            <li>คัดลอกไฟล์ <code>Advanced Trading EA V1.00.mq5</code> ไปในโฟลเดอร์นี้</li>
+                            <li>รีสตาร์ท MetaTrader 5 หรือกด <span class="highlight">Ctrl + R</span></li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>2. การใส่ EA ลงในชาร์ต</h4>
+                        <ol style="padding-left: 20px; margin-top: 10px;">
+                            <li>เปิดชาร์ตที่ต้องการเทรด (แนะนำ M15 หรือ H1)</li>
+                            <li>ลาก EA จาก Navigator มาวางลงในชาร์ต</li>
+                            <li>ตั้งค่าพารามิเตอร์ตามต้องการ</li>
+                            <li>เปิด <span class="highlight">Allow Algo Trading</span></li>
+                            <li>คลิก <span class="highlight">OK</span></li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>3. การตรวจสอบการทำงาน</h4>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>ดู Smiley Face ที่มุมขวาบนของชาร์ต (ต้องเป็นหน้ายิ้ม)</li>
+                            <li>ตรวจสอบข้อความใน <span class="highlight">Journal</span> และ <span class="highlight">Expert</span> Tab</li>
+                            <li>ดูข้อมูลที่แสดงบนชาร์ต</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <div id="swing" class="tab-content">
-                <h4>📈 Swing Trading Setup</h4>
-                <div class="code-block">
-InpTakeProfitPoints = 100       // TP 100 points
-InpStopLossPoints = 50          // SL 50 points
-InpUseTrailingStop = true       // เปิด Trailing
-InpTrailingStopDistance = 30    // ระยะ Trailing 30 points
-InpTrailingStopStep = 10        // ขยับทีละ 10 points
-                </div>
+            <div class="tip">
+                <strong>💡 เคล็ดลับสำคัญ:</strong> ก่อนใช้งานจริง แนะนำให้ทดสอบใน Demo Account หรือ Strategy Tester อย่างน้อย 1 สัปดาห์ เพื่อทำความเข้าใจการทำงานของ EA
             </div>
+        </section>
 
-            <div id="longterm" class="tab-content">
-                <h4>📊 Long Term Setup</h4>
-                <div class="code-block">
-InpTakeProfitPoints = 500       // TP 500 points  
-InpStopLossPoints = 200         // SL 200 points
-InpUseTrailingStop = true       // เปิด Trailing
-InpTrailingStopDistance = 100   // ระยะ Trailing 100 points
-InpTrailingStopStep = 20        // ขยับทีละ 20 points
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>🖥️ ระบบแสดงผลแบบใหม่ (Compact Display)</h2>
+        <section id="quick-start" class="section">
+            <h2>⚡ เริ่มต้นอย่างรวดเร็ว (Quick Start)</h2>
             
-            <h3>🎛️ การควบคุมการแสดงผล</h3>
-            <table>
-                <tr><th>Parameter</th><th>คำอธิบาย</th><th>แนะนำ</th></tr>
-                <tr><td>InpCompactMode</td><td>โหมดกระทัดรัด</td><td>true (หน้าจอเล็ก)</td></tr>
-                <tr><td>InpShowProfitDetails</td><td>แสดงรายละเอียดกำไร</td><td>false</td></tr>
-                <tr><td>InpShowTradingCosts</td><td>แสดงค่าใช้จ่าย</td><td>false</td></tr>
-                <tr><td>InpShowStatistics</td><td>แสดงสถิติ</td><td>false</td></tr>
-                <tr><td>InpShowTPSLInfo</td><td>แสดงข้อมูล TP/SL</td><td>true</td></tr>
-                <tr><td>InpShowDualCloseInfo</td><td>แสดงข้อมูล Close System</td><td>false</td></tr>
-                <tr><td>InpShowPositionInfo</td><td>แสดงข้อมูล Position</td><td>true</td></tr>
-                <tr><td>InpShowSystemSettings</td><td>แสดงการตั้งค่าระบบ</td><td>false</td></tr>
-                <tr><td>InpShowSRInfo</td><td>แสดงข้อมูล S/R</td><td>false</td></tr>
-            </table>
-
-            <h3>📱 การตั้งค่าตามขนาดหน้าจอ</h3>
-            <div class="note">
-                <p><strong>หน้าจอเล็ก (1366x768 หรือเล็กกว่า):</strong></p>
-                <div class="code-block">
-InpCompactMode = true
-InpShowProfitDetails = false
-InpShowTradingCosts = false  
-InpShowStatistics = false
-InpShowDualCloseInfo = false
-InpShowSystemSettings = false
-InpShowSRInfo = false
-                </div>
-
-                <p><strong>หน้าจอใหญ่ (1920x1080 ขึ้นไป):</strong></p>
-                <div class="code-block">
-InpCompactMode = false
-InpShowProfitDetails = true
-InpShowTPSLInfo = true
-InpShowPositionInfo = true
-InpShowDualCloseInfo = true
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>🎯 ระบบจัดการการเทรด (อัปเดต)</h2>
-            
-            <h3>📈 OneDirection Mode (เทรดทิศทางเดียว)</h3>
-            <table>
-                <tr><th>Mode</th><th>คำอธิบาย</th><th>เหมาะสำหรับ</th></tr>
-                <tr><td>AutoDetect</td><td>รอสัญญาณแรกแล้วล็อคทิศทาง</td><td>Trend Following</td></tr>
-                <tr><td>BuyOnly</td><td>เทรด BUY เท่านั้น</td><td>Bull Market</td></tr>
-                <tr><td>SellOnly</td><td>เทรด SELL เท่านั้น</td><td>Bear Market</td></tr>
-            </table>
-
-            <h3>📊 TwoDirection Mode (เทรดสองทิศทาง)</h3>
-            <table>
-                <tr><th>Mode</th><th>คำอธิบาย</th><th>เหมาะสำหรับ</th></tr>
-                <tr><td>AutoDetect</td><td>BUY Signal → BUY, SELL Signal → SELL</td><td>Clear Signals</td></tr>
-                <tr><td>Reverse</td><td>BUY Signal → SELL, SELL Signal → BUY</td><td>Counter Trend</td></tr>
-                <tr><td>BuyOnly</td><td>ทุกสัญญาณ → BUY Trade</td><td>Strong Uptrend</td></tr>
-                <tr><td>SellOnly</td><td>ทุกสัญญาณ → SELL Trade</td><td>Strong Downtrend</td></tr>
-            </table>
-
-            <h3>💰 ระบบจัดการ Volume</h3>
-            <table>
-                <tr><th>LotSize Type</th><th>คำอธิบาย</th><th>สูตร</th><th>เหมาะสำหรับ</th></tr>
-                <tr><td>FixLotSize</td><td>ขนาด Lot คงที่</td><td>Lot = InpLotSize</td><td>Conservative Trading</td></tr>
-                <tr><td>LotMartingale</td><td>เพิ่ม Lot แบบ Martingale</td><td>Lot = Base × Multiplier^Positions</td><td>Recovery Strategy</td></tr>
-                <tr><td>LotPlus</td><td>เพิ่ม Lot เป็นจำนวนคงที่</td><td>Lot = Base + (Plus × Positions)</td><td>Gradual Increase</td></tr>
-            </table>
-        </div>
-
-        <div class="section">
-            <h2>🚪 ระบบปิดสถานะ (Dual Close System)</h2>
-            
-            <h3>🏗️ โครงสร้างระบบ</h3>
-            <ul>
-                <li><strong>Basic System:</strong> Cut Loss & Profit Target (ตาม Balance)</li>
-                <li><strong>Advanced System:</strong> Time & Drawdown Based</li>
-                <li><strong>Partial Close:</strong> ปิดบางส่วนเมื่อถึงเงื่อนไข</li>
-                <li><strong>Priority System:</strong> กำหนดระบบไหนทำงานก่อน</li>
-            </ul>
-
-            <h3>📋 Close System Modes</h3>
-            <table>
-                <tr><th>Mode</th><th>คำอธิบาย</th><th>เหมาะสำหรับ</th></tr>
-                <tr><td>BasicOnly</td><td>ใช้เฉพาะ Basic System</td><td>Simple Trading</td></tr>
-                <tr><td>AdvancedOnly</td><td>ใช้เฉพาะ Advanced System</td><td>Time/DD Based</td></tr>
-                <tr><td>DualSystem</td><td>ใช้ทั้งสองระบบพร้อมกัน</td><td>Complete Protection</td></tr>
-                <tr><td>CustomCombination</td><td>ปรับแต่งการผสมผสาน</td><td>Advanced Users</td></tr>
-            </table>
-
-            <h3>⚙️ Basic Close System</h3>
-            <table>
-                <tr><th>Parameter</th><th>คำอธิบาย</th><th>ตัวอย่าง</th></tr>
-                <tr><td>InpCutlossType</td><td>ประเภท Cut Loss</td><td>percentCut / dollarsCut</td></tr>
-                <tr><td>InpCutlossPercent</td><td>Cut Loss เป็น % ของ Balance</td><td>5.0 = 5%</td></tr>
-                <tr><td>InpCutlossDollars</td><td>Cut Loss เป็นจำนวนเงิน</td><td>100.0 = $100</td></tr>
-                <tr><td>InpProfitType</td><td>ประเภท Profit Target</td><td>percentProfit / dollarsProfit</td></tr>
-                <tr><td>InpProfitPercent</td><td>Profit Target เป็น %</td><td>10.0 = 10%</td></tr>
-                <tr><td>InpProfitDollars</td><td>Profit Target เป็นจำนวนเงิน</td><td>200.0 = $200</td></tr>
-            </table>
-
-            <h3>📊 Advanced Close System</h3>
-            <table>
-                <tr><th>Parameter</th><th>คำอธิบาย</th><th>ตัวอย่าง</th></tr>
-                <tr><td>InpEnableTimeBasedClose</td><td>เปิดการปิดตามเวลา</td><td>true/false</td></tr>
-                <tr><td>InpCloseHour</td><td>ชั่วโมงที่ปิด</td><td>17 = 5 PM</td></tr>
-                <tr><td>InpCloseMinute</td><td>นาทีที่ปิด</td><td>0 = XX:00</td></tr>
-                <tr><td>InpCloseFridayOnly</td><td>ปิดเฉพาะวันศุกร์</td><td>true/false</td></tr>
-                <tr><td>InpEnableDrawdownClose</td><td>เปิดการปิดตาม Drawdown</td><td>true/false</td></tr>
-                <tr><td>InpMaxDrawdownPercent</td><td>Drawdown สูงสุดที่ยอมรับ</td><td>20.0 = 20%</td></tr>
-            </table>
-
-            <h3>🔄 Partial Close System</h3>
-            <table>
-                <tr><th>Parameter</th><th>คำอธิบาย</th><th>ค่าแนะนำ</th></tr>
-                <tr><td>InpEnablePartialClose</td><td>เปิดการปิดบางส่วน</td><td>false (เริ่มต้น)</td></tr>
-                <tr><td>InpPartialClosePercent</td><td>เปอร์เซ็นต์ที่ปิด</td><td>50.0 = 50%</td></tr>
-                <tr><td>InpPartialOnBasicTrigger</td><td>ปิดบางส่วนเมื่อ Basic Trigger</td><td>true</td></tr>
-                <tr><td>InpPartialOnAdvancedTrigger</td><td>ปิดบางส่วนเมื่อ Advanced Trigger</td><td>false</td></tr>
-            </table>
-        </div>
-
-        <div class="section">
-            <h2>📋 Template การตั้งค่า (อัปเดต)</h2>
-            
-            <div class="tabs">
-                <button class="tab-button active" onclick="showTab('conservative')">Conservative</button>
-                <button class="tab-button" onclick="showTab('balanced')">Balanced</button>
-                <button class="tab-button" onclick="showTab('aggressive')">Aggressive</button>
-                <button class="tab-button" onclick="showTab('hybrid')">Hybrid</button>
-            </div>
-
-            <div id="conservative" class="tab-content active">
-                <h4>🛡️ Conservative Trading (ปลอดภัย)</h4>
-                <div class="code-block">
-// สัญญาณและทิศทาง
-InpUseInternalSignal = true
-InpSignalType = SIGNAL_MA_CROSS
-InpMACross_FastPeriod = 10
-InpMACross_SlowPeriod = 25
-InpTradeDirection = OneDirection
-InpOneDirectionMode = AutoDetect
-
-// Volume และความเสี่ยง
+            <div class="signal-grid">
+                <div class="signal-card">
+                    <h4>🥇 สำหรับทองคำ (GOLD)</h4>
+                    <div class="code-block">
+InpSignalType = 11 (Gold Scalping EMA)
+InpLotSize = 0.01
 InpLotType = FixLotSize
-InpLotSize = 0.01
-InpMaxOrdersPerSymbol = 5
-InpMaxRiskPercent = 2.0
-
-// TP/SL
-InpEnableTPSL = true
-InpTakeProfitPoints = 100
-InpStopLossPoints = 50
-InpUseTrailingStop = true
-InpTrailingStopDistance = 30
-
-// Close System
-InpCloseSystemMode = BasicOnly
-InpCutlossType = percentCut
-InpCutlossPercent = 3.0
-InpProfitType = percentProfit
-InpProfitPercent = 5.0
-
-// Display
-InpCompactMode = true
-InpShowProfitDetails = false
-                </div>
-            </div>
-
-            <div id="balanced" class="tab-content">
-                <h4>⚖️ Balanced Trading (สมดุล)</h4>
-                <div class="code-block">
-// สัญญาณและทิศทาง
-InpUseInternalSignal = true
-InpSignalType = SIGNAL_RSI_OVERBOUGHT_SOLD
-InpRSI_Period = 14
-InpRSI_Overbought = 70
-InpRSI_Oversold = 30
+InpTakeProfitPoints = 3500
+InpStopLossPoints = 2000
 InpTradeDirection = TwoDirection
-InpTwoDirectionMode = TwoDir_AutoDetect
+                    </div>
+                </div>
 
-// Volume และความเสี่ยง
+                <div class="signal-card">
+                    <h4>💱 สำหรับ Forex</h4>
+                    <div class="code-block">
+InpSignalType = 2 (MA Cross)
+InpLotSize = 0.01
 InpLotType = LotPlus
-InpLotSize = 0.01
-InpLotPlus = 0.01
-InpMaxOrdersPerSymbol = 10
-InpMaxRiskPercent = 5.0
-
-// TP/SL
-InpEnableTPSL = true
-InpTakeProfitPoints = 80
-InpStopLossPoints = 40
+InpTakeProfitPoints = 500
+InpStopLossPoints = 300
 InpUseTrailingStop = true
-InpTrailingStopDistance = 25
-InpTrailingStopStep = 5
-
-// Close System
-InpCloseSystemMode = DualSystem
-InpCutlossType = percentCut
-InpCutlossPercent = 5.0
-InpProfitType = dollarsProfit
-InpProfitDollars = 50.0
-InpEnableDrawdownClose = true
-InpMaxDrawdownPercent = 15.0
+                    </div>
                 </div>
-            </div>
 
-            <div id="aggressive" class="tab-content">
-                <h4>🔥 Aggressive Trading (รุกราน)</h4>
-                <div class="code-block">
-// สัญญาณและทิศทาง
-InpUseInternalSignal = true
-InpSignalType = SIGNAL_SUPPORT_RESISTANCE_BREAK
-InpSR_Interval = 6
-InpTradeDirection = TwoDirection
-InpTwoDirectionMode = TwoDir_Reverse
-
-// Volume และความเสี่ยง
-InpLotType = LotMartingale
+                <div class="signal-card">
+                    <h4>📊 สำหรับดัชนี</h4>
+                    <div class="code-block">
+InpSignalType = 3 (Support/Resistance Break)
 InpLotSize = 0.01
-InpMartingaleMultiplier = 1.5
-InpMaxOrdersPerSymbol = 20
-InpMaxRiskPercent = 10.0
-
-// TP/SL
-InpEnableTPSL = true
-InpTakeProfitPoints = 50
-InpStopLossPoints = 30
-InpUseTrailingStop = true
-InpTrailingStopDistance = 15
-InpTrailingStopStep = 3
-
-// Close System
-InpCloseSystemMode = DualSystem
-InpCutlossType = dollarsCut
-InpCutlossDollars = 200.0
-InpProfitType = dollarsProfit
-InpProfitDollars = 100.0
-InpEnablePartialClose = true
-InpPartialClosePercent = 50.0
+InpLotType = FixLotSize
+InpTakeProfitPoints = 1000
+InpStopLossPoints = 500
+InpBlockTradingOnNewsTime = true
+                    </div>
                 </div>
-            </div>
 
-            <div id="hybrid" class="tab-content">
-                <h4>🔄 Hybrid Signal System (ผสมผสาน)</h4>
-                <div class="code-block">
-// สัญญาณแบบผสม
-InpUseInternalSignal = true
-InpUseCustomIndicator = true
-InpSignalType = SIGNAL_MACD_CROSS_SIGNAL
-InpIndicatorName = "YourCustomIndicator"
-InpHybridMode = HYBRID_CONFIRMATION
-
-// ทิศทางการเทรด
-InpTradeDirection = TwoDirection
-InpTwoDirectionMode = TwoDir_AutoDetect
-
-// Volume และความเสี่ยง
+                <div class="signal-card">
+                    <h4>🚀 สำหรับ Scalping</h4>
+                    <div class="code-block">
+InpSignalType = 25 (ICT Kill Zone)
+InpLotSize = 0.01
 InpLotType = LotPlus
-InpLotSize = 0.01
-InpLotPlus = 0.005
-InpMaxOrdersPerSymbol = 15
-InpMaxRiskPercent = 7.0
-
-// TP/SL
-InpEnableTPSL = true
-InpTakeProfitPoints = 75
-InpStopLossPoints = 35
+InpTakeProfitPoints = 200
+InpStopLossPoints = 100
 InpUseTrailingStop = true
-InpTrailingStopDistance = 20
-InpTrailingStopStep = 5
+                    </div>
+                </div>
+            </div>
+        </section>
 
-// Close System
+        <section id="basic-settings" class="section">
+            <h2>🔧 การตั้งค่าพื้นฐาน</h2>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    📊 การตั้งค่าการเทรดพื้นฐาน
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>พารามิเตอร์</th>
+                                    <th>คำอธิบาย</th>
+                                    <th>ค่าแนะนำ</th>
+                                    <th>หมายเหตุ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>InpTradeDirection</td>
+                                    <td>ทิศทางการเทรด</td>
+                                    <td>TwoDirection</td>
+                                    <td>OneDirection = ทิศทางเดียว</td>
+                                </tr>
+                                <tr>
+                                    <td>InpLotType</td>
+                                    <td>ประเภทการจัดการ Lot Size</td>
+                                    <td>LotPlus</td>
+                                    <td>สำหรับมือใหม่ใช้ FixLotSize</td>
+                                </tr>
+                                <tr>
+                                    <td>InpLotSize</td>
+                                    <td>ขนาด Lot เริ่มต้น</td>
+                                    <td>0.01</td>
+                                    <td>ปรับตามขนาดบัญชี</td>
+                                </tr>
+                                <tr>
+                                    <td>InpMagicNumber</td>
+                                    <td>หมายเลข Magic สำหรับระบุออเดอร์</td>
+                                    <td>12345</td>
+                                    <td>เปลี่ยนถ้าใช้ EA หลายตัว</td>
+                                </tr>
+                                <tr>
+                                    <td>InpMaxOrders</td>
+                                    <td>จำนวนออเดอร์สูงสุด</td>
+                                    <td>10</td>
+                                    <td>ควบคุมความเสี่ยง</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    🎯 การตั้งค่า TP/SL และ Trailing Stop
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>พารามิเตอร์</th>
+                                    <th>คำอธิบาย</th>
+                                    <th>ค่าแนะนำ</th>
+                                    <th>สำหรับ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>InpEnableTPSL</td>
+                                    <td>เปิดใช้งาน TP/SL อัตโนมัติ</td>
+                                    <td>true</td>
+                                    <td>ทุกการเทรด</td>
+                                </tr>
+                                <tr>
+                                    <td>InpTakeProfitPoints</td>
+                                    <td>Take Profit เป็น Points</td>
+                                    <td>3500.0</td>
+                                    <td>ทอง / 500 สำหรับ Forex</td>
+                                </tr>
+                                <tr>
+                                    <td>InpStopLossPoints</td>
+                                    <td>Stop Loss เป็น Points</td>
+                                    <td>2000.0</td>
+                                    <td>ทอง / 300 สำหรับ Forex</td>
+                                </tr>
+                                <tr>
+                                    <td>InpUseTrailingStop</td>
+                                    <td>เปิดใช้งาน Trailing Stop</td>
+                                    <td>false</td>
+                                    <td>เหมาะกับ Trend Market</td>
+                                </tr>
+                                <tr>
+                                    <td>InpTrailingStopPoints</td>
+                                    <td>ระยะห่าง Trailing Stop</td>
+                                    <td>1000.0</td>
+                                    <td>เมื่อเปิด Trailing Stop</td>
+                                </tr>
+                                <tr>
+                                    <td>InpTrailingStepPoints</td>
+                                    <td>ขั้นตอนการขยับ Trailing</td>
+                                    <td>100.0</td>
+                                    <td>ความละเอียดในการปรับ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    ⚙️ การตั้งค่าขั้นสูง
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>ฟีเจอร์</th>
+                                    <th>พารามิเตอร์</th>
+                                    <th>คำอธิบาย</th>
+                                    <th>ค่าแนะนำ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="2">Slippage Control</td>
+                                    <td>InpMaxSlippage</td>
+                                    <td>Slippage สูงสุดที่ยอมรับ</td>
+                                    <td>30</td>
+                                </tr>
+                                <tr>
+                                    <td>InpPartialFillMode</td>
+                                    <td>รับ Partial Fill หรือไม่</td>
+                                    <td>true</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">Spread Filter</td>
+                                    <td>InpMaxSpread</td>
+                                    <td>Spread สูงสุดที่อนุญาต</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td>InpCheckSpreadOnEntry</td>
+                                    <td>ตรวจสอบ Spread ก่อนเข้า</td>
+                                    <td>true</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">Debug & Log</td>
+                                    <td>InpDebugMode</td>
+                                    <td>โหมด Debug สำหรับตรวจสอบ</td>
+                                    <td>false</td>
+                                </tr>
+                                <tr>
+                                    <td>InpVerboseLogging</td>
+                                    <td>บันทึก Log แบบละเอียด</td>
+                                    <td>false</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="signal-system" class="section">
+            <h2>📈 ระบบสัญญาณ</h2>
+
+            <h3>🔄 โหมดไฮบริด (Hybrid Mode)</h3>
+            <p style="margin-bottom: 20px;">EA รองรับ 4 โหมดการทำงานแบบไฮบริด เพื่อความยืดหยุ่นในการใช้สัญญาณ:</p>
+            
+            <div class="signal-grid">
+                <div class="signal-card">
+                    <h4>HYBRID_CONFIRMATION</h4>
+                    <p><strong>โหมดยืนยัน:</strong> สัญญาณภายในและภายนอกต้องตรงกันถึงจะเทรด เหมาะสำหรับการเทรดที่ต้องการความแม่นยำสูง</p>
+                    <div style="margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                        <small><strong>ใช้เมื่อ:</strong> ตลาดมี Volatility สูง หรือต้องการลดความเสี่ยง</small>
+                    </div>
+                </div>
+                <div class="signal-card">
+                    <h4>HYBRID_INTERNAL_PRIORITY</h4>
+                    <p><strong>โหมดสัญญาณภายในหลัก:</strong> ใช้สัญญาณภายในเป็นหลัก ใช้สัญญาณภายนอกเป็นตัวกรอง</p>
+                    <div style="margin-top: 10px; padding: 10px; background: #e3f2fd; border-radius: 5px;">
+                        <small><strong>ใช้เมื่อ:</strong> เชื่อมั่นในสูตรสัญญาณภายใน หรือสัญญาณภายนอกไม่เสถียร</small>
+                    </div>
+                </div>
+                <div class="signal-card">
+                    <h4>HYBRID_EXTERNAL_PRIORITY</h4>
+                    <p><strong>โหมดสัญญาณภายนอกหลัก:</strong> ใช้สัญญาณภายนอกเป็นหลัก ใช้สัญญาณภายในเป็นตัวยืนยัน</p>
+                    <div style="margin-top: 10px; padding: 10px; background: #fff3e0; border-radius: 5px;">
+                        <small><strong>ใช้เมื่อ:</strong> มีสัญญาณภายนอกที่เชื่อถือได้ เช่น Copy Trade หรือ Signal Provider</small>
+                    </div>
+                </div>
+                <div class="signal-card">
+                    <h4>HYBRID_INDEPENDENT</h4>
+                    <p><strong>โหมดอิสระ:</strong> สัญญาณทั้งสองแบบทำงานอิสระจากกัน เพิ่มโอกาสในการเทรด</p>
+                    <div style="margin-top: 10px; padding: 10px; background: #fce4ec; border-radius: 5px;">
+                        <small><strong>ใช้เมื่อ:</strong> ต้องการเพิ่มความถี่ในการเทรด หรือทดสอบสัญญาณใหม่</small>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🧠 สูตรสัญญาณภายใน (30 สูตร)</h3>
+            
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    📊 กลุ่มสูตรพื้นฐาน (1-10)
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="signal-grid">
+                            <div class="signal-card">
+                                <h4>1. Double MA Cross</h4>
+                                <p><strong>หลักการ:</strong> การตัดกันของ Moving Average คู่</p>
+                                <p><strong>พารามิเตอร์:</strong> Fast MA, Slow MA</p>
+                                <p><strong>เหมาะกับ:</strong> Trend Market, Timeframe H1 ขึ้นไป</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>2. MA Cross</h4>
+                                <p><strong>หลักการ:</strong> ราคาตัด Moving Average</p>
+                                <p><strong>พารามิเตอร์:</strong> MA Period, MA Method</p>
+                                <p><strong>เหมาะกับ:</strong> ทุกตลาด, มือใหม่</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>3. Support/Resistance Break</h4>
+                                <p><strong>หลักการ:</strong> การเบรกเส้น Support/Resistance</p>
+                                <p><strong>พารามิเตอร์:</strong> Lookback Period, Break Strength</p>
+                                <p><strong>เหมาะกับ:</strong> Range Market, Breakout Trading</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>4. BB Rejection</h4>
+                                <p><strong>หลักการ:</strong> การ Reject ที่แถบ Bollinger</p>
+                                <p><strong>พารามิเตอร์:</strong> BB Period, Deviation</p>
+                                <p><strong>เหมาะกับ:</strong> Range Market, Mean Reversion</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>5. MACD Cross Signal</h4>
+                                <p><strong>หลักการ:</strong> MACD Line ตัด Signal Line</p>
+                                <p><strong>พารามิเตอร์:</strong> Fast EMA, Slow EMA, Signal SMA</p>
+                                <p><strong>เหมาะกับ:</strong> Trend Following</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>6-10. สูตรอื่นๆ</h4>
+                                <p><strong>รวม:</strong> RSI OB/OS, Stochastic Cross, MA+ATR Breakout, MA Cross+Trend, Volume Spike</p>
+                                <p><strong>หมายเหตุ:</strong> แต่ละสูตรมีพารามิเตอร์ที่ปรับแต่งได้</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    🥇 กลุ่มสูตรเฉพาะทอง (11-20)
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="signal-grid">
+                            <div class="signal-card">
+                                <h4>11. Gold Scalping EMA ⭐</h4>
+                                <p><strong>หลักการ:</strong> EMA 5/13/21 เฉพาะทอง</p>
+                                <p><strong>ความพิเศษ:</strong> ปรับ Parameter สำหรับความผันผวนของทอง</p>
+                                <p><strong>Timeframe:</strong> M15, M30</p>
+                                <p><strong>TP/SL:</strong> 3500/2000 points</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>12. Gold Momentum RSI</h4>
+                                <p><strong>หลักการ:</strong> RSI+MACD Combination</p>
+                                <p><strong>ความพิเศษ:</strong> ตรวจจับ Momentum ของทอง</p>
+                                <p><strong>เงื่อนไข:</strong> RSI > 70 หรือ < 30 + MACD Signal</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>13. Gold Bollinger Squeeze</h4>
+                                <p><strong>หลักการ:</strong> Bollinger Band Squeeze Pattern</p>
+                                <p><strong>ความพิเศษ:</strong> จับจังหวะก่อน Breakout ใหญ่</p>
+                                <p><strong>สัญญาณ:</strong> Bandwidth < Threshold</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>14-20. สูตรขั้นสูงอื่นๆ</h4>
+                                <p><strong>รวม:</strong> Ichimoku Cloud, Volume Analysis, Fibonacci Retracement, Pivot Point, CCI Divergence, StochRSI, Channel Breakout</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    🎯 Smart Money Concepts & ICT (21-30)
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="signal-grid">
+                            <div class="signal-card">
+                                <h4>21. SMC Order Block 🔥</h4>
+                                <p><strong>หลักการ:</strong> การระบุ Order Block ตาม SMC</p>
+                                <p><strong>ขั้นตอน:</strong> หา BOS → ระบุ Order Block → เทรดที่ Retest</p>
+                                <p><strong>เหมาะกับ:</strong> H1, H4</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>22. Fair Value Gap (FVG)</h4>
+                                <p><strong>หลักการ:</strong> การหา Imbalance ในราคา</p>
+                                <p><strong>สัญญาณ:</strong> 3 Candle Gap ที่ไม่ Overlap</p>
+                                <p><strong>Entry:</strong> เมื่อราคากลับมา Fill Gap</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>23. Liquidity Sweep</h4>
+                                <p><strong>หลักการ:</strong> การกวาด Liquidity ก่อน Reversal</p>
+                                <p><strong>จุดสังเกต:</strong> Equal Highs/Lows, Stop Hunt</p>
+                                <p><strong>Entry:</strong> หลัง Sweep เสร็จแล้ว</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>24. BOS (Break of Structure)</h4>
+                                <p><strong>หลักการ:</strong> การเบรก Market Structure</p>
+                                <p><strong>สัญญาณ:</strong> Break Previous High/Low</p>
+                                <p><strong>ยืนยัน:</strong> Impulse Move + Volume</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>25. ICT Kill Zone 🔥</h4>
+                                <p><strong>หลักการ:</strong> เทรดในช่วงเวลาที่ Smart Money Active</p>
+                                <p><strong>เวลา:</strong> London Open, New York Open</p>
+                                <p><strong>ความพิเศษ:</strong> รวม Time Filter + Price Action</p>
+                            </div>
+                            <div class="signal-card">
+                                <h4>26-30. ICT ขั้นสูง</h4>
+                                <p><strong>รวม:</strong> CHoCH, Premium/Discount Zones, Silver Bullet, Wyckoff Phases, Demand/Supply Zones</p>
+                                <p><strong>หมายเหตุ:</strong> สูตรเหล่านี้ต้องการความเข้าใจ ICT Concepts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip">
+                <strong>💡 การเลือกสูตรสัญญาณ:</strong> 
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>มือใหม่:</strong> เริ่มด้วยสูตร 1-5 (พื้นฐาน)</li>
+                    <li><strong>เทรดทอง:</strong> ใช้สูตร 11-13 (Gold Specific)</li>
+                    <li><strong>มืออาชีพ:</strong> ลองสูตร 21-30 (SMC/ICT)</li>
+                    <li><strong>การทดสอบ:</strong> ใช้ Strategy Tester ก่อนเสมอ</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="risk-management" class="section">
+            <h2>🛡️ การจัดการความเสี่ยง</h2>
+
+            <h3>💰 ประเภทการจัดการ Lot Size</h3>
+            <div class="signal-grid">
+                <div class="feature-card">
+                    <h4>FixLotSize (0) - ปลอดภัยที่สุด</h4>
+                    <p><strong>หลักการ:</strong> ใช้ขนาด Lot คงที่ตลอด</p>
+                    <p><strong>ข้อดี:</strong> ความเสี่ยงคงที่, เหมาะกับมือใหม่</p>
+                    <p><strong>ข้อเสีย:</strong> กำไรเติบโตช้า</p>
+                    <p><strong>แนะนำ:</strong> Lot Size ไม่เกิน 1% ของ Account</p>
+                </div>
+                <div class="feature-card" style="border-left-color: #ffc107;">
+                    <h4>LotMartingale (1) - ความเสี่ยงสูง</h4>
+                    <p><strong>หลักการ:</strong> เพิ่ม Lot ตามสูตร Martingale เมื่อขาดทุน</p>
+                    <p><strong>ข้อดี:</strong> กู้คืนขาดทุนได้เร็ว</p>
+                    <p><strong>ข้อเสีย:</strong> ความเสี่ยง Margin Call สูง</p>
+                    <p><strong>คำเตือน:</strong> ใช้เฉพาะ Account ขนาดใหญ่</p>
+                </div>
+                <div class="feature-card" style="border-left-color: #17a2b8;">
+                    <h4>LotPlus (2) - สมดุล</h4>
+                    <p><strong>หลักการ:</strong> เพิ่ม Lot คงที่ในแต่ละออเดอร์</p>
+                    <p><strong>ข้อดี:</strong> เติบโตแบบคงที่, ควบคุมความเสี่ยงได้</p>
+                    <p><strong>ข้อเสีย:</strong> ต้องการเงินทุนมากขึ้น</p>
+                    <p><strong>แนะนำ:</strong> เหมาะกับนักเทรดมีประสบการณ์</p>
+                </div>
+            </div>
+
+            <h3>⏰ ระบบตัวกรองเวลาเทรด</h3>
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>ฟีเจอร์</th>
+                        <th>พารามิเตอร์</th>
+                        <th>คำอธิบาย</th>
+                        <th>ตัวอย่าง</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2">วันเทรด</td>
+                        <td>InpAllowMonday - InpAllowSunday</td>
+                        <td>เลือกวันที่อนุญาตให้เทรด</td>
+                        <td>จันทร์-ศุกร์ = true, เสาร์-อาทิตย์ = false</td>
+                    </tr>
+                    <tr>
+                        <td>InpAvoidFriday</td>
+                        <td>หลีกเลี่ยงวันศุกร์</td>
+                        <td>true (เพื่อหลีกเลี่ยง Weekend Gap)</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">เวลาเทรด</td>
+                        <td>InpTradingStartHour/Minute</td>
+                        <td>เวลาเริ่มเทรด</td>
+                        <td>08:00 (London Session)</td>
+                    </tr>
+                    <tr>
+                        <td>InpTradingEndHour/Minute</td>
+                        <td>เวลาหยุดเทรด</td>
+                        <td>22:00 (ก่อน Asian Session)</td>
+                    </tr>
+                    <tr>
+                        <td>InpTimeZone</td>
+                        <td>เขตเวลา</td>
+                        <td>GMT+7 (เวลาไทย)</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">บล็อกข่าว</td>
+                        <td>InpBlockTradingOnNewsTime</td>
+                        <td>หยุดเทรดช่วงข่าวสำคัญ</td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>InpNewsBlockMinutes</td>
+                        <td>ระยะเวลาบล็อกก่อน/หลังข่าว</td>
+                        <td>30 นาที</td>
+                    </tr>
+                    <tr>
+                        <td>InpHighImpactNewsOnly</td>
+                        <td>บล็อกเฉพาะข่าว High Impact</td>
+                        <td>true</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>🎯 การควบคุมความเสี่ยงขั้นสูง</h3>
+            <div class="signal-grid">
+                <div class="signal-card">
+                    <h4>💹 Daily Drawdown Control</h4>
+                    <p><strong>InpMaxDailyLossPercent:</strong> % การขาดทุนสูงสุดต่อวัน</p>
+                    <p><strong>InpMaxDailyLossDollars:</strong> จำนวนเงินขาดทุนสูงสุดต่อวัน</p>
+                    <p><strong>การทำงาน:</strong> หยุดเทรดเมื่อถึงขีดจำกัด</p>
+                </div>
+                <div class="signal-card">
+                    <h4>📊 Position Size Control</h4>
+                    <p><strong>InpMaxOrders:</strong> จำนวนออเดอร์สูงสุด</p>
+                    <p><strong>InpMaxLotSize:</strong> ขนาด Lot สูงสุด</p>
+                    <p><strong>InpMaxRiskPerTrade:</strong> ความเสี่ยงสูงสุดต่อเทรด</p>
+                </div>
+                <div class="signal-card">
+                    <h4>⚡ Volatility Filter</h4>
+                    <p><strong>InpMaxATR:</strong> ATR สูงสุดที่ยอมรับ</p>
+                    <p><strong>InpVolatilityMultiplier:</strong> ตัวคูณความผันผวน</p>
+                    <p><strong>การใช้:</strong> หยุดเทรดเมื่อตลาดผันผวนเกินไป</p>
+                </div>
+                <div class="signal-card">
+                    <h4>🔒 Account Protection</h4>
+                    <p><strong>InpMinEquity:</strong> Equity ขั้นต่ำ</p>
+                    <p><strong>InpMaxDrawdownPercent:</strong> Drawdown สูงสุด</p>
+                    <p><strong>InpEmergencyStop:</strong> หยุดฉุกเฉิน</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="close-system" class="section">
+            <h2>🎯 ระบบปิดออเดอร์คู่ (Dual Close System)</h2>
+
+            <h3>🔄 โหมดการทำงาน</h3>
+            <div class="signal-grid">
+                <div class="feature-card">
+                    <h4>BasicOnly - สำหรับมือใหม่</h4>
+                    <p><strong>การทำงาน:</strong> ใช้เฉพาะระบบปิดออเดอร์พื้นฐาน</p>
+                    <p><strong>เงื่อนไข:</strong> % กำไร/ขาดทุน, จำนวนเงิน</p>
+                    <p><strong>ข้อดี:</strong> เข้าใจง่าย, ควบคุมได้ชัดเจน</p>
+                </div>
+                <div class="feature-card" style="border-left-color: #17a2b8;">
+                    <h4>AdvancedOnly - สำหรับมืออาชีพ</h4>
+                    <p><strong>การทำงาน:</strong> ใช้เฉพาะระบบปิดออเดอร์ขั้นสูง</p>
+                    <p><strong>เงื่อนไข:</strong> เวลา, Drawdown, Partial Close</p>
+                    <p><strong>ข้อดี:</strong> ยืดหยุ่น, ปรับตัวได้</p>
+                </div>
+                <div class="feature-card" style="border-left-color: #28a745;">
+                    <h4>DualSystem - แนะนำ</h4>
+                    <p><strong>การทำงาน:</strong> ใช้ทั้งสองระบบร่วมกัน</p>
+                    <p><strong>ลำดับ:</strong> ตรวจสอบ Basic ก่อน แล้ว Advanced</p>
+                    <p><strong>ข้อดี:</strong> ครอบคลุมทุกสถานการณ์</p>
+                </div>
+            </div>
+
+            <h3>📊 Basic Close System</h3>
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>ประเภท</th>
+                        <th>พารามิเตอร์</th>
+                        <th>คำอธิบาย</th>
+                        <th>ตัวอย่าง</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3">Cut Loss</td>
+                        <td>InpUseCutloss</td>
+                        <td>เปิดใช้งาน Cut Loss</td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>InpCutlossPercent</td>
+                        <td>ปิดเมื่อขาดทุนถึง %</td>
+                        <td>-10% (ของ Account Balance)</td>
+                    </tr>
+                    <tr>
+                        <td>InpCutlossDollars</td>
+                        <td>ปิดเมื่อขาดทุนถึงจำนวนเงิน</td>
+                        <td>-$500</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">Take Profit</td>
+                        <td>InpUseProfit</td>
+                        <td>เปิดใช้งาน Take Profit</td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>InpProfitPercent</td>
+                        <td>ปิดเมื่อกำไรถึง %</td>
+                        <td>20% (ของ Account Balance)</td>
+                    </tr>
+                    <tr>
+                        <td>InpProfitDollars</td>
+                        <td>ปิดเมื่อกำไรถึงจำนวนเงิน</td>
+                        <td>$1000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>🚀 Advanced Close System</h3>
+            <div class="signal-grid">
+                <div class="signal-card">
+                    <h4>⏰ Time Based Close</h4>
+                    <p><strong>InpTimeBasedClose:</strong> เปิดใช้การปิดตามเวลา</p>
+                    <p><strong>InpCloseHour/Minute:</strong> เวลาที่ปิดออเดอร์</p>
+                    <p><strong>InpCloseFridayOnly:</strong> ปิดเฉพาะวันศุกร์</p>
+                    <p><strong>ตัวอย่าง:</strong> ปิดทุกออเดอร์ 23:00 ศุกร์</p>
+                </div>
+                <div class="signal-card">
+                    <h4>📉 Drawdown Close</h4>
+                    <p><strong>InpDrawdownClose:</strong> เปิดใช้การปิดตาม Drawdown</p>
+                    <p><strong>InpMaxDrawdownPercent:</strong> Drawdown สูงสุด</p>
+                    <p><strong>InpDrawdownCalculation:</strong> วิธีคำนวณ</p>
+                    <p><strong>ตัวอย่าง:</strong> ปิดเมื่อ Floating Loss > 15%</p>
+                </div>
+                <div class="signal-card">
+                    <h4>📊 Partial Close</h4>
+                    <p><strong>InpPartialClose:</strong> เปิดใช้การปิดบางส่วน</p>
+                    <p><strong>InpPartialClosePercent:</strong> เปอร์เซ็นต์ที่ปิด</p>
+                    <p><strong>InpPartialCloseTrigger:</strong> เงื่อนไขการปิด</p>
+                    <p><strong>ตัวอย่าง:</strong> ปิด 50% เมื่อกำไร 10%</p>
+                </div>
+                <div class="signal-card">
+                    <h4>🎯 Smart Close</h4>
+                    <p><strong>InpSmartClose:</strong> ปิดออเดอร์อัจฉริยะ</p>
+                    <p><strong>InpCloseOnReversal:</strong> ปิดเมื่อสัญญาณกลับตัว</p>
+                    <p><strong>InpCloseOnWeakening:</strong> ปิดเมื่อสัญญาณอ่อนแอ</p>
+                    <p><strong>ตัวอย่าง:</strong> ปิด Buy เมื่อมีสัญญาณ Sell</p>
+                </div>
+            </div>
+
+            <div class="tip">
+                <strong>💡 แนะนำการตั้งค่า:</strong>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>มือใหม่:</strong> BasicOnly + Cut Loss 5% + Take Profit 10%</li>
+                    <li><strong>ระดับกลาง:</strong> DualSystem + Partial Close + Time Based</li>
+                    <li><strong>มืออาชีพ:</strong> AdvancedOnly + Smart Close + Drawdown Control</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="optimization" class="section">
+            <h2>🚀 การปรับแต่งและเพิ่มประสิทธิภาพ</h2>
+
+            <h3>📈 เคล็ดลับการตั้งค่าตามประเภทการเทรด</h3>
+            
+            <div class="signal-grid">
+                <div class="feature-card">
+                    <h4>🥇 การตั้งค่าทอง (GOLD/XAUUSD)</h4>
+                    <div class="code-block">
+InpSignalType = 11 (Gold Scalping EMA)
+InpLotSize = 0.01
+InpLotType = FixLotSize
+InpTakeProfitPoints = 3500
+InpStopLossPoints = 2000
+InpTradeDirection = TwoDirection
+InpTradingStartHour = 8  // London Open
+InpTradingEndHour = 22   // Before Asian
+InpMaxSpread = 50
+InpBlockTradingOnNewsTime = true
+                    </div>
+                    <p><strong>หมายเหตุ:</strong> ทองมีความผันผวนสูง ควรใช้ SL ใหญ่และระวัง Spread ช่วงข่าว</p>
+                </div>
+
+                <div class="feature-card" style="border-left-color: #17a2b8;">
+                    <h4>💱 การตั้งค่า Forex Major Pairs</h4>
+                    <div class="code-block">
+InpSignalType = 2 (MA Cross)
+InpLotSize = 0.01
+InpLotType = LotPlus
+InpTakeProfitPoints = 500
+InpStopLossPoints = 300
+InpUseTrailingStop = true
+InpTrailingStopPoints = 200
+InpTradingStartHour = 8
+InpTradingEndHour = 22
+InpMaxSpread = 30
+                    </div>
+                    <p><strong>หมายเหตุ:</strong> Forex เหมาะกับ Trailing Stop และ Lot Plus</p>
+                </div>
+
+                <div class="feature-card" style="border-left-color: #ffc107;">
+                    <h4>📊 การตั้งค่าดัชนี (US30, NAS100)</h4>
+                    <div class="code-block">
+InpSignalType = 3 (Support/Resistance Break)
+InpLotSize = 0.01
+InpLotType = FixLotSize
+InpTakeProfitPoints = 1000
+InpStopLossPoints = 500
+InpBlockTradingOnNewsTime = true
+InpNewsBlockMinutes = 60
+InpMaxATR = 500
+InpAvoidFriday = true
+                    </div>
+                    <p><strong>หมายเหตุ:</strong> ดัชนีไวต่อข่าว ควรบล็อกการเทรดช่วงข่าวสำคัญ</p>
+                </div>
+
+                <div class="feature-card" style="border-left-color: #28a745;">
+                    <h4>🚀 การตั้งค่า Scalping</h4>
+                    <div class="code-block">
+InpSignalType = 25 (ICT Kill Zone)
+InpLotSize = 0.01
+InpLotType = LotPlus
+InpTakeProfitPoints = 200
+InpStopLossPoints = 100
+InpUseTrailingStop = true
+InpTrailingStopPoints = 50
+InpMaxOrders = 5
+InpMaxSpread = 20
+                    </div>
+                    <p><strong>หมายเหตุ:</strong> Scalping ต้องการ Spread ต่ำและ TP/SL เล็ก</p>
+                </div>
+            </div>
+
+            <h3>⚙️ การปรับแต่งตามสภาวะตลาด</h3>
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>สภาวะตลาด</th>
+                        <th>การปรับแต่ง</th>
+                        <th>เหตุผล</th>
+                        <th>ตัวอย่างค่า</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ตลาดแกว่งตัวมาก (Range)</td>
+                        <td>เพิ่ม SL, ลด TP, ใช้ BB Rejection</td>
+                        <td>ลดความเสี่ยงจาก False Signal</td>
+                        <td>SL: 300→500, TP: 500→300</td>
+                    </tr>
+                    <tr>
+                        <td>ตลาด Trend ชัด</td>
+                        <td>เพิ่ม TP, เปิด Trailing Stop</td>
+                        <td>เพิ่มกำไรจาก Trend</td>
+                        <td>TP: 500→800, Trailing: ON</td>
+                    </tr>
+                    <tr>
+                        <td>Volatility สูง</td>
+                        <td>ลด Lot Size, เพิ่ม ATR Filter</td>
+                        <td>ป้องกันความเสี่ยงจาก Gap</td>
+                        <td>Lot: 0.01→0.005, MaxATR: 300</td>
+                    </tr>
+                    <tr>
+                        <td>ช่วงข่าวสำคัญ</td>
+                        <td>เปิด News Block, เพิ่ม Spread Filter</td>
+                        <td>หลีกเลี่ยง Slippage</td>
+                        <td>NewsBlock: 60min, MaxSpread: 30</td>
+                    </tr>
+                    <tr>
+                        <td>ตลาดเปิดใหม่</td>
+                        <td>ลด Max Orders, เพิ่ม Observation Period</td>
+                        <td>ศึกษาพฤติกรรมก่อน</td>
+                        <td>MaxOrders: 3, Wait: 1 hour</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>📊 การใช้ Strategy Tester อย่างมีประสิทธิภาพ</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>1. การตั้งค่าพื้นฐาน</h4>
+                        <ul style="padding-left: 20px;">
+                            <li>เลือก EA: Advanced Trading EA V1.00</li>
+                            <li>Symbol: XAUUSD (ทดสอบทองก่อน)</li>
+                            <li>Period: M15 หรือ H1</li>
+                            <li>ช่วงเวลา: 3-6 เดือนล่าสุด</li>
+                            <li>Model: Every tick (แม่นยำสุด)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>2. การ Optimization</h4>
+                        <ul style="padding-left: 20px;">
+                            <li>เลือกพารามิเตอร์สำคัญ: Signal Type, TP, SL</li>
+                            <li>กำหนดช่วงค่า: TP (1000-5000), SL (500-3000)</li>
+                            <li>Optimization criteria: Balance + Profit Factor</li>
+                            <li>เวลาที่ใช้: 30 นาที - 2 ชั่วโมง</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>3. การวิเคราะห์ผล</h4>
+                        <ul style="padding-left: 20px;">
+                            <li><strong>Total Net Profit:</strong> ต้อง > 0</li>
+                            <li><strong>Profit Factor:</strong> ต้อง > 1.5</li>
+                            <li><strong>Maximum Drawdown:</strong> ต้อง < 20%</li>
+                            <li><strong>Win Rate:</strong> ต้อง > 50%</li>
+                            <li><strong>Sharpe Ratio:</strong> ต้อง > 1.0</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip">
+                <strong>💡 เคล็ดลับการ Optimization:</strong>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>ไม่ Over-Optimize:</strong> อย่าปรับแต่งจนเกินไป จะทำให้ไม่ทำงานในอนาคต</li>
+                    <li><strong>ทดสอบหลายช่วง:</strong> ทดสอบใน Period ต่างๆ เพื่อความมั่นใจ</li>
+                    <li><strong>Forward Testing:</strong> ทดสอบต่อในอนาคต 1-2 เดือน</li>
+                    <li><strong>Walk Forward:</strong> ใช้เทคนิค Walk Forward Analysis</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="troubleshooting" class="section">
+            <h2>🔍 การแก้ไขปัญหาและคำถามที่พบบ่อย</h2>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    ❓ EA ไม่ทำงาน / ไม่เปิดออเดอร์
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <h4>🔧 ขั้นตอนการตรวจสอบ:</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 15px 0;">
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                                <h5>✅ การตรวจสอบพื้นฐาน</h5>
+                                <ul style="padding-left: 20px;">
+                                    <li>Algo Trading เปิดแล้วหรือไม่ (Smiley Face)</li>
+                                    <li>EA ใส่ในชาร์ตถูกต้องหรือไม่</li>
+                                    <li>มี Error ใน Expert Tab หรือไม่</li>
+                                    <li>Internet เสถียรหรือไม่</li>
+                                </ul>
+                            </div>
+                            <div style="background: #e8f5e8; padding: 15px; border-radius: 8px;">
+                                <h5>📊 การตรวจสอบการตั้งค่า</h5>
+                                <ul style="padding-left: 20px;">
+                                    <li>Signal Type ตั้งค่าถูกต้องหรือไม่</li>
+                                    <li>เวลาเทรดอยู่ในช่วงที่อนุญาตหรือไม่</li>
+                                    <li>Lot Size ไม่เกินขีดจำกัดโบรกเกอร์</li>
+                                    <li>Magic Number ไม่ซ้ำกับ EA อื่น</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="tip">
+                            <strong>💡 วิธีตรวจสอบอย่างละเอียด:</strong> เปิด Debug Mode (InpDebugMode = true) เพื่อดูข้อมูลการทำงานใน Journal แบบละเอียด
+                        </div>
+
+                        <div class="code-block">
+// ข้อความที่ควรเห็นใน Journal เมื่อ EA ทำงานปกติ
+[เวลา] Advanced Trading EA V1.00 initialized successfully
+[เวลา] Signal system ready - Type: [หมายเลขสูตร]
+[เวลา] Risk management active - Max lot: [ขนาด]
+[เวลา] Time filter active - Trading hours: [เวลา]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    💰 ปัญหาการคำนวณ Lot Size
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <h4>🔄 สาเหตุและการแก้ไข:</h4>
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>อาการ</th>
+                                    <th>สาเหตุที่เป็นไปได้</th>
+                                    <th>วิธีแก้ไข</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ไม่เปิดออเดอร์ + Error "Invalid Volume"</td>
+                                    <td>Lot Size น้อยกว่าขั้นต่ำของโบรกเกอร์</td>
+                                    <td>เพิ่ม Lot Size เป็น 0.01 หรือตาม Minimum ของโบรกเกอร์</td>
+                                </tr>
+                                <tr>
+                                    <td>ไม่เปิดออเดอร์ + Error "Not enough money"</td>
+                                    <td>Margin ไม่พอสำหรับ Lot Size ที่ต้องการ</td>
+                                    <td>ลด Lot Size หรือเพิ่มเงินในบัญชี</td>
+                                </tr>
+                                <tr>
+                                    <td>Lot Size เพิ่มขึ้นเรื่อยๆ (Martingale)</td>
+                                    <td>การตั้งค่า Martingale ไม่เหมาะสม</td>
+                                    <td>เปลี่ยนเป็น FixLotSize หรือปรับ Multiplier</td>
+                                </tr>
+                                <tr>
+                                    <td>Lot Size ไม่เปลี่ยน (LotPlus)</td>
+                                    <td>InpLotIncrement ตั้งค่าเป็น 0</td>
+                                    <td>ตั้งค่า InpLotIncrement > 0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="signal-grid" style="margin: 20px 0;">
+                            <div class="signal-card">
+                                <h4>🔧 การตรวจสอบ Lot Size</h4>
+                                <ol style="padding-left: 20px;">
+                                    <li>ดู Contract Size ของ Symbol</li>
+                                    <li>ตรวจสอบ Minimum/Maximum Lot</li>
+                                    <li>คำนวณ Margin Required</li>
+                                    <li>ทดสอบด้วย Lot Size เล็กๆ ก่อน</li>
+                                </ol>
+                            </div>
+                            <div class="signal-card">
+                                <h4>📊 การคำนวณ Margin</h4>
+                                <div class="code-block">
+// สูตรคำนวณ Margin
+Margin = Lot Size × Contract Size × Price × Margin Rate
+ตัวอย่าง (XAUUSD):
+Margin = 0.01 × 100 × 2000 × 0.05 = $100
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    📊 สัญญาณไม่ถูกต้อง / ไม่มีสัญญาณ
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <h4>🎯 การตรวจสอบและแก้ไข:</h4>
+                        
+                        <div class="signal-grid">
+                            <div class="feature-card">
+                                <h4>🔍 การตรวจสอบสัญญาณ</h4>
+                                <ul style="padding-left: 20px;">
+                                    <li>ตรวจสอบ InpSignalType ว่าตั้งค่าถูกต้อง</li>
+                                    <li>ลองเปลี่ยนไปใช้สูตรอื่น (เช่น สูตร 2)</li>
+                                    <li>ตรวจสอบพารามิเตอร์ของสูตร</li>
+                                    <li>ใช้ Strategy Tester ทดสอบ</li>
+                                </ul>
+                            </div>
+                            <div class="feature-card" style="border-left-color: #17a2b8;">
+                                <h4>⚙️ การปรับพารามิเตอร์</h4>
+                                <ul style="padding-left: 20px;">
+                                    <li>ลด Sensitivity ของสัญญาณ</li>
+                                    <li>เปลี่ยน Timeframe ที่ใช้วิเคราะห์</li>
+                                    <li>ปรับค่า Threshold ของตัวบ่งชี้</li>
+                                    <li>เพิ่ม Confirmation Filter</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h4>📈 การแก้ไขตามประเภทสัญญาณ:</h4>
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>ประเภทสัญญาณ</th>
+                                    <th>ปัญหาที่พบบ่อย</th>
+                                    <th>การแก้ไข</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>MA Cross (1-2)</td>
+                                    <td>สัญญาณช้า, False Signal มาก</td>
+                                    <td>ลด Period ของ MA, เพิ่ม Confirmation</td>
+                                </tr>
+                                <tr>
+                                    <td>Support/Resistance (3)</td>
+                                    <td>ไม่จับ Level ได้</td>
+                                    <td>เพิ่ม Lookback Period, ปรับ Sensitivity</td>
+                                </tr>
+                                <tr>
+                                    <td>RSI/Stochastic (5-6)</td>
+                                    <td>OB/OS ไม่ Reverse</td>
+                                    <td>ปรับระดับ OB/OS, เพิ่มเงื่อนไข Divergence</td>
+                                </tr>
+                                <tr>
+                                    <td>Gold Specific (11-13)</td>
+                                    <td>ไม่เหมาะกับ Volatility ปัจจุบัน</td>
+                                    <td>ปรับ ATR Multiplier, เปลี่ยน Timeframe</td>
+                                </tr>
+                                <tr>
+                                    <td>SMC/ICT (21-30)</td>
+                                    <td>ซับซ้อนเกินไป, ไม่เข้าใจ</td>
+                                    <td>ศึกษา SMC เพิ่มเติม, เริ่มจากสูตรง่ายก่อน</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    🎯 ระบบปิดออเดอร์ไม่ทำงาน
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <h4>🔧 การตรวจสอบและแก้ไข:</h4>
+                        
+                        <div class="signal-grid">
+                            <div class="signal-card">
+                                <h4>📊 Basic Close System</h4>
+                                <p><strong>ตรวจสอบ:</strong></p>
+                                <ul style="padding-left: 20px;">
+                                    <li>InpCloseSystemMode = BasicOnly หรือ DualSystem</li>
+                                    <li>InpUseCutloss = true (ถ้าต้องการ Cut Loss)</li>
+                                    <li>InpUseProfit = true (ถ้าต้องการ Take Profit)</li>
+                                    <li>ค่า Percent/Dollars ไม่เป็น 0</li>
+                                </ul>
+                                
+                                <p><strong>ตัวอย่างการตั้งค่า:</strong></p>
+                                <div class="code-block">
 InpCloseSystemMode = DualSystem
-InpClosePriority = Simultaneous
-InpCutlossType = percentCut
-InpCutlossPercent = 8.0
-InpProfitType = percentProfit
-InpProfitPercent = 12.0
+InpUseCutloss = true
+InpCutlossPercent = -10
+InpUseProfit = true  
+InpProfitPercent = 20
+                                </div>
+                            </div>
 
-// Display (Compact for Multi-Signal)
-InpCompactMode = true
+                            <div class="signal-card">
+                                <h4>🚀 Advanced Close System</h4>
+                                <p><strong>ตรวจสอบ:</strong></p>
+                                <ul style="padding-left: 20px;">
+                                    <li>InpCloseSystemMode = AdvancedOnly หรือ DualSystem</li>
+                                    <li>InpTimeBasedClose = true (ถ้าใช้ Time Based)</li>
+                                    <li>InpDrawdownClose = true (ถ้าใช้ Drawdown)</li>
+                                    <li>เวลาปิดตั้งค่าถูกต้อง</li>
+                                </ul>
+
+                                <p><strong>ตัวอย่างการตั้งค่า:</strong></p>
+                                <div class="code-block">
+InpTimeBasedClose = true
+InpCloseHour = 23
+InpCloseMinute = 0
+InpCloseFridayOnly = true
+InpDrawdownClose = true
+InpMaxDrawdownPercent = 15
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip">
+                            <strong>💡 เคล็ดลับ:</strong> ถ้าระบบปิดออเดอร์ไม่ทำงาน ให้ดูใน Journal ว่ามีข้อความ "Close system activated" หรือไม่ และตรวจสอบว่า Magic Number ตรงกันหรือไม่
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    🌐 ปัญหาการเชื่อมต่อและ Spread
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <h4>🔌 ปัญหาการเชื่อมต่อ:</h4>
+                        <div class="signal-grid">
+                            <div class="signal-card">
+                                <h4>❌ No Connection</h4>
+                                <ul style="padding-left: 20px;">
+                                    <li>ตรวจสอบ Internet Connection</li>
+                                    <li>ตรวจสอบ Firewall/Antivirus</li>
+                                    <li>เปลี่ยน Server ของโบรกเกอร์</li>
+                                    <li>รีสตาร์ท MT5</li>
+                                </ul>
+                            </div>
+                            <div class="signal-card">
+                                <h4>📶 Poor Connection</h4>
+                                <ul style="padding-left: 20px;">
+                                    <li>ปิดโปรแกรมที่ใช้ Internet มาก</li>
+                                    <li>ใช้ Ethernet แทน WiFi</li>
+                                    <li>ติดต่อ ISP</li>
+                                    <li>ใช้ VPS สำหรับ Trading</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h4>📊 ปัญหา Spread สูง:</h4>
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>สาเหตุ</th>
+                                    <th>การแก้ไข</th>
+                                    <th>การป้องกัน</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ช่วงข่าวสำคัญ</td>
+                                    <td>รอให้ Spread กลับมาปกติ</td>
+                                    <td>เปิด InpBlockTradingOnNewsTime</td>
+                                </tr>
+                                <tr>
+                                    <td>ช่วงเปิด/ปิดตลาด</td>
+                                    <td>หลีกเลี่ยงการเทรดช่วงนี้</td>
+                                    <td>ตั้งเวลาเทรดให้เหมาะสม</td>
+                                </tr>
+                                <tr>
+                                    <td>Liquidity ต่ำ</td>
+                                    <td>เปลี่ยนไปเทรด Major Pairs</td>
+                                    <td>ใช้ InpMaxSpread Filter</td>
+                                </tr>
+                                <tr>
+                                    <td>โบรกเกอร์ไม่ดี</td>
+                                    <td>เปลี่ยนโบรกเกอร์</td>
+                                    <td>เลือกโบรกเกอร์ที่มีชื่อเสียง</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    🎭 ปัญหาการแสดงผลบนชาร์ต
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <h4>🖥️ การแก้ไขปัญหาการแสดงผล:</h4>
+                        
+                        <div class="signal-grid">
+                            <div class="signal-card">
+                                <h4>👁️ ไม่แสดงข้อมูลบนชาร์ต</h4>
+                                <p><strong>สาเหตุ:</strong> การตั้งค่าการแสดงผลปิดอยู่</p>
+                                <p><strong>แก้ไข:</strong></p>
+                                <div class="code-block">
 InpShowProfitDetails = true
-InpShowTPSLInfo = true
-InpShowPositionInfo = true
+InpShowTradingCosts = true  
+InpShowStatistics = true
+InpCompactMode = false
+                                </div>
+                            </div>
+
+                            <div class="signal-card">
+                                <h4>📱 ข้อมูลแสดงไม่ครบ (มือถือ)</h4>
+                                <p><strong>สาเหตุ:</strong> หน้าจอเล็ก</p>
+                                <p><strong>แก้ไข:</strong></p>
+                                <div class="code-block">
+InpCompactMode = true
+InpDisplayPosition = TopLeft
+// ลดข้อมูลที่แสดง
+InpShowTradingCosts = false
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4>🎨 การปรับแต่งการแสดงผล:</h4>
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>ปัญหา</th>
+                                    <th>พารามิเตอร์</th>
+                                    <th>ค่าแนะนำ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ข้อมูลทับกับกราฟ</td>
+                                    <td>InpDisplayPosition</td>
+                                    <td>TopRight หรือ TopLeft</td>
+                                </tr>
+                                <tr>
+                                    <td>ข้อมูลมากเกินไป</td>
+                                    <td>InpCompactMode</td>
+                                    <td>true</td>
+                                </tr>
+                                <tr>
+                                    <td>อ่านยาก</td>
+                                    <td>InpFontSize</td>
+                                    <td>8-12 (ขึ้นกับหน้าจอ)</td>
+                                </tr>
+                                <tr>
+                                    <td>สีไม่เหมาะสม</td>
+                                    <td>InpTextColor</td>
+                                    <td>White/Black (ตามธีม)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="section">
-            <h2>🔧 การ Troubleshooting (ปัญหาใหม่)</h2>
-            
-            <h3>⚠️ ปัญหาทั่วไปและการแก้ไข</h3>
-            <table>
-                <tr><th>ปัญหา</th><th>สาเหตุ</th><th>วิธีแก้ไข</th></tr>
-                <tr><td>EA ไม่ปรากฏใน Navigator</td><td>ไฟล์ไม่ได้อยู่ใน MQL5/Experts</td><td>ตรวจสอบ path และคัดลอกไฟล์ใหม่</td></tr>
-                <tr><td>EA มีเครื่องหมาย ✖️</td><td>Auto Trading ปิดอยู่</td><td>กด Auto Trading button หรือ F7</td></tr>
-                <tr><td>Authentication Failed</td><td>WebRequest ไม่ได้เปิด</td><td>ตรวจสอบ Options → Expert Advisors</td></tr>
-                <tr><td>ไม่มี Internet Connection</td><td>ไม่มีเน็ต หรือ Firewall บล็อค</td><td>ตรวจสอบการเชื่อมต่อและ Firewall</td></tr>
-                <tr><td>EA หยุดทำงานเอง</td><td>Error ในการทำงาน</td><td>ดู Experts tab และรีสตาร์ท EA</td></tr>
-                <tr><td>Hybrid Signals ไม่ทำงาน</td><td>ไม่มี Custom Indicator</td><td>ตรวจสอบชื่อ Indicator และ Buffer</td></tr>
-                <tr><td>TP/SL ไม่ถูกตั้ง</td><td>Broker ไม่รองรับ</td><td>เปิด InpModifyAfterOpen = true</td></tr>
-                <tr><td>Trailing Stop ไม่ขยับ</td><td>ยังไม่มีกำไร</td><td>รอให้มีกำไรก่อน</td></tr>
-                <tr><td>Display ยาวเกินจอ</td><td>ไม่ได้เปิด Compact Mode</td><td>ตั้ง InpCompactMode = true</td></tr>
-            </table>
+        <section id="updates" class="section">
+            <h2>🔄 การอัพเดตและการสนับสนุน</h2>
 
-            <h3>🐛 Debug Mode และ Log Analysis</h3>
-            <div class="note">
-                <p><strong>การใช้ Debug Mode:</strong></p>
-                <ol>
-                    <li>ตั้งค่า <code>InpDebugMode = true</code></li>
-                    <li>ดู Experts tab ใน MT5</li>
-                    <li>สังเกต Log Messages ที่ขึ้นต้นด้วย 🎯, ✅, ❌</li>
-                    <li>บันทึก Log เมื่อเกิดปัญหา</li>
-                    <li>ส่ง Log ให้ Support เพื่อวิเคราะห์</li>
-                </ol>
-
-                <p><strong>ตัวอย่าง Log Messages:</strong></p>
-                <div class="code-block">
-✅ Internal Signal System loaded: MA Cross
-🎯 HYBRID CONFIRMATION: Both signals agree - BUY
-📈 Attempting to open BUY position (Volume: 0.01)
-✅ Position opened: 123456
-🔧 Modified position 123456: TP: 1.2050 SL: 1.1950
+            <h3>📝 ประวัติการอัพเดต</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Version 1.00 (ปัจจุบัน) - มกราคม 2024</h4>
+                        <div class="signal-grid">
+                            <div class="feature-card">
+                                <h4>✨ ฟีเจอร์ใหม่</h4>
+                                <ul style="padding-left: 20px;">
+                                    <li>เพิ่มสูตรสัญญาณภายใน 30 แบบ</li>
+                                    <li>ระบบ Dual Close System</li>
+                                    <li>โหมด Hybrid Signal แบบ 4 โหมด</li>
+                                    <li>ระบบ TP/SL อัตโนมัติพร้อม Trailing Stop</li>
+                                    <li>ตัวกรองเวลาและวันเทรดขั้นสูง</li>
+                                    <li>Smart Money Concepts & ICT Integration</li>
+                                </ul>
+                            </div>
+                            <div class="feature-card" style="border-left-color: #28a745;">
+                                <h4>🔧 การปรับปรุง</h4>
+                                <ul style="padding-left: 20px;">
+                                    <li>เพิ่มประสิทธิภาพการประมวลผล 40%</li>
+                                    <li>ลดการใช้ Memory 25%</li>
+                                    <li>ปรับปรุง UI/UX การแสดงผล</li>
+                                    <li>เพิ่มระบบ Error Handling</li>
+                                    <li>รองรับ Multi-Timeframe Analysis</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <h3>📱 Performance Optimization</h3>
-            <table>
-                <tr><th>ปัญหา</th><th>สาเหตุ</th><th>การแก้ไข</th></tr>
-                <tr><td>EA ทำงานช้า</td><td>แสดงผลมากเกินไป</td><td>เปิด Compact Mode, ปิด Debug</td></tr>
-                <tr><td>CPU สูง</td><td>คำนวณสัญญาณบ่อยเกินไป</td><td>เพิ่ม InpMinBarsBetweenTrades</td></tr>
-                <tr><td>Memory ใช้เยอะ</td><td>ข้อมูลสะสมมากเกินไป</td><td>รีสตาร์ท EA ทุก 1-2 สัปดาห์</td></tr>
-                <tr><td>Chart กระตุก</td><td>Update Display บ่อยเกินไป</td><td>ปิดการแสดงผลที่ไม่จำเป็น</td></tr>
+            <h3>🎯 แผนการพัฒนาในอนาคต</h3>
+            <div class="signal-grid">
+                <div class="feature-card" style="border-left-color: #ffc107;">
+                    <h4>Version 1.1 (Q4 2025)</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>🤖 AI/ML Based Signal Analysis</li>
+                        <li>📊 Multi-Timeframe Confirmation</li>
+                        <li>📱 Telegram Notification System</li>
+                        <li>⚡ Real-time Performance Analytics</li>
+                        <li>🔄 Auto-Parameter Optimization</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" style="border-left-color: #17a2b8;">
+                    <h4>Version 1.2 (Q1 2026)</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>💼 Portfolio Management System</li>
+                        <li>📈 Correlation Analysis</li>
+                        <li>🌐 Social Trading Integration</li>
+                        <li>📊 Advanced Risk Management</li>
+                        <li>🎯 Custom Signal Builder</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" style="border-left-color: #dc3545;">
+                    <h4>Version 2.0 (Q2 2026)</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>🧠 Neural Network Integration</li>
+                        <li>☁️ Cloud-based Signal Processing</li>
+                        <li>📱 Mobile App Companion</li>
+                        <li>🔮 Predictive Analytics</li>
+                        <li>🌍 Multi-Broker Support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>📢 ช่องทางรับข่าวสารอัพเดต</h3>
+            <div class="signal-grid">
+                <div class="signal-card">
+                    <h4>📘 Facebook Page</h4>
+                    <p><strong>Link:</strong> facebook.com/uutrader</p>
+                    <p><strong>Content:</strong> ข่าวสาร, เคล็ดลับ, ตัวอย่างการใช้งาน</p>
+                    <p><strong>อัพเดต:</strong> ทุกวัน</p>
+                </div>
+                
+                <div class="signal-card">
+                    <h4>💬 Telegram Channel</h4>
+                    <p><strong>Channel:</strong> @teleuutrader</p>
+                    <p><strong>Content:</strong> การแจ้งเตือน, ลิงก์ดาวน์โหลด, Q&A</p>
+                    <p><strong>อัพเดต:</strong> Real-time</p>
+                </div>
+
+                <div class="signal-card">
+                    <h4>📱 Line Official</h4>
+                    <p><strong>Line ID:</strong> @uutrader</p>
+                    <p><strong>Content:</strong> การสนับสนุน, การปรึกษา</p>
+                    <p><strong>เวลาตอบ:</strong> 09:00-18:00</p>
+                </div>
+
+            </div>
+
+            <div class="tip">
+                <strong>🔔 การแจ้งเตือนอัพเดต:</strong> เปิด Notification ใน Telegram Channel เพื่อได้รับข่าวสารอัพเดตเป็นคนแรก รวมถึงลิงก์ดาวน์โหลดเวอร์ชันใหม่
+            </div>
+
+            <h3>🎓 การสนับสนุนเพิ่มเติม</h3>
+            <div class="signal-grid">
+                <div class="feature-card">
+                    <h4>📚 คอร์สเรียนออนไลน์</h4>
+                    <p>คอร์สการใช้งาน EA และเทคนิคการเทรดขั้นสูง</p>
+                    <p><strong>ระยะเวลา:</strong> 4 สัปดาห์</p>
+                    <p><strong>รูปแบบ:</strong> Live + VDO บันทึก</p>
+                </div>
+
+                <div class="feature-card" style="border-left-color: #17a2b8;">
+                    <h4>👥 Community กลุ่มผู้ใช้</h4>
+                    <p>แลกเปลี่ยนประสบการณ์และเทคนิคการใช้งาน</p>
+                    <p><strong>Platform:</strong> Telegram Group</p>
+                    <p><strong>สมาชิก:</strong> 500+ คน</p>
+                </div>
+
+                <div class="feature-card" style="border-left-color: #28a745;">
+                    <h4>🔧 Custom Development</h4>
+                    <p>รับพัฒนา EA ตามความต้องการเฉพาะ</p>
+                    <p><strong>ระยะเวลา:</strong> 2-4 สัปดาห์</p>
+                    <p><strong>รับประกัน:</strong> 3 เดือน</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>📞 ข้อมูลการติดต่อและการสนับสนุน</h2>
+
+            <div class="contact-info">
+                <h3>🏫 UU School Trading</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0; position: relative; z-index: 1;">
+                    <div>
+                        <p><strong>📘 Facebook:</strong></p>
+                        <p><a href="https://www.facebook.com/uutrader" target="_blank">facebook.com/uutrader</a></p>
+                    </div>
+                    <div>
+                        <p><strong>📱 Line ID:</strong></p>
+                        <p><a href="#">@uutrader</a></p>
+                    </div>
+                    <div>
+                        <p><strong>💬 Telegram:</strong></p>
+                        <p><a href="#">@teleuutrader</a></p>
+                    </div>
+                    <div>
+                        <p><strong>🌐 Website:</strong></p>
+                        <p><a href="#">www.uuschooltrading.com</a></p>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; position: relative; z-index: 1;"><strong>📧 สำหรับการสนับสนุน:</strong> ติดต่อผ่านช่องทางใดช่องทางหนึ่งข้างต้น</p>
+            </div>
+
+            <h3>🆘 การขอความช่วยเหลือ</h3>
+            <div class="signal-grid">
+                <div class="feature-card">
+                    <h4>📋 ข้อมูลที่ควรเตรียมก่อนติดต่อ</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>📸 Screenshot ของ EA Settings (ทั้งหน้า)</li>
+                        <li>📊 Screenshot ของชาร์ตพร้อม EA</li>
+                        <li>📝 รายละเอียดปัญหาที่พบ (ละเอียด)</li>
+                        <li>💻 ข้อมูลโบรกเกอร์และ MT5 Version</li>
+                        <li>📈 ข้อมูลสัญลักษณ์ที่เทรด (Symbol)</li>
+                        <li>🕐 เวลาที่เกิดปัญหา</li>
+                        <li>📋 ข้อความ Error (ถ้ามี)</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" style="border-left-color: #17a2b8;">
+                    <h4>⚡ การได้รับการช่วยเหลือเร็ว</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>🔍 ตรวจสอบ FAQ ในคู่มือนี้ก่อน</li>
+                        <li>📱 ใช้ Telegram สำหรับปัญหาเร่งด่วน</li>
+                        <li>📘 ใช้ Facebook สำหรับคำถามทั่วไป</li>
+                        <li>📞 ใช้ Line สำหรับการปรึกษาส่วนตัว</li>
+                        <li>🎥 อาจต้องใช้ TeamViewer สำหรับปัญหาซับซ้อน</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" style="border-left-color: #28a745;">
+                    <h4>💡 เทคนิคการอธิบายปัญหา</h4>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>อะไร:</strong> ปัญหาคืออะไร</li>
+                        <li><strong>เมื่อไหร่:</strong> เกิดขึ้นเมื่อไหร่</li>
+                        <li><strong>ที่ไหน:</strong> ในส่วนไหนของ EA</li>
+                        <li><strong>ทำไม:</strong> คิดว่าเกิดจากอะไร</li>
+                        <li><strong>ยังไง:</strong> ขั้นตอนการทำซ้ำ</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>⏰ เวลาให้บริการ</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">09:00-18:00</div>
+                    <div class="stat-label">จันทร์ - ศุกร์</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10:00-16:00</div>
+                    <div class="stat-label">เสาร์ - อาทิตย์</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Telegram (ตอบภายใน 4 ชม.)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">< 30 นาที</div>
+                    <div class="stat-label">เวลาตอบเฉลี่ย</div>
+                </div>
+            </div>
+
+            <h3>🎯 ระดับการสนับสนุน</h3>
+            <table class="parameter-table">
+                <thead>
+                    <tr>
+                        <th>ประเภทปัญหา</th>
+                        <th>ช่องทางแนะนำ</th>
+                        <th>เวลาตอบ</th>
+                        <th>หมายเหตุ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ปัญหาเร่งด่วน (EA ไม่ทำงาน)</td>
+                        <td>Telegram</td>
+                        <td>< 1 ชั่วโมง</td>
+                        <td>ในเวลาทำการ</td>
+                    </tr>
+                    <tr>
+                        <td>คำถามการใช้งาน</td>
+                        <td>Line / Facebook</td>
+                        <td>2-4 ชั่วโมง</td>
+                        <td>รวมตัวอย่าง</td>
+                    </tr>
+                    <tr>
+                        <td>การปรับแต่งขั้นสูง</td>
+                        <td>Line (นัดเวลา)</td>
+                        <td>1-2 วัน</td>
+                        <td>อาจเสียค่าใช้จ่าย</td>
+                    </tr>
+                    <tr>
+                        <td>Bug Report</td>
+                        <td>Telegram / Email</td>
+                        <td>< 24 ชั่วโมง</td>
+                        <td>จะได้รับ Fix ฟรี</td>
+                    </tr>
+                    <tr>
+                        <td>Feature Request</td>
+                        <td>Facebook / Website</td>
+                        <td>1 สัปดาห์</td>
+                        <td>พิจารณาใน Version ถัดไป</td>
+                    </tr>
+                </tbody>
             </table>
-        </div>
 
-        <div class="section">
-            <h2>📊 การวิเคราะห์ผลการเทรด</h2>
-            
-            <h3>📈 ตัวชี้วัดที่สำคัญ</h3>
-            <ul>
-                <li><strong>Net P/L:</strong> กำไรขาดทุนรวม</li>
-                <li><strong>Profit by Source:</strong> กำไรจาก Manual vs Signal</li>
-                <li><strong>Profit by Direction:</strong> กำไรจาก Buy vs Sell</li>
-                <li><strong>Daily Average:</strong> กำไรเฉลี่ยต่อวัน</li>
-                <li><strong>Trading Costs:</strong> ค่า Commission และ Swap</li>
-                <li><strong>Max Drawdown:</strong> การขาดทุนสูงสุด</li>
-                <li><strong>Close Statistics:</strong> จำนวนครั้งที่ระบบปิดออเดอร์</li>
-            </ul>
-
-            <h3>🎯 การปรับแต่งตามผลลัพธ์</h3>
-            <table>
-                <tr><th>สถานการณ์</th><th>ปัญหา</th><th>การปรับแต่ง</th></tr>
-                <tr><td>กำไร Manual > Signal</td><td>สัญญาณไม่ดี</td><td>เปลี่ยนสูตรสัญญาณ หรือปรับ Parameters</td></tr>
-                <tr><td>กำไร Buy > Sell มาก</td><td>Trend ขาขึ้น</td><td>ใช้ BuyOnly Mode ชั่วคราว</td></tr>
-                <tr><td>Drawdown สูงเกินไป</td><td>ความเสี่ยงมาก</td><td>ลด Lot Size หรือเพิ่ม Stop Loss</td></tr>
-                <tr><td>Close บ่อยเกินไป</td><td>เงื่อนไขเข้มเกินไป</td><td>ปรับ Cut Loss/Profit Target</td></tr>
-                <tr><td>Commission สูง</td><td>เทรดบ่อยเกินไป</td><td>เพิ่ม MinBarsBetweenTrades</td></tr>
-            </table>
-
-            <h3>📋 Checklist การตรวจสอบประจำ</h3>
-            <div class="success">
-                <p><strong>รายสัปดาห์:</strong></p>
-                <ul>
-                    <li>✅ ตรวจสอบ Net P/L และ Daily Average</li>
-                    <li>✅ เปรียบเทียบ Manual vs Signal Performance</li>
-                    <li>✅ ดู Max Drawdown และ Close Statistics</li>
-                    <li>✅ ตรวจสอบ Log ในกรณีมี Error</li>
-                </ul>
-
-                <p><strong>รายเดือน:</strong></p>
-                <ul>
-                    <li>✅ วิเคราะห์ Performance โดยรวม</li>
-                    <li>✅ ปรับแต่ง Parameters ตามผลลัพธ์</li>
-                    <li>✅ Backup การตั้งค่าที่ดี</li>
-                    <li>✅ อัปเดต EA เป็นเวอร์ชันใหม่ (หากมี)</li>
+            <div class="tip">
+                <strong>🎁 สิทธิพิเศษสำหรับผู้ใช้:</strong>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>การสนับสนุนฟรี:</strong> ตลอดชีวิตสำหรับเทรดเดอร์เปิดบัญชีใหม่ ผ่าน<a href="terms_conditions.html" target="_blank" style="color: #fff; background: linear-gradient(135deg, #3498db, #2980b9); padding: 3px 8px; border-radius: 5px; text-decoration: none; font-weight: 600; margin-left: 5px; transition: all 0.3s ease;">ลิงค์แนะนำ</a></li>
+                    <li><strong>อัพเดต ฟรี:</strong> V1.01, V1.02, V1.03, ฯลฯ</li>
+                    <li><strong>อินดิเคอเตอร์ ฟรี:</strong> สำหรับ จุดเข้าเทรด External</li>
+                    <li><strong>การปรึกษาฟรี:</strong> สำหรับการตั้งค่า</li>
                 </ul>
             </div>
-        </div>
 
-        <div class="section">
-            <h2>📞 การติดต่อและสนับสนุน</h2>
-            <div class="note">
-                <h3>🔗 ช่องทางการติดต่อ</h3>
-                <ul>
-                    <li><strong>Facebook:</strong> <a href="https://www.facebook.com/uutrader">UU School Trading</a></li>
-                    <li><strong>Line ID:</strong> uutrader</li>
-                    <li><strong>Telegram:</strong> <a href="#">@teleuutrader</a></li>
-                    <li><strong>Email Support:</strong> support@uutrader.com</li>
-                </ul>
+            <h3>📚 แหล่งเรียนรู้เพิ่มเติม</h3>
+            <div class="signal-grid">
+                <div class="signal-card">
+                    <h4>📖 Documentation</h4>
+                    <p><strong>คู่มือนี้:</strong> ครอบคลุมการใช้งาน 80%</p>
+                    <p><strong>Video Tutorial:</strong> อยู่ในเว็บไซต์</p>
+                    <p><strong>FAQ Database:</strong> คำถามที่พบบ่อย</p>
+                </div>
 
-                <h3>⏰ เวลาให้บริการ</h3>
-                <ul>
-                    <li><strong>Support Hours:</strong> 9:00 - 18:00 น. (จ-ศ)</li>
-                    <li><strong>Response Time:</strong> ภายใน 24-48 ชั่วโมง</li>
-                    <li><strong>Emergency:</strong> ติดต่อผ่าน Telegram สำหรับปัญหาเร่งด่วน</li>
-                </ul>
+                <div class="signal-card">
+                    <h4>🎓 การอบรม</h4>
+                    <p><strong>Online Course:</strong> 4 สัปดาห์</p>
+                    <p><strong>Workshop:</strong> เดือนละครั้ง</p>
+                    <p><strong>1-on-1 Coaching:</strong> ตามนัดหมาย</p>
+                </div>
 
-                <h3>📝 การขอความช่วยเหลือ</h3>
-                <p><strong>ข้อมูลที่ควรส่งมาด้วย:</strong></p>
-                <ul>
-                    <li>Screenshot ของ Error Message</li>
-                    <li>Log จาก Experts Tab</li>
-                    <li>การตั้งค่า EA (Parameters)</li>
-                    <li>ประเภทบัญชี (Demo/Real)</li>
-                    <li>Broker และ Server Name</li>
-                    <li>เวอร์ชัน MT5</li>
-                </ul>
+                <div class="signal-card">
+                    <h4>👥 Community</h4>
+                    <p><strong>Telegram Group:</strong> แลกเปลี่ยนประสบการณ์</p>
+                    <p><strong>Facebook Group:</strong> ถาม-ตอบ สาธารณะ</p>
+                    <p><strong>Discord Server:</strong> สำหรับ Developer</p>
+                </div>
+
+                <div class="signal-card">
+                    <h4>📊 Resources</h4>
+                    <p><strong>Template Settings:</strong> การตั้งค่าสำเร็จรูป</p>
+                    <p><strong>Backtest Results:</strong> ผลการทดสอบ</p>
+                    <p><strong>Market Analysis:</strong> วิเคราะห์ตลาดประจำสัปดาห์</p>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="section">
-            <h2>🆘 Emergency Procedures (อัปเดต)</h2>
-            <div class="warning">
-                <h3>🚨 การหยุด EA ฉุกเฉิน</h3>
-                <p><strong>วิธีที่ 1 - ปิด EA:</strong></p>
-                <ol>
-                    <li>คลิกขวาบน Chart → Expert Advisors → Remove</li>
-                    <li>หรือลาก EA ออกจาก Chart</li>
-                </ol>
-
-                <p><strong>วิธีที่ 2 - ปิด Auto Trading:</strong></p>
-                <ol>
-                    <li>กดปุ่ม "Auto Trading" ใน Toolbar (หรือกด F7)</li>
-                    <li>หรือไปที่ Tools → Options → Expert Advisors → ยกเลิก "Allow live trading"</li>
-                </ol>
-
-                <p><strong>วิธีที่ 3 - ปิด Terminal:</strong></p>
-                <ol>
-                    <li>ปิด MetaTrader 5 ทั้งหมด</li>
-                    <li>หยุด VPS (หากใช้)</li>
-                </ol>
-
-                <h3>⚠️ การจัดการเมื่อเกิดปัญหาร้ายแรง</h3>
-                <p><strong>ขั้นตอนฉุกเฉิน:</strong></p>
-                <ol>
-                    <li><strong>หยุด EA ทันที</strong> (ใช้วิธีข้างต้น)</li>
-                    <li><strong>Screenshot</strong> ทุกอย่างที่ผิดปกติ</li>
-                    <li><strong>บันทึก Log</strong> จาก Experts Tab</li>
-                    <li><strong>ปิด Position ด้วยตนเอง</strong> (หากจำเป็น)</li>
-                    <li><strong>ติดต่อ Support ทันที</strong></li>
-                    <li><strong>อย่าแก้ไขการตั้งค่า</strong> โดยไม่มีคำแนะนำ</li>
-                </ol>
-
-                <h3>🛡️ การป้องกันปัญหา</h3>
-                <ul>
-                    <li>ใช้ Demo Account ทดสอบก่อน</li>
-                    <li>เริ่มต้นด้วย Lot Size เล็ก</li>
-                    <li>ตั้ง Max Risk ไม่เกิน 5%</li>
-                    <li>ติดตาม EA อย่างสม่ำเสมอ</li>
-                    <li>เตรียม Emergency Plan ไว้</li>
-                </ul>
+        <footer style="text-align: center; padding: 40px 0; color: #6c757d; border-top: 3px solid #dee2e6; margin-top: 50px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 15px;">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h3 style="color: #495057; margin-bottom: 20px; font-size: 1.5rem;">Advanced Trading EA V1.00</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 15px;"><strong>Created with ❤️ by UU School Trading</strong></p>
+                
+                <div class="stats-grid" style="margin: 30px 0;">
+                    <div class="stat-card" style="border-top-color: #28a745;">
+                        <div class="stat-number" style="color: #28a745;"> กำลังเพิ่มขึ้น <br> 1000+</div>
+                        <div class="stat-label">ผู้ใช้งาน</div>
+                    </div>
+                    <div class="stat-card" style="border-top-color: #17a2b8;">
+                        <div class="stat-number" style="color: #17a2b8;">30+</div>
+                        <div class="stat-label">สูตรสัญญาณ</div>
+                    </div>
+                    <div class="stat-card" style="border-top-color: #ffc107;">
+                        <div class="stat-number" style="color: #ffc107;">24/7</div>
+                        <div class="stat-label">การสนับสนุน</div>
+                    </div>
+                    <div class="stat-card" style="border-top-color: #dc3545;">
+                        <div class="stat-number" style="color: #dc3545;">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(102,126,234,0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <p style="font-size: 1rem; margin-bottom: 10px; color: #495057;">
+                        <strong>⚠️ คำเตือนสำคัญ:</strong> การซื้อขายมีความเสี่ยง กรุณาศึกษาและทำความเข้าใจก่อนใช้งาน
+                    </p>
+                    <p style="font-size: 0.9rem; color: #6c757d;">
+                        ผลการเทรดในอดีตไม่ได้รับประกันผลกำไรในอนาคต • ใช้เงินที่สามารถเสียได้เท่านั้น
+                    </p>
+                </div>
+                
+                <p style="font-size: 0.9rem; margin-top: 20px; color: #6c757d;">
+                    © 2024 UU School Trading. All rights reserved.<br>
+                    Version 1.00 | Last Updated: มกราคม 2024 | Next Update: มีนาคม 2024
+                </p>
+                
+                <div style="margin-top: 25px;">
+                    <p style="font-size: 0.85rem; color: #adb5bd;">
+                        🚀 สร้างขึ้นด้วยเทคโนโลยี MQL5 | ⚡ ทดสอบแล้วกว่า 10,000 ชั่วโมง | 🛡️ รับประกันคุณภาพ
+                    </p>
+                </div>
             </div>
-        </div>
-
-        <div class="section">
-            <h2>🔄 การอัปเดตและเวอร์ชันใหม่</h2>
-            <div class="note">
-                <h3>📋 Version History</h3>
-                <ul>
-                    <li><strong>V1.00 (2024):</strong> เวอร์ชันปัจจุบัน - Hybrid Signal System</li>
-                    <li><strong>อัปเดตล่าสุด:</strong> TP/SL Management + Compact Display</li>
-                    <li><strong>กำลังพัฒนา:</strong> Machine Learning Signals, Cloud Sync</li>
-                </ul>
-
-                <h3>🔔 การรับแจ้งอัปเดต</h3>
-                <ul>
-                    <li>ติดตาม Facebook Page สำหรับข่าวสาร</li>
-                    <li>เข้าร่วม Line Group เพื่อรับอัปเดต</li>
-                    <li>ตรวจสอบ Email สำหรับแจ้งเตือนสำคัญ</li>
-                </ul>
-
-                <h3>⬆️ วิธีอัปเดต EA</h3>
-                <ol>
-                    <li>Download ไฟล์ใหม่จากลิงก์ที่ส่งให้</li>
-                    <li>ปิด EA เก่าจาก Chart</li>
-                    <li>แทนที่ไฟล์ใน MQL5/Experts</li>
-                    <li>รีสตาร์ท MetaTrader 5</li>
-                    <li>แนบ EA ใหม่และตั้งค่าใหม่</li>
-                </ol>
-            </div>
-        </div>
-
-        <script>
-        function showTab(tabName) {
-            // ซ่อน tab ทั้งหมด
-            var tabContents = document.getElementsByClassName('tab-content');
-            for (var i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove('active');
-            }
-            
-            // ซ่อนปุ่ม active ทั้งหมด
-            var tabButtons = document.getElementsByClassName('tab-button');
-            for (var i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].classList.remove('active');
-            }
-            
-            // แสดง tab ที่เลือก
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-        }
-        </script>
-
-        <footer>
-            <p>© 2024 UU School Trading. Advanced Trading EA V1.00 - Complete Manual with Hybrid System</p>
-            <p style="font-size: 12px; margin-top: 10px;">คู่มือฉบับสมบูรณ์ อัปเดตล่าสุด: มกราคม 2025 | พร้อมระบบ Hybrid Signal & Compact Display</p>
         </footer>
     </div>
+
+    <div class="floating-action" onclick="scrollToTop()" title="กลับด้านบน">
+        ⬆️
+    </div>
+
+    <script>
+        // Loading overlay
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Accordion functionality
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const isActive = content.classList.contains('active');
+            
+            // Close all accordions
+            document.querySelectorAll('.accordion-content').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.accordion-header').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked accordion if it wasn't active
+            if (!isActive) {
+                content.classList.add('active');
+                element.classList.add('active');
+            }
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Back to top functionality
+        function scrollToTop() {
+            window.scrollTo({ 
+                top: 0, 
+                behavior: 'smooth' 
+            });
+        }
+
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (searchTerm === '' || text.includes(searchTerm)) {
+                    section.style.display = 'block';
+                    section.style.opacity = '1';
+                } else {
+                    section.style.opacity = '0.3';
+                }
+            });
+            
+            // Highlight search terms
+            if (searchTerm.length > 2) {
+                highlightText(searchTerm);
+            } else {
+                removeHighlight();
+            }
+        });
+
+        function highlightText(term) {
+            removeHighlight();
+            const walker = document.createTreeWalker(
+                document.body,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            const textNodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                textNodes.push(node);
+            }
+            
+            textNodes.forEach(textNode => {
+                const parent = textNode.parentNode;
+                if (parent.tagName !== 'SCRIPT' && parent.tagName !== 'STYLE') {
+                    const text = textNode.textContent;
+                    const regex = new RegExp(`(${term})`, 'gi');
+                    if (regex.test(text)) {
+                        const highlighted = text.replace(regex, '<mark>$1</mark>');
+                        const wrapper = document.createElement('span');
+                        wrapper.innerHTML = highlighted;
+                        parent.replaceChild(wrapper, textNode);
+                    }
+                }
+            });
+        }
+
+        function removeHighlight() {
+            document.querySelectorAll('mark').forEach(mark => {
+                const parent = mark.parentNode;
+                parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                parent.normalize();
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Copy code functionality
+        document.querySelectorAll('.code-block').forEach(block => {
+            block.addEventListener('click', function() {
+                navigator.clipboard.writeText(this.textContent).then(() => {
+                    const originalBg = this.style.backgroundColor;
+                    this.style.backgroundColor = '#2ecc71';
+                    setTimeout(() => {
+                        this.style.backgroundColor = originalBg;
+                    }, 500);
+                });
+            });
+            
+            block.style.cursor = 'pointer';
+            block.title = 'คลิกเพื่อคัดลอก';
+        });
+
+        // Progress bar animation
+        setTimeout(() => {
+            document.querySelector('.progress-fill').style.width = '100%';
+        }, 500);
+
+        // Add pulse effect to important buttons
+        document.querySelectorAll('.nav-btn').forEach((btn, index) => {
+            setTimeout(() => {
+                btn.classList.add('pulse');
+                setTimeout(() => {
+                    btn.classList.remove('pulse');
+                }, 2000);
+            }, index * 200);
+        });
+
+        // Table row click effect
+        document.querySelectorAll('.parameter-table tr').forEach(row => {
+            row.addEventListener('click', function() {
+                // Remove active class from all rows
+                document.querySelectorAll('.parameter-table tr').forEach(r => 
+                    r.classList.remove('active'));
+                // Add active class to clicked row
+                this.classList.add('active');
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl + F for search
+            if (e.ctrlKey && e.key === 'f') {
+                e.preventDefault();
+                document.getElementById('searchBox').focus();
+            }
+            
+            // Escape to clear search
+            if (e.key === 'Escape') {
+                document.getElementById('searchBox').value = '';
+                document.getElementById('searchBox').dispatchEvent(new Event('input'));
+            }
+        });
+
+        console.log('🚀 Advanced Trading EA V1.00 Manual Loaded Successfully!');
+        console.log('📊 Features: 30+ Signals, Dual Close System, Hybrid Mode');
+        console.log('💡 Tip: Use Ctrl+F to search in this manual');
+    </script>
 </body>
 </html>
-
