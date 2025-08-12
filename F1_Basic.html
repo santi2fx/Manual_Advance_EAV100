@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Basic - คู่มือสูตรพื้นฐาน (1-10)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .main-header h1 {
+            color: #2c3e50; /* fallback */
+            background: linear-gradient(45deg, #3498db, #e74c3c, #de5c85);
+            -webkit-background-clip: text;
+            background-clip: text; /* standard property */
+            -webkit-text-fill-color: transparent;
+            color: transparent; /* for browsers that support background-clip */
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-tab {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .strategy-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .strategy-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .strategy-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+
+        .strategy-title {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .strategy-description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .signal-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .signal-type {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .buy-signal {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .sell-signal {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .parameters {
+            background: #ecf0f1;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .parameters h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .param-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .param-list li {
+            background: white;
+            margin: 5px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .param-name {
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .param-value {
+            color: #3498db;
+            font-weight: 500;
+        }
+
+        .tips-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .tips-title {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+        }
+
+        .tip-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .tip-card p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 30px;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .strategy-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .strategy-card {
+                padding: 20px;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-tab {
+                width: 200px;
+                text-align: center;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 5px;
+        } 
+
+        .back-button {
+            background: rgba(52, 152, 219, 0.8);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border: 1px solid #3498db;
+        }
+        
+        .back-button:hover {
+            background: rgba(52, 152, 219, 1);
+            transform: translateY(-2px);
+        }
+        
+        .back-button::before {
+            content: '←';
+            margin-right: 8px;
+            font-size: 16px;
+        } 
+
+        /* Responsive สำหรับมือถือ */
+        @media (max-width: 768px) {
+            .back-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="summarize_manual.html" class="back-button">กลับ</a>
+        <div class="header">
+            <h1>🚀 F1 Basic Trading Strategies</h1>
+            <p>คู่มือสูตรการเทรดพื้นฐาน 10 สูตรแรก - เรียนรู้ง่าย ใช้งานได้จริง</p>
+        </div>
+
+        <div class="nav-tabs">
+            <a href="F1_Basic.html" class="nav-tab active">F1 Basic (1-10)</a>
+            <a href="F2_Gold.html" class="nav-tab">F2 Gold (11-20)</a>
+            <a href="F3_Pro.html" class="nav-tab">F3 Pro (21-30)</a>
+        </div>
+
+        <div class="strategy-grid">
+            <!-- Strategy 1: Double MA Cross -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">1</div>
+                    <div class="strategy-title">Double MA Cross</div>
+                </div>
+                <div class="strategy-description">
+                    การตัดกันของเส้น Moving Average 2 เส้น เหมาะสำหรับผู้เริ่มต้น
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: MA เร็ว ตัดขึ้น MA ช้า</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: MA เร็ว ตัดลง MA ช้า</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">MA เร็ว:</span> <span class="param-value">20 periods</span></li>
+                        <li><span class="param-name">MA ช้า:</span> <span class="param-value">50 periods</span></li>
+                        <li><span class="param-name">ประเภท:</span> <span class="param-value">Simple MA</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 2: MA Cross -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">2</div>
+                    <div class="strategy-title">MA Cross</div>
+                </div>
+                <div class="strategy-description">
+                    ราคาตัดผ่านเส้น Moving Average เดียว สัญญาณรวดเร็ว
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: ราคาตัดขึ้น MA</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: ราคาตัดลง MA</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">MA Period:</span> <span class="param-value">21 periods</span></li>
+                        <li><span class="param-name">ประเภท:</span> <span class="param-value">Exponential MA</span></li>
+                        <li><span class="param-name">Timeframe:</span> <span class="param-value">M15, H1</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 3: Support & Resistance Break -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">3</div>
+                    <div class="strategy-title">Support & Resistance Break</div>
+                </div>
+                <div class="strategy-description">
+                    การทะลุเส้น Support และ Resistance ที่สำคัญ
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: ทะลุ Resistance</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: ทะลุ Support</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">Lookback:</span> <span class="param-value">50 bars</span></li>
+                        <li><span class="param-name">Min Touches:</span> <span class="param-value">2 ครั้ง</span></li>
+                        <li><span class="param-name">Breakout Size:</span> <span class="param-value">10 pips</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 4: BB Rejection -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">4</div>
+                    <div class="strategy-title">Bollinger Bands Rejection</div>
+                </div>
+                <div class="strategy-description">
+                    ราคาสะท้อนจากขอบ Bollinger Bands กลับเข้าสู่แนวโน้ม
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: สะท้อนจาก Lower Band</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: สะท้อนจาก Upper Band</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">BB Period:</span> <span class="param-value">20 periods</span></li>
+                        <li><span class="param-name">Deviation:</span> <span class="param-value">2.0</span></li>
+                        <li><span class="param-name">Rejection Size:</span> <span class="param-value">5 pips</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 5: MACD Cross Signal -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">5</div>
+                    <div class="strategy-title">MACD Cross Signal</div>
+                </div>
+                <div class="strategy-description">
+                    MACD Line ตัดผ่าน Signal Line แสดงการเปลี่ยนแนวโน้ม
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: MACD ตัดขึ้น Signal</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: MACD ตัดลง Signal</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">Fast EMA:</span> <span class="param-value">12</span></li>
+                        <li><span class="param-name">Slow EMA:</span> <span class="param-value">26</span></li>
+                        <li><span class="param-name">Signal EMA:</span> <span class="param-value">9</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 6: MACD Cross Zero -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">6</div>
+                    <div class="strategy-title">MACD Cross Zero</div>
+                </div>
+                <div class="strategy-description">
+                    MACD ตัดผ่านเส้น Zero แสดงการเปลี่ยนแนวโน้มหลัก
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: MACD ตัดขึ้นเส้น 0</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: MACD ตัดลงเส้น 0</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">Fast EMA:</span> <span class="param-value">12</span></li>
+                        <li><span class="param-name">Slow EMA:</span> <span class="param-value">26</span></li>
+                        <li><span class="param-name">Min Distance:</span> <span class="param-value">0.0001</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 7: RSI Overbought/Oversold -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">7</div>
+                    <div class="strategy-title">RSI Overbought/Oversold</div>
+                </div>
+                <div class="strategy-description">
+                    RSI ในโซน Overbought/Oversold พร้อมสัญญาณกลับตัว
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: RSI < 30 แล้วขึ้น</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: RSI > 70 แล้วลง</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">RSI Period:</span> <span class="param-value">14</span></li>
+                        <li><span class="param-name">Oversold:</span> <span class="param-value">30</span></li>
+                        <li><span class="param-name">Overbought:</span> <span class="param-value">70</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 8: Stochastic OB/OS -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">8</div>
+                    <div class="strategy-title">Stochastic OB/OS</div>
+                </div>
+                <div class="strategy-description">
+                    Stochastic ในโซน Overbought/Oversold พร้อมการตัดกัน
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: %K ตัดขึ้น %D ในโซน < 20</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: %K ตัดลง %D ในโซน > 80</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">%K Period:</span> <span class="param-value">14</span></li>
+                        <li><span class="param-name">%D Period:</span> <span class="param-value">3</span></li>
+                        <li><span class="param-name">Slow Period:</span> <span class="param-value">3</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 9: MA+ATR Breakout -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">9</div>
+                    <div class="strategy-title">MA+ATR Breakout</div>
+                </div>
+                <div class="strategy-description">
+                    ราคาทะลุ MA ร่วมกับ ATR วัดความผันผวน
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: ราขึ้นเกิน MA+ATR</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: ราคาลงต่ำกว่า MA-ATR</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">MA Period:</span> <span class="param-value">20</span></li>
+                        <li><span class="param-name">ATR Period:</span> <span class="param-value">14</span></li>
+                        <li><span class="param-name">ATR Multiplier:</span> <span class="param-value">2.0</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 10: MA Cross + Trend -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">10</div>
+                    <div class="strategy-title">MA Cross + Trend</div>
+                </div>
+                <div class="strategy-description">
+                    การตัดกันของ MA พร้อมยืนยันแนวโน้มจาก MA ช้ากว่า
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: MA เร็วตัดขึ้น + แนวโน้มขึ้น</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: MA เร็วตัดลง + แนวโน้มลง</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">MA เร็ว:</span> <span class="param-value">10</span></li>
+                        <li><span class="param-name">MA ช้า:</span> <span class="param-value">21</span></li>
+                        <li><span class="param-name">MA แนวโน้ม:</span> <span class="param-value">50</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2 class="tips-title">💡 เทคนิคการใช้งานสูตรพื้นฐาน</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🎯 การเลือก Timeframe</h4>
+                    <p>สูตรพื้นฐานเหมาะกับ <span class="highlight">M15, H1, H4</span> เริ่มต้นด้วย H1 เพื่อเรียนรู้</p>
+                </div>
+                <div class="tip-card">
+                    <h4>⚠️ Risk Management</h4>
+                    <p>ใช้ <span class="highlight">Stop Loss 1-2%</span> ของบัญชี และ <span class="highlight">Take Profit 1:2</span> ratio</p>
+                </div>
+                <div class="tip-card">
+                    <h4>📊 การยืนยันสัญญาณ</h4>
+                    <p>ใช้สูตรร่วมกัน 2-3 สูตร เช่น <span class="highlight">MA + RSI + Support/Resistance</span></p>
+                </div>
+                <div class="tip-card">
+                    <h4>🕐 เวลาเทรด</h4>
+                    <p>หลีกเลี่ยงช่วง <span class="highlight">22:00-02:00 GMT</span> (Asian Session) เพราะ Volatility ต่ำ</p>
+                </div>
+                <div class="tip-card">
+                    <h4>💰 Currency Pairs</h4>
+                    <p>เริ่มต้นด้วย <span class="highlight">EURUSD, GBPUSD</span> เพราะ Spread ต่ำและ Liquidity สูง</p>
+                </div>
+                <div class="tip-card">
+                    <h4>📈 Backtesting</h4>
+                    <p>ทดสอบสูตรด้วยข้อมูล <span class="highlight">3-6 เดือน</span> ก่อนใช้งานจริง</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📚 F1 Basic Trading Manual - สำหรับผู้เริ่มต้นเทรด Forex</p>
+            <p>🎯 ฝึกฝนให้มากก่อนใช้เงินจริง | 💡 เรียนรู้อย่างต่อเนื่อง</p>
+        </div>
+    </div>
+
+    <script>
+        // Mobile-friendly interactions
+        document.querySelectorAll('.strategy-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-5px)';
+                }, 150);
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Add loading animation on page load
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.strategy-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

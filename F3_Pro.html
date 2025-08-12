@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F3 Pro - คู่มือสูตร Professional (21-30)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid #667eea;
+        }
+
+        .main-header h1 {
+            color: #2c3e50; /* fallback */
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            background-clip: text; /* standard property */
+            -webkit-text-fill-color: transparent;
+            color: transparent; /* for browsers that support background-clip */
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-tab {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tab:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .nav-tab.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .strategy-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        .strategy-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .strategy-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.3rem;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .strategy-title {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .strategy-description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .signal-info {
+            background: linear-gradient(135deg, #f8f9ff, #e8ecff);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #667eea;
+        }
+
+        .signal-type {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .buy-signal {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .sell-signal {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .parameters {
+            background: linear-gradient(135deg, #f4f6ff, #e1e8ff);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #a29bfe;
+        }
+
+        .parameters h4 {
+            color: #6c5ce7;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .param-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .param-list li {
+            background: white;
+            margin: 5px 0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .param-name {
+            font-weight: 600;
+            color: #6c5ce7;
+        }
+
+        .param-value {
+            color: #fd79a8;
+            font-weight: 500;
+        }
+
+        .pro-specific {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .complexity-level {
+            display: inline-block;
+            background: linear-gradient(45deg, #fd79a8, #fdcb6e);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+
+        .smc-indicator {
+            background: linear-gradient(45deg, #00b894, #00cec9);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .ict-indicator {
+            background: linear-gradient(45deg, #e17055, #d63031);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .tips-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 2px solid #667eea;
+        }
+
+        .tips-title {
+            color: #6c5ce7;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #f4f6ff, #e1e8ff);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .tip-card h4 {
+            color: #6c5ce7;
+            margin-bottom: 10px;
+        }
+
+        .tip-card p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 30px;
+            color: #7f8c8d;
+            border: 2px solid #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .strategy-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .strategy-card {
+                padding: 20px;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-tab {
+                width: 200px;
+                text-align: center;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff5f5, #ffeaa7);
+            border: 2px solid #fdcb6e;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #2d3436;
+        }
+
+        .warning-box h4 {
+            color: #e17055;
+            margin-bottom: 8px;
+        } 
+
+        .back-button {
+            background: rgba(52, 152, 219, 0.8);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border: 1px solid #3498db;
+        }
+        
+        .back-button:hover {
+            background: rgba(52, 152, 219, 1);
+            transform: translateY(-2px);
+        }
+        
+        .back-button::before {
+            content: '←';
+            margin-right: 8px;
+            font-size: 16px;
+        } 
+
+        /* Responsive สำหรับมือถือ */
+        @media (max-width: 768px) {
+            .back-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="summarize_manual.html" class="back-button">กลับ</a>
+        <div class="header">
+            <h1>🚀 F3 Professional Strategies</h1>
+            <p>Smart Money Concepts & ICT - สำหรับ Professional Traders ที่ต้องการเทคนิคขั้นสูง</p>
+        </div>
+
+        <div class="nav-tabs">
+            <a href="F1_Basic.html" class="nav-tab">F1 Basic (1-10)</a>
+            <a href="F2_Gold.html" class="nav-tab">F2 Gold (11-20)</a>
+            <a href="F3_Pro.html" class="nav-tab active">F3 Pro (21-30)</a>
+        </div>
+
+        <div class="warning-box">
+            <h4>⚠️ คำเตือนสำหรับสูตร Professional</h4>
+            <p>สูตรเหล่านี้ใช้แนวคิด <strong>Smart Money Concepts (SMC)</strong> และ <strong>Inner Circle Trader (ICT)</strong> ที่ซับซ้อน ต้องมีความเข้าใจลึกในการอ่านชาร์ตและ Market Structure</p>
+        </div>
+
+        <div class="strategy-grid">
+            <!-- Strategy 21: SMC Order Block -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">21</div>
+                    <div class="strategy-title">SMC Order Block <span class="smc-indicator">SMC</span><span class="complexity-level">Advanced</span></div>
+                </div>
+                <div class="pro-specific">
+                    🏦 Order Block = พื้นที่ที่ Smart Money ใส่ออเดอร์จำนวนมาก
+                </div>
+                <div class="strategy-description">
+                    หาจุดที่ Smart Money เก็บออเดอร์ไว้ ซึ่งจะกลายเป็น Support/Resistance ที่แข็งแกร่ง
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: ราคากลับมาทดสอบ Bullish OB</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: ราคากลับมาทดสอบ Bearish OB</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">OB Lookback:</span> <span class="param-value">50 bars</span></li>
+                        <li><span class="param-name">Min OB Size:</span> <span class="param-value">20 pips</span></li>
+                        <li><span class="param-name">Test Distance:</span> <span class="param-value">50% OB</span></li>
+                        <li><span class="param-name">Validity Period:</span> <span class="param-value">100 bars</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 22: SMC Fair Value Gap -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">22</div>
+                    <div class="strategy-title">SMC Fair Value Gap <span class="smc-indicator">SMC</span><span class="complexity-level">Expert</span></div>
+                </div>
+                <div class="pro-specific">
+                    📊 FVG = ช่องว่างที่ตลาดต้องกลับมาเติม (Imbalance)
+                </div>
+                <div class="strategy-description">
+                    หา Imbalance ในราคา (Fair Value Gap) ที่ตลาดจะกลับมาเติมในอนาคต
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: ราคากลับมาเติม Bullish FVG</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: ราคากลับมาเติม Bearish FVG</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">Min Gap Size:</span> <span class="param-value">10 pips</span></li>
+                        <li><span class="param-name">Gap Detection:</span> <span class="param-value">3 bars</span></li>
+                        <li><span class="param-name">Fill Percentage:</span> <span class="param-value">50%-80%</span></li>
+                        <li><span class="param-name">Max Age:</span> <span class="param-value">200 bars</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 23: SMC Liquidity Sweep -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">23</div>
+                    <div class="strategy-title">SMC Liquidity Sweep <span class="smc-indicator">SMC</span><span class="complexity-level">Expert</span></div>
+                </div>
+                <div class="pro-specific">
+                    💧 Liquidity = Stop Loss ของคนอื่น Smart Money จะไป "ล่า" มันก่อน
+                </div>
+                <div class="strategy-description">
+                    Smart Money จะไปกวาด Liquidity (Stop Loss) ของ Retail Traders ก่อนเปลี่ยนทิศทาง
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: กวาด Sell Stop แล้วกลับขึ้น</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: กวาด Buy Stop แล้วกลับลง</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">Liquidity Lookback:</span> <span class="param-value">30 bars</span></li>
+                        <li><span class="param-name">Sweep Distance:</span> <span class="param-value">5-15 pips</span></li>
+                        <li><span class="param-name">Reversal Confirm:</span> <span class="param-value">2 bars</span></li>
+                        <li><span class="param-name">Min Volume:</span> <span class="param-value">1.5x avg</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 24: SMC Break of Structure -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">24</div>
+                    <div class="strategy-title">SMC Break of Structure <span class="smc-indicator">SMC</span><span class="complexity-level">Advanced</span></div>
+                </div>
+                <div class="pro-specific">
+                    🔨 BOS = การทำลาย Market Structure เก่า สร้างแนวโน้มใหม่
+                </div>
+                <div class="strategy-description">
+                    การทะลุ Higher High/Lower Low ที่แสดงการเปลี่ยนแปลง Market Structure
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: ทะลุ Previous HH (Bullish BOS)</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: ทะลุ Previous LL (Bearish BOS)</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">Structure Lookback:</span> <span class="param-value">20 bars</span></li>
+                        <li><span class="param-name">Min Break Size:</span> <span class="param-value">10 pips</span></li>
+                        <li><span class="param-name">Confirmation:</span> <span class="param-value">Body close</span></li>
+                        <li><span class="param-name">Swing Filter:</span> <span class="param-value">5 bars</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 25: SMC Change of Character -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">25</div>
+                    <div class="strategy-title">SMC Change of Character <span class="smc-indicator">SMC</span><span class="complexity-level">Expert</span></div>
+                </div>
+                <div class="pro-specific">
+                    🔄 CHoCH = การเปลี่ยนจากขาขึ้นเป็นขาลง หรือกลับกัน
+                </div>
+                <div class="strategy-description">
+                    การเปลี่ยนแปลง Character ของแนวโน้ม จากขาขึ้นเป็นขาลง หรือกลับกัน
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: CHoCH จากขาลงเป็นขาขึ้น</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: CHoCH จากขาขึ้นเป็นขาลง</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">CHoCH Period:</span> <span class="param-value">15 bars</span></li>
+                        <li><span class="param-name">Threshold:</span> <span class="param-value">61.8% Fib</span></li>
+                        <li><span class="param-name">Volume Check:</span> <span class="param-value">Optional</span></li>
+                        <li><span class="param-name">Momentum Filter:</span> <span class="param-value">3 bars</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 26: SMC Premium/Discount Zones -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">26</div>
+                    <div class="strategy-title">SMC Premium/Discount <span class="smc-indicator">SMC</span><span class="complexity-level">Advanced</span></div>
+                </div>
+                <div class="pro-specific">
+                    💎 Premium = ราคาแพง (ขาย), Discount = ราคาถูก (ซื้อ)
+                </div>
+                <div class="strategy-description">
+                    แบ่งราคาเป็น Premium Zone (70-100%) และ Discount Zone (0-30%) ตาม Range
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: ราคาใน Discount Zone</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: ราคาใน Premium Zone</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">Range Period:</span> <span class="param-value">50 bars</span></li>
+                        <li><span class="param-name">Premium Zone:</span> <span class="param-value">70-100%</span></li>
+                        <li><span class="param-name">Discount Zone:</span> <span class="param-value">0-30%</span></li>
+                        <li><span class="param-name">Equilibrium:</span> <span class="param-value">45-55%</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 27: ICT Kill Zone -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">27</div>
+                    <div class="strategy-title">ICT Kill Zone <span class="ict-indicator">ICT</span><span class="complexity-level">Advanced</span></div>
+                </div>
+                <div class="pro-specific">
+                    ⏰ Kill Zone = ช่วงเวลาที่ Smart Money เคลื่อนไหวมากที่สุด
+                </div>
+                <div class="strategy-description">
+                    เทรดในช่วงเวลา London Kill Zone (02:00-05:00) และ NY Kill Zone (07:00-10:00) GMT
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: Bullish setup ใน Kill Zone</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: Bearish setup ใน Kill Zone</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">London KZ:</span> <span class="param-value">08:00-11:00</span></li>
+                        <li><span class="param-name">NY KZ:</span> <span class="param-value">14:00-17:00</span></li>
+                        <li><span class="param-name">Range Required:</span> <span class="param-value">Optional</span></li>
+                        <li><span class="param-name">Momentum Check:</span> <span class="param-value">2 bars</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 28: ICT Silver Bullet -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">28</div>
+                    <div class="strategy-title">ICT Silver Bullet <span class="ict-indicator">ICT</span><span class="complexity-level">Expert</span></div>
+                </div>
+                <div class="pro-specific">
+                    🎯 Silver Bullet = แนวคิดการหา Entry ที่แม่นยำใน Kill Zone
+                </div>
+                <div class="strategy-description">
+                    การหา High Probability Setup ในช่วง Kill Zone ด้วย Market Structure และ Liquidity
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: SB Bullish Setup + Liquidity Sweep</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: SB Bearish Setup + Liquidity Sweep</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">Setup Window:</span> <span class="param-value">1 hour</span></li>
+                        <li><span class="param-name">Liquidity Required:</span> <span class="param-value">Yes</span></li>
+                        <li><span class="param-name">FVG Confirmation:</span> <span class="param-value">Optional</span></li>
+                        <li><span class="param-name">Risk Reward:</span> <span class="param-value">1:3 min</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 29: Wyckoff Market Phases -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">29</div>
+                    <div class="strategy-title">Wyckoff Market Phases <span class="complexity-level">Master</span></div>
+                </div>
+                <div class="pro-specific">
+                    📈 Wyckoff = Accumulation → Markup → Distribution → Markdown
+                </div>
+                <div class="strategy-description">
+                    วิเคราะห์ตาม Wyckoff Method: ตลาดมี 4 Phase หลัก Smart Money สะสม/แจกจ่าย
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: ใน Accumulation Phase</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: ใน Distribution Phase</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">Phase Detection:</span> <span class="param-value">Volume + Price</span></li>
+                        <li><span class="param-name">Phase Length:</span> <span class="param-value">20-100 bars</span></li>
+                        <li><span class="param-name">Volume Analysis:</span> <span class="param-value">Required</span></li>
+                        <li><span class="param-name">Structure Break:</span> <span class="param-value">Confirmation</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strategy 30: Demand/Supply Zones -->
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">30</div>
+                    <div class="strategy-title">Demand/Supply Zones <span class="complexity-level">Expert</span></div>
+                </div>
+                <div class="pro-specific">
+                    ⚡ Demand = ซื้อมาก, Supply = ขายมาก โซนที่แข็งแกร่งที่สุด
+                </div>
+                <div class="strategy-description">
+                    หาโซน Demand/Supply ที่แข็งแกร่ง จากการเคลื่อนไหวของราคาที่รวดเร็วและมี Volume สูง
+                </div>
+                <div class="signal-info">
+                    <div class="signal-type">
+                        <span class="buy-signal">🟢 BUY: ราคากลับมาทดสอบ Demand Zone</span>
+                    </div>
+                    <div class="signal-type">
+                        <span class="sell-signal">🔴 SELL: ราคากลับมาทดสอบ Supply Zone</span>
+                    </div>
+                </div>
+                <div class="parameters">
+                    <h4>⚙️ พารามิเตอร์</h4>
+                    <ul class="param-list">
+                        <li><span class="param-name">Zone Strength:</span> <span class="param-value">Volume + Speed</span></li>
+                        <li><span class="param-name">Min Zone Size:</span> <span class="param-value">15 pips</span></li>
+                        <li><span class="param-name">Touch Limit:</span> <span class="param-value">2-3 ครั้ง</span></li>
+                        <li><span class="param-name">Age Limit:</span> <span class="param-value">500 bars</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2 class="tips-title">🎓 เทคนิคการใช้ Smart Money Concepts</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🧠 Smart Money vs Retail</h4>
+                    <p><span class="highlight">Smart Money</span> จะทำตรงข้ามกับ Retail Traders เสมอ หาจุดที่คนส่วนใหญ่คิดผิด</p>
+                </div>
+                <div class="tip-card">
+                    <h4>📊 Market Structure</h4>
+                    <p>เรียนรู้ <span class="highlight">Higher Highs, Higher Lows, Lower Highs, Lower Lows</span> เป็นพื้นฐาน</p>
+                </div>
+                <div class="tip-card">
+                    <h4>💧 Liquidity Concept</h4>
+                    <p>Stop Loss ของคนอื่น = <span class="highlight">Liquidity</span> Smart Money จะไป "กิน" มันก่อนเปลี่ยนทิศทาง</p>
+                </div>
+                <div class="tip-card">
+                    <h4>⏰ Time Based Analysis</h4>
+                    <p>ใช้ <span class="highlight">Kill Zones</span> แทนการเทรดตลอดวัน ประหยัดเวลาและมีประสิทธิภาพมากขึ้น</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🎯 High Probability Setups</h4>
+                    <p>รอ <span class="highlight">3-4 Confluences</span> ก่อนเข้าเทรด เช่น FVG + OB + Kill Zone + Liquidity Sweep</p>
+                </div>
+                <div class="tip-card">
+                    <h4>📈 Multiple Timeframes</h4>
+                    <p><span class="highlight">Daily</span> สำหรับทิศทาง, <span class="highlight">H4</span> สำหรับ Structure, <span class="highlight">H1</span> สำหรับ Entry</p>
+                </div>
+                <div class="tip-card">
+                    <h4>💰 Risk Management</h4>
+                    <p>SMC มี <span class="highlight">Win Rate สูง</span> แต่ใช้ SL กว้าง ปรับ Position Size ให้เหมาะสม</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🔄 Patience is Key</h4>
+                    <p>SMC ต้องใช้ <span class="highlight">ความอดทน</span> รอ Setup ที่สมบูรณ์ อย่าเร่งรีบ</p>
+                </div>
+                <div class="tip-card">
+                    <h4>📚 Continuous Learning</h4>
+                    <p>SMC เป็น <span class="highlight">Art มากกว่า Science</span> ต้องฝึกฝนและศึกษาอย่างต่อเนื่อง</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🎨 Chart Reading</h4>
+                    <p>เรียนรู้อ่าน <span class="highlight">Price Action</span> ดิบๆ ก่อนใส่ Indicator ใดๆ</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h4>🚨 ข้อควรระวังสำหรับ SMC & ICT</h4>
+            <p><strong>1. ความซับซ้อน:</strong> สูตรเหล่านี้ต้องใช้เวลาเรียนรู้นาน อย่าคาดหวังผลลัพธ์เร็ว</p>
+            <p><strong>2. Subjective Analysis:</strong> การวิเคราะห์ SMC มีส่วน Subjective สูง คนละคนอาจตีความต่างกัน</p>
+            <p><strong>3. False Signals:</strong> ในตลาดที่ Choppy อาจมี False Signal เยอะ</p>
+            <p><strong>4. Psychology:</strong> ต้องควบคุมจิตใจได้ดี เพราะบางครั้งต้องเทรดตรงข้ามกับสัญชาตญาณ</p>
+        </div>
+
+        <div class="footer">
+            <p>🚀 F3 Professional Trading Manual - Smart Money Concepts & ICT</p>
+            <p>⚠️ ใช้เฉพาะผู้ที่มีประสบการณ์ | 🎓 ศึกษาเพิ่มเติมจาก ICT Official | 💎 Quality > Quantity</p>
+        </div>
+    </div>
+
+    <script>
+        // Advanced interactions for pro strategies
+        document.querySelectorAll('.strategy-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.97)';
+                this.style.borderColor = '#667eea';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-8px)';
+                }, 150);
+            });
+
+            // Add advanced hover effects
+            card.addEventListener('mouseenter', function() {
+                const number = this.querySelector('.strategy-number');
+                number.style.transform = 'scale(1.1) rotate(10deg)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                const number = this.querySelector('.strategy-number');
+                number.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Smooth scrolling with easing
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Professional loading animation
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.strategy-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(40px) rotateX(10deg)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0) rotateX(0deg)';
+                }, index * 150);
+            });
+        });
+
+        // Interactive indicators
+        document.querySelectorAll('.smc-indicator, .ict-indicator, .complexity-level').forEach(indicator => {
+            indicator.addEventListener('click', function() {
+                this.style.transform = 'scale(1.2)';
+                this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = 'none';
+                }, 300);
+            });
+        });
+
+        // Professional gradient animation
+        let gradientAngle = 135;
+        setInterval(() => {
+            gradientAngle += 1;
+            document.body.style.background = `linear-gradient(${gradientAngle}deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)`;
+        }, 100);
+
+        // Advanced tooltip system
+        document.querySelectorAll('[data-tooltip]').forEach(element => {
+            element.addEventListener('mouseenter', function(e) {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'custom-tooltip';
+                tooltip.textContent = this.getAttribute('data-tooltip');
+                tooltip.style.cssText = `
+                    position: absolute;
+                    background: #2c3e50;
+                    color: white;
+                    padding: 8px 12px;
+                    border-radius: 8px;
+                    font-size: 0.8rem;
+                    z-index: 1000;
+                    pointer-events: none;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                `;
+                document.body.appendChild(tooltip);
+                
+                const rect = this.getBoundingClientRect();
+                tooltip.style.left = rect.left + 'px';
+                tooltip.style.top = (rect.top - 40) + 'px';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                const tooltip = document.querySelector('.custom-tooltip');
+                if (tooltip) tooltip.remove();
+            });
+        });
+    </script>
+</body>
+</html>
