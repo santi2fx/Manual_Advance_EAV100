@@ -264,7 +264,27 @@
         }
         
         /* Mobile Responsive */
+        /* Enhanced TP/SL info box styles */
+        .header div[style*="background: rgba(0, 255, 204, 0.1)"] {
+            border-left: 4px solid #00ffcc;
+        }
+        
         @media (max-width: 768px) {
+            
+            /* Enhanced TP/SL info responsive */
+            .header div[style*="background: rgba(0, 255, 204, 0.1)"] h3 {
+                font-size: 1rem;
+            }
+            
+            .header div[style*="background: rgba(0, 255, 204, 0.1)"] > div {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+                gap: 8px !important;
+            }
+            
+            .header div[style*="background: rgba(0, 255, 204, 0.1)"] > div > div {
+                font-size: 12px !important;
+                padding: 3px 8px !important;
+            }
             .container {
                 padding: 20px;
                 margin: 10px;
@@ -309,8 +329,20 @@
         <a href="javascript:history.back()" class="back-button">กลับหน้าหลัก</a>
         
         <div class="header">
-            <h1>ตัวอย่างการตั้งค่า EA Trading</h1>
-            <p>รวมตัวอย่างการตั้งค่าที่เหมาะกับสไตล์การเทรดแต่ละประเภท เลือกได้ตามความเสี่ยงที่รับได้</p>
+            <h1>🚀 ตัวอย่างการตั้งค่า EA Trading ใหม่!</h1>
+            <p>รวมตัวอย่างการตั้งค่าที่เหมาะกับสไตล์การเทรดแต่ละประเภท พร้อมระบบ Enhanced TP/SL ใหม่!</p>
+            <div style="background: rgba(0, 255, 204, 0.1); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                <h3 style="margin-bottom: 10px; color: #00ffcc;">✨ ฟีเจอร์ใหม่ที่เพิ่มเข้ามา:</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 14px;">
+                    <div>🎯 Fixed Points</div>
+                    <div>📊 ATR-Based</div>
+                    <div>🎯 Swing Points</div>
+                    <div>📈 Percentage-Based</div>
+                    <div>🔀 Hybrid Method</div>
+                    <div>🎯 Multiple Targets</div>
+                    <div>⚡ Dynamic Adjustment</div>
+                </div>
+            </div>
         </div>
         
         <div class="settings-grid">
@@ -330,12 +362,16 @@
                     <span class="setting-value">0.01</span>
                 </div>
                 <div class="setting-item">
+                    <span class="setting-label">TP/SL Method</span>
+                    <span class="setting-value">Fixed Points</span>
+                </div>
+                <div class="setting-item">
                     <span class="setting-label">Stop Loss</span>
-                    <span class="setting-value">50 pips</span>
+                    <span class="setting-value">500 points</span>
                 </div>
                 <div class="setting-item">
                     <span class="setting-label">Take Profit</span>
-                    <span class="setting-value">25 pips</span>
+                    <span class="setting-value">300 points</span>
                 </div>
                 <div class="setting-item">
                     <span class="setting-label">Max Trades</span>
@@ -375,12 +411,20 @@
                     <span class="setting-value">0.05</span>
                 </div>
                 <div class="setting-item">
-                    <span class="setting-label">Stop Loss</span>
-                    <span class="setting-value">40 pips</span>
+                    <span class="setting-label">TP/SL Method</span>
+                    <span class="setting-value">ATR-Based</span>
                 </div>
                 <div class="setting-item">
-                    <span class="setting-label">Take Profit</span>
-                    <span class="setting-value">40 pips</span>
+                    <span class="setting-label">ATR Period</span>
+                    <span class="setting-value">14 (H4)</span>
+                </div>
+                <div class="setting-item">
+                    <span class="setting-label">SL Multiplier</span>
+                    <span class="setting-value">2.0x ATR</span>
+                </div>
+                <div class="setting-item">
+                    <span class="setting-label">TP Multiplier</span>
+                    <span class="setting-value">3.0x ATR</span>
                 </div>
                 <div class="setting-item">
                     <span class="setting-label">Max Trades</span>
@@ -420,12 +464,20 @@
                     <span class="setting-value">0.1</span>
                 </div>
                 <div class="setting-item">
-                    <span class="setting-label">Stop Loss</span>
-                    <span class="setting-value">30 pips</span>
+                    <span class="setting-label">TP/SL Method</span>
+                    <span class="setting-value">Hybrid Method</span>
                 </div>
                 <div class="setting-item">
-                    <span class="setting-label">Take Profit</span>
-                    <span class="setting-value">60 pips</span>
+                    <span class="setting-label">SL Method</span>
+                    <span class="setting-value">ATR-Based (1.5x)</span>
+                </div>
+                <div class="setting-item">
+                    <span class="setting-label">TP Method</span>
+                    <span class="setting-value">Swing Points</span>
+                </div>
+                <div class="setting-item">
+                    <span class="setting-label">Multiple Targets</span>
+                    <span class="setting-value">เปิดใช้งาน (33/33/34%)</span>
                 </div>
                 <div class="setting-item">
                     <span class="setting-label">Max Trades</span>
@@ -465,12 +517,20 @@
                     <span class="setting-value">0.02</span>
                 </div>
                 <div class="setting-item">
-                    <span class="setting-label">Stop Loss</span>
-                    <span class="setting-value">15 pips</span>
+                    <span class="setting-label">TP/SL Method</span>
+                    <span class="setting-value">ATR-Based</span>
                 </div>
                 <div class="setting-item">
-                    <span class="setting-label">Take Profit</span>
-                    <span class="setting-value">10 pips</span>
+                    <span class="setting-label">ATR Timeframe</span>
+                    <span class="setting-value">M15</span>
+                </div>
+                <div class="setting-item">
+                    <span class="setting-label">SL Multiplier</span>
+                    <span class="setting-value">1.5x ATR</span>
+                </div>
+                <div class="setting-item">
+                    <span class="setting-label">TP Multiplier</span>
+                    <span class="setting-value">1.0x ATR</span>
                 </div>
                 <div class="setting-item">
                     <span class="setting-label">Max Trades</span>
@@ -510,12 +570,20 @@
                     <span class="setting-value">0.03</span>
                 </div>
                 <div class="setting-item">
+                    <span class="setting-label">TP/SL Method</span>
+                    <span class="setting-value">Percentage-Based</span>
+                </div>
+                <div class="setting-item">
                     <span class="setting-label">Stop Loss</span>
-                    <span class="setting-value">80 pips</span>
+                    <span class="setting-value">3% ของราคาเข้า</span>
                 </div>
                 <div class="setting-item">
                     <span class="setting-label">Take Profit</span>
-                    <span class="setting-value">100 pips</span>
+                    <span class="setting-value">5% ของราคาเข้า</span>
+                </div>
+                <div class="setting-item">
+                    <span class="setting-label">Dynamic Adjustment</span>
+                    <span class="setting-value">เปิดใช้งาน</span>
                 </div>
                 <div class="setting-item">
                     <span class="setting-label">Max Trades</span>

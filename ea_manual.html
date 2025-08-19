@@ -836,6 +836,204 @@
                 box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
             }
         }
+
+        /* TP/SL Tab System Styles */
+        .tpsl-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+            padding: 5px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 12px;
+        }
+
+        .tpsl-tab {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+            min-width: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tpsl-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .tpsl-tab:hover::before {
+            left: 100%;
+        }
+
+        .tpsl-tab:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .tpsl-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .tpsl-content {
+            display: none;
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tpsl-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+
+        .difficulty-beginner {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .difficulty-intermediate {
+            background: linear-gradient(135deg, #ffc107, #fd7e14);
+            color: #333;
+        }
+
+        .difficulty-advanced {
+            background: linear-gradient(135deg, #dc3545, #e83e8c);
+            color: white;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            margin: 15px 0;
+        }
+
+        .example-box h5 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .example-box pre {
+            background: #343a40;
+            color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .pros, .cons {
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .pros {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(32, 201, 151, 0.1));
+            border-left: 4px solid #28a745;
+        }
+
+        .cons {
+            background: linear-gradient(135deg, rgba(220, 53, 69, 0.1), rgba(232, 62, 140, 0.1));
+            border-left: 4px solid #dc3545;
+        }
+
+        .pros h6, .cons h6 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .pros ul, .cons ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .pros li, .cons li {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile responsive for tab system */
+        @media (max-width: 768px) {
+            .tpsl-tabs {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .tpsl-tab {
+                min-width: unset;
+                flex: unset;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .pros-cons {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .example-box {
+                padding: 15px;
+            }
+            
+            .example-box pre {
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1097,58 +1295,460 @@ InpUseTrailingStop = true
 
             <div class="accordion">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
-                    🎯 การตั้งค่า TP/SL และ Trailing Stop
+                    🚀 Enhanced TP/SL System - ระบบ TP/SL ขั้นสูงใหม่!
                 </div>
                 <div class="accordion-content">
                     <div class="accordion-content-inner">
-                        <table class="parameter-table">
-                            <thead>
-                                <tr>
-                                    <th>พารามิเตอร์</th>
-                                    <th>คำอธิบาย</th>
-                                    <th>ค่าแนะนำ</th>
-                                    <th>สำหรับ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>InpEnableTPSL</td>
-                                    <td>เปิดใช้งาน TP/SL อัตโนมัติ</td>
-                                    <td>true</td>
-                                    <td>ทุกการเทรด</td>
-                                </tr>
-                                <tr>
-                                    <td>InpTakeProfitPoints</td>
-                                    <td>Take Profit เป็น Points</td>
-                                    <td>3500.0</td>
-                                    <td>ทอง / 500 สำหรับ Forex</td>
-                                </tr>
-                                <tr>
-                                    <td>InpStopLossPoints</td>
-                                    <td>Stop Loss เป็น Points</td>
-                                    <td>2000.0</td>
-                                    <td>ทอง / 300 สำหรับ Forex</td>
-                                </tr>
-                                <tr>
-                                    <td>InpUseTrailingStop</td>
-                                    <td>เปิดใช้งาน Trailing Stop</td>
-                                    <td>false</td>
-                                    <td>เหมาะกับ Trend Market</td>
-                                </tr>
-                                <tr>
-                                    <td>InpTrailingStopPoints</td>
-                                    <td>ระยะห่าง Trailing Stop</td>
-                                    <td>1000.0</td>
-                                    <td>เมื่อเปิด Trailing Stop</td>
-                                </tr>
-                                <tr>
-                                    <td>InpTrailingStepPoints</td>
-                                    <td>ขั้นตอนการขยับ Trailing</td>
-                                    <td>100.0</td>
-                                    <td>ความละเอียดในการปรับ</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <!-- TP/SL Method Selection -->
+                        <div style="background: #e8f4f8; padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 5px solid #667eea;">
+                            <h3 style="color: #667eea; margin-bottom: 15px;">🎯 การเลือกวิธีการคำนวณ TP/SL</h3>
+                            <p style="margin-bottom: 15px;">ใช้พารามิเตอร์ <strong>InpTPSLMethod</strong> ในการเลือกวิธีการคำนวณ TP/SL ที่ต้องการ:</p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 15px;">
+                                <div style="background: #3498db; color: white; padding: 8px 12px; border-radius: 5px; text-align: center; font-size: 14px;">0 = FIXED_POINTS</div>
+                                <div style="background: #f39c12; color: white; padding: 8px 12px; border-radius: 5px; text-align: center; font-size: 14px;">1 = ATR_BASED</div>
+                                <div style="background: #e74c3c; color: white; padding: 8px 12px; border-radius: 5px; text-align: center; font-size: 14px;">2 = SWING_POINTS</div>
+                                <div style="background: #9b59b6; color: white; padding: 8px 12px; border-radius: 5px; text-align: center; font-size: 14px;">3 = PERCENTAGE_BASED</div>
+                                <div style="background: #1abc9c; color: white; padding: 8px 12px; border-radius: 5px; text-align: center; font-size: 14px;">4 = HYBRID_METHOD</div>
+                            </div>
+                            <p style="font-weight: 600; color: #2c3e50;">💡 แนะนำ: F1 Basic ใช้ 0-3, F2 Gold ใช้ 1-2, F3 Pro ใช้ 4</p>
+                        </div>
+                        
+                        <!-- Tab Navigation -->
+                        <div class="tpsl-tabs">
+                            <button class="tpsl-tab active" onclick="showTPSLTab('fixed')">
+                                <span class="tab-number">0</span>
+                                <span class="tab-title">Fixed Points</span>
+                                <span class="tab-subtitle">จุดตายตัว</span>
+                            </button>
+                            <button class="tpsl-tab" onclick="showTPSLTab('atr')">
+                                <span class="tab-number">1</span>
+                                <span class="tab-title">ATR-Based</span>
+                                <span class="tab-subtitle">ตามความผันผวน</span>
+                            </button>
+                            <button class="tpsl-tab" onclick="showTPSLTab('swing')">
+                                <span class="tab-number">2</span>
+                                <span class="tab-title">Swing Points</span>
+                                <span class="tab-subtitle">จุด High-Low</span>
+                            </button>
+                            <button class="tpsl-tab" onclick="showTPSLTab('percentage')">
+                                <span class="tab-number">3</span>
+                                <span class="tab-title">Percentage</span>
+                                <span class="tab-subtitle">เปอร์เซ็นต์</span>
+                            </button>
+                            <button class="tpsl-tab" onclick="showTPSLTab('hybrid')">
+                                <span class="tab-number">4</span>
+                                <span class="tab-title">Hybrid</span>
+                                <span class="tab-subtitle">ผสมผสาน</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Tab Content -->
+                        <div class="tpsl-tab-content">
+                            <!-- Fixed Points Tab -->
+                            <div id="fixed-tab" class="tpsl-content active">
+                                <div class="method-header">
+                                    <h3>📊 Fixed Points Method (วิธีแบบเดิม)</h3>
+                                    <div class="difficulty-badge beginner">เหมาะสำหรับมือใหม่</div>
+                                </div>
+                                <div class="method-description">
+                                    <p><strong>คำอธิบาย:</strong> กำหนด TP/SL เป็นจำนวน Points ตายตัว ไม่เปลี่ยนแปลงตามสภาวะตลาด</p>
+                                    <p><strong>ข้อดี:</strong> เข้าใจง่าย ควบคุมได้ ไม่ซับซ้อน</p>
+                                    <p><strong>ข้อเสีย:</strong> ไม่ปรับตามความผันผวนของตลาด</p>
+                                </div>
+                                <table class="parameter-table">
+                                    <thead>
+                                        <tr>
+                                            <th>พารามิเตอร์</th>
+                                            <th>คำอธิบาย</th>
+                                            <th>ค่าแนะนำ</th>
+                                            <th>หมายเหตุ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>InpTakeProfitPoints</strong></td>
+                                            <td>Take Profit เป็น Points</td>
+                                            <td>3500.0</td>
+                                            <td>ทอง / 500 สำหรับ Forex</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>InpStopLossPoints</strong></td>
+                                            <td>Stop Loss เป็น Points</td>
+                                            <td>2000.0</td>
+                                            <td>ทอง / 300 สำหรับ Forex</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="example-box">
+                                    <h4>💡 ตัวอย่างการตั้งค่า:</h4>
+                                    <pre><code>InpTPSLMethod = 0  // Fixed Points
+InpEnableTPSL = true
+InpTakeProfitPoints = 500.0    // 50 pips สำหรับ Forex
+InpStopLossPoints = 300.0      // 30 pips สำหรับ Forex</code></pre>
+                                </div>
+                            </div>
+                            
+                            <!-- ATR-Based Tab -->
+                            <div id="atr-tab" class="tpsl-content">
+                                <div class="method-header">
+                                    <h3>📈 ATR-Based Method (ปรับตามความผันผวน)</h3>
+                                    <div class="difficulty-badge intermediate">เหมาะสำหรับระดับกลาง</div>
+                                </div>
+                                <div class="method-description">
+                                    <p><strong>คำอธิบาย:</strong> ใช้ Average True Range (ATR) ในการคำนวณ TP/SL ให้ปรับตามความผันผวนของตลาด</p>
+                                    <p><strong>ข้อดี:</strong> ปรับตามสภาวะตลาด รองรับความผันผวน มีเหตุผล</p>
+                                    <p><strong>ข้อเสีย:</strong> ซับซ้อนกว่า อาจให้ SL/TP ที่กว้างเกินไปในบางครั้ง</p>
+                                </div>
+                                <table class="parameter-table">
+                                    <thead>
+                                        <tr>
+                                            <th>พารามิเตอร์</th>
+                                            <th>คำอธิบาย</th>
+                                            <th>ค่าแนะนำ</th>
+                                            <th>ช่วงที่เหมาะสม</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>InpATRTimeframe</strong></td>
+                                            <td>กรอบเวลาสำหรับคำนวณ ATR</td>
+                                            <td>PERIOD_H4</td>
+                                            <td>H1/H4/Daily/Weekly</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>InpATRPeriod</strong></td>
+                                            <td>จำนวนแท่งเทียนสำหรับ ATR</td>
+                                            <td>14</td>
+                                            <td>10-21 แท่ง</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>InpATRMultiplierSL</strong></td>
+                                            <td>ตัวคูณ ATR สำหรับ Stop Loss</td>
+                                            <td>2.0</td>
+                                            <td>1.5-3.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>InpATRMultiplierTP</strong></td>
+                                            <td>ตัวคูณ ATR สำหรับ Take Profit</td>
+                                            <td>3.0</td>
+                                            <td>2.0-5.0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="example-box">
+                                    <h4>💡 ตัวอย่างการตั้งค่า:</h4>
+                                    <pre><code>InpTPSLMethod = 1  // ATR-Based
+InpATRTimeframe = PERIOD_H4
+InpATRPeriod = 14
+InpATRMultiplierSL = 2.0      // SL = ATR × 2
+InpATRMultiplierTP = 3.0      // TP = ATR × 3</code></pre>
+                                    <p><strong>การคำนวณ:</strong> หาก ATR = 0.0050, SL = 0.0100, TP = 0.0150</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Swing Points Tab -->
+                            <div id="swing-tab" class="tpsl-content">
+                                <div class="method-header">
+                                    <h3>🎯 Swing Points Method (ใช้จุด High-Low)</h3>
+                                    <div class="difficulty-badge intermediate">เหมาะสำหรับระดับกลาง</div>
+                                </div>
+                                <div class="method-description">
+                                    <p><strong>คำอธิบาย:</strong> หาจุด Highest High และ Lowest Low ย้อนหลังเป็นจำนวนแท่งที่กำหนด แล้วใช้เป็นฐานในการคำนวณ TP/SL</p>
+                                    <p><strong>ข้อดี:</strong> ใช้โครงสร้างตลาดจริง เหมาะกับ Swing Trading</p>
+                                    <p><strong>ข้อเสี่ยง:</strong> อาจให้ SL/TP ที่กว้างมากในตลาดที่มี Range กว้าง</p>
+                                </div>
+                                <table class="parameter-table">
+                                    <thead>
+                                        <tr>
+                                            <th>พารามิเตอร์</th>
+                                            <th>คำอธิบาย</th>
+                                            <th>ค่าแนะนำ</th>
+                                            <th>ช่วงที่เหมาะสม</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>InpSwingTimeframe</strong></td>
+                                            <td>กรอบเวลาสำหรับหาจุด Swing</td>
+                                            <td>PERIOD_H4</td>
+                                            <td>H1/H4/Daily</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>InpSwingLookback</strong></td>
+                                            <td>จำนวนแท่งย้อนหลังสำหรับหา High/Low</td>
+                                            <td>20</td>
+                                            <td>10-50 แท่ง</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>InpSwingBufferPercent</strong></td>
+                                            <td>เผื่อระยะห่างเป็นเปอร์เซ็นต์</td>
+                                            <td>10.0</td>
+                                            <td>5-20%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="example-box">
+                                    <h4>💡 ตัวอย่างการตั้งค่า:</h4>
+                                    <pre><code>InpTPSLMethod = 2  // Swing Points
+InpSwingTimeframe = PERIOD_H4
+InpSwingLookback = 20         // มอง 20 แท่งย้อนหลัง
+InpSwingBufferPercent = 10.0  // เผื่อ 10%</code></pre>
+                                    <p><strong>การคำนวณ:</strong> หา High/Low ใน 20 แท่ง แล้วเผื่อระยะ 10%</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Percentage Tab -->
+                            <div id="percentage-tab" class="tpsl-content">
+                                <div class="method-header">
+                                    <h3>📊 Percentage-Based Method (เปอร์เซ็นต์)</h3>
+                                    <div class="difficulty-badge beginner">เหมาะสำหรับมือใหม่</div>
+                                </div>
+                                <div class="method-description">
+                                    <p><strong>คำอธิบาย:</strong> กำหนด TP/SL เป็นเปอร์เซ็นต์ของราคาเข้า เหมาะสำหรับการจัดการ Risk แบบเปอร์เซ็นต์</p>
+                                    <p><strong>ข้อดี:</strong> ควบคุม Risk ได้ชัดเจน เข้าใจง่าย</p>
+                                    <p><strong>ข้อเสีย:</strong> ไม่คำนึงถึงสภาวะตลาด อาจไม่เหมาะกับทุกสถานการณ์</p>
+                                </div>
+                                <table class="parameter-table">
+                                    <thead>
+                                        <tr>
+                                            <th>พารามิเตอร์</th>
+                                            <th>คำอธิบาย</th>
+                                            <th>ค่าแนะนำ</th>
+                                            <th>ช่วงที่เหมาะสม</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>InpSLPercentage</strong></td>
+                                            <td>Stop Loss เป็นเปอร์เซ็นต์ของราคาเข้า</td>
+                                            <td>2.0</td>
+                                            <td>1.0-5.0%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>InpTPPercentage</strong></td>
+                                            <td>Take Profit เป็นเปอร์เซ็นต์ของราคาเข้า</td>
+                                            <td>4.0</td>
+                                            <td>2.0-10.0%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="example-box">
+                                    <h4>💡 ตัวอย่างการตั้งค่า:</h4>
+                                    <pre><code>InpTPSLMethod = 3  // Percentage-Based
+InpSLPercentage = 2.0         // SL = 2% ของราคาเข้า
+InpTPPercentage = 4.0         // TP = 4% ของราคาเข้า</code></pre>
+                                    <p><strong>การคำนวณ:</strong> หากเข้า 1.2000, SL = 1.1760, TP = 1.2480</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Hybrid Tab -->
+                            <div id="hybrid-tab" class="tpsl-content">
+                                <div class="method-header">
+                                    <h3>🔀 Hybrid Method (ผสมผสาน ATR + Swing)</h3>
+                                    <div class="difficulty-badge advanced">เหมาะสำหรับมืออาชีพ</div>
+                                </div>
+                                <div class="method-description">
+                                    <p><strong>คำอธิบาย:</strong> ใช้ ATR สำหรับกำหนด Stop Loss (ปรับตามความผันผวน) และ Swing Points สำหรับกำหนด Take Profit (ตามโครงสร้างตลาด)</p>
+                                    <p><strong>ข้อดี:</strong> ได้ประโยชน์จากทั้งสองวิธี SL ปรับตามความผันผวน TP ตามโครงสร้างตลาด</p>
+                                    <p><strong>ข้อเสีย:</strong> ซับซ้อน ต้องเข้าใจทั้งสองแนวคิด</p>
+                                </div>
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                                    <h4 style="color: #495057;">🔧 การทำงาน:</h4>
+                                    <ul style="margin: 0; padding-left: 20px;">
+                                        <li><strong>Stop Loss:</strong> ใช้ ATR × Multiplier (ตามพารามิเตอร์ ATR-Based)</li>
+                                        <li><strong>Take Profit:</strong> ใช้ Swing Points (ตามพารามิเตอร์ Swing Points)</li>
+                                    </ul>
+                                </div>
+                                <table class="parameter-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ใช้พารามิเตอร์จาก</th>
+                                            <th>สำหรับ</th>
+                                            <th>คำอธิบาย</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>ATR-Based Method</strong></td>
+                                            <td>Stop Loss</td>
+                                            <td>InpATRTimeframe, InpATRPeriod, InpATRMultiplierSL</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Swing Points Method</strong></td>
+                                            <td>Take Profit</td>
+                                            <td>InpSwingTimeframe, InpSwingLookback, InpSwingBufferPercent</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="example-box">
+                                    <h4>💡 ตัวอย่างการตั้งค่า:</h4>
+                                    <pre><code>InpTPSLMethod = 4  // Hybrid Method
+
+// ATR Settings (สำหรับ SL)
+InpATRTimeframe = PERIOD_H4
+InpATRPeriod = 14
+InpATRMultiplierSL = 2.0
+
+// Swing Settings (สำหรับ TP)
+InpSwingTimeframe = PERIOD_H4
+InpSwingLookback = 20
+InpSwingBufferPercent = 10.0</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Advanced Features -->
+                        <div class="advanced-features">
+                            <h3 style="color: #e67e22; margin: 30px 0 15px;">🎯 Multiple Targets System</h3>
+                            <div style="background: #fff9e6; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                                <p><strong>การทำงาน:</strong> แบ่ง Position เป็น 3 ส่วน แต่ละส่วนมี TP ที่ระยะต่างกัน</p>
+                            </div>
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>พารามิเตอร์</th>
+                                        <th>คำอธิบาย</th>
+                                        <th>ค่าแนะนำ</th>
+                                        <th>หมายเหตุ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background: #fff9e6;">
+                                        <td><strong>InpEnableMultipleTargets</strong></td>
+                                        <td>เปิดใช้ระบบ Multiple Targets</td>
+                                        <td>false</td>
+                                        <td>Professional Level</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>InpTarget1Percentage</strong></td>
+                                        <td>เปอร์เซ็นต์ Position สำหรับ Target 1</td>
+                                        <td>33.0</td>
+                                        <td>รวมต้องเป็น 100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>InpTarget1Multiplier</strong></td>
+                                        <td>ตัวคูณระยะห่าง Target 1</td>
+                                        <td>1.0</td>
+                                        <td>ใกล้ที่สุด</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>InpTarget2Percentage</strong></td>
+                                        <td>เปอร์เซ็นต์ Position สำหรับ Target 2</td>
+                                        <td>33.0</td>
+                                        <td>กลาง</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>InpTarget2Multiplier</strong></td>
+                                        <td>ตัวคูณระยะห่าง Target 2</td>
+                                        <td>2.0</td>
+                                        <td>กลาง</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>InpTarget3Percentage</strong></td>
+                                        <td>เปอร์เซ็นต์ Position สำหรับ Target 3</td>
+                                        <td>34.0</td>
+                                        <td>ไกลที่สุด</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>InpTarget3Multiplier</strong></td>
+                                        <td>ตัวคูณระยะห่าง Target 3</td>
+                                        <td>3.0</td>
+                                        <td>ไกลที่สุด</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <h3 style="color: #34495e; margin: 30px 0 15px;">⚡ Dynamic Adjustment</h3>
+                            <div style="background: #f4f4f4; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                                <p><strong>การทำงาน:</strong> ปรับ TP/SL อัตโนมัติตามความผันผวนของตลาด โดยเปรียบเทียบ ATR ปัจจุบันกับ ATR รายวัน</p>
+                            </div>
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>พารามิเตอร์</th>
+                                        <th>คำอธิบาย</th>
+                                        <th>ค่าแนะนำ</th>
+                                        <th>ผลลัพธ์</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background: #f4f4f4;">
+                                        <td><strong>InpEnableDynamicAdjustment</strong></td>
+                                        <td>เปิดการปรับ TP/SL อัตโนมัติ</td>
+                                        <td>false</td>
+                                        <td>Advanced Users</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>InpVolatilityThreshold</strong></td>
+                                        <td>เกณฑ์ความผันผวนสำหรับปรับ</td>
+                                        <td>0.02</td>
+                                        <td>2% = ขีดปรับ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <h3 style="color: #2c3e50; margin: 30px 0 15px;">📊 Trailing Stop System</h3>
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>พารามิเตอร์</th>
+                                        <th>คำอธิบาย</th>
+                                        <th>ค่าแนะนำ</th>
+                                        <th>เหมาะกับ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>InpUseTrailingStop</strong></td>
+                                        <td>เปิดใช้งาน Trailing Stop</td>
+                                        <td>false</td>
+                                        <td>Trend Market</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>InpTrailingStopDistance</strong></td>
+                                        <td>ระยะห่าง Trailing Stop</td>
+                                        <td>50.0</td>
+                                        <td>Points</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>InpTrailingStopStep</strong></td>
+                                        <td>ขั้นตอนการขยับ Trailing</td>
+                                        <td>10.0</td>
+                                        <td>ความละเอียด</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="recommendations">
+                            <h4 style="color: #27ae60; margin-top: 30px;">💡 คำแนะนำการใช้งานตามระดับ:</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border-left: 4px solid #27ae60;">
+                                    <h5 style="color: #27ae60; margin-bottom: 10px;">🎯 มือใหม่ (F1 Basic)</h5>
+                                    <ul style="margin: 0; font-size: 14px;">
+                                        <li>Fixed Points (0)</li>
+                                        <li>Percentage-Based (3)</li>
+                                        <li>เริ่มต้นด้วยค่าเล็ก</li>
+                                    </ul>
+                                </div>
+                                <div style="background: #fff9e6; padding: 15px; border-radius: 8px; border-left: 4px solid #f39c12;">
+                                    <h5 style="color: #f39c12; margin-bottom: 10px;">🥇 ระดับกลาง (F2 Gold)</h5>
+                                    <ul style="margin: 0; font-size: 14px;">
+                                        <li>ATR-Based (1)</li>
+                                        <li>Swing Points (2)</li>
+                                        <li>+ Dynamic Adjustment</li>
+                                    </ul>
+                                </div>
+                                <div style="background: #f4f0ff; padding: 15px; border-radius: 8px; border-left: 4px solid #9b59b6;">
+                                    <h5 style="color: #9b59b6; margin-bottom: 10px;">🚀 มืออาชีพ (F3 Pro)</h5>
+                                    <ul style="margin: 0; font-size: 14px;">
+                                        <li>Hybrid Method (4)</li>
+                                        <li>+ Multiple Targets</li>
+                                        <li>+ Full Dynamic Suite</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2704,10 +3304,48 @@ InpShowTradingCosts = false
             }
         });
 
+        // TP/SL Tab System Function
+        function showTPSLTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tpsl-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tpsl-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            const selectedContent = document.getElementById(tabName + '-tab');
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Smooth scroll to tab section (optional)
+            const tabContainer = document.querySelector('.tpsl-tabs').parentElement;
+            if (tabContainer) {
+                tabContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Initialize first tab as active on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstTab = document.querySelector('.tpsl-tab');
+            const firstContent = document.getElementById('fixed-tab');
+            
+            if (firstTab && firstContent) {
+                firstTab.classList.add('active');
+                firstContent.classList.add('active');
+            }
+        });
+
         console.log('🚀 Advanced Trading EA V1.00 Manual Loaded Successfully!');
-        console.log('📊 Features: 30+ Signals, Dual Close System, Hybrid Mode');
+        console.log('📊 Features: 30+ Signals, Dual Close System, Hybrid Mode, Enhanced TP/SL Tab System');
         console.log('💡 Tip: Use Ctrl+F to search in this manual');
     </script>
 </body>
-
 </html>

@@ -342,6 +342,24 @@
                 font-size: 0.9rem;
                 margin-bottom: 20px;
             }
+            
+            /* Enhanced TP/SL info responsive */
+            .footer h3 {
+                font-size: 1.2rem;
+            }
+            
+            .footer p {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+            }
+            
+            .stats-row {
+                gap: 10px;
+            }
+            
+            .stat-box {
+                min-width: 120px;
+            }
         }
     </style>
 </head>
@@ -350,7 +368,7 @@
         <a href="index.html" class="back-button">กลับหน้าหลัก</a>
         <div class="main-header">
             <h1>📈 คู่มือสูตรเทรด 30 แบบ</h1>
-            <p>ระบบเทรดอัตโนมัติขั้นสูง สำหรับทุกระดับ</p>
+            <p>ระบบเทรดอัตโนมัติขั้นสูง พร้อมระบบ Enhanced TP/SL ใหม่!</p>
             
             <div class="stats-row">
                 <div class="stat-box">
@@ -358,8 +376,12 @@
                     <span class="stat-label">สูตรเทรด</span>
                 </div>
                 <div class="stat-box">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">วิธี TP/SL</span>
+                </div>
+                <div class="stat-box">
                     <span class="stat-number">3</span>
-                    <span class="stat-label">ระดับความยาก</span>
+                    <span class="stat-label">Multiple Targets</span>
                 </div>
                 <div class="stat-box">
                     <span class="stat-number">100%</span>
@@ -376,7 +398,7 @@
                 <h2 class="card-title">F1 Basic (1-10)</h2>
                 <p class="card-subtitle">สูตรพื้นฐานสำหรับผู้เริ่มต้น</p>
                 <p class="card-description">
-                    เรียนรู้สูตรเทรดพื้นฐานที่ใช้งานง่าย เหมาะสำหรับผู้ที่เพิ่งเริ่มต้นเทรด Forex
+                    เรียนรู้สูตรเทรดพื้นฐานที่ใช้งานง่าย พร้อมระบบ TP/SL แบบ Fixed Points และ Percentage-Based เหมาะสำหรับผู้เริ่มต้น
                 </p>
                 <ul class="strategies-list">
                     <li>• Double MA Cross - การตัดกันของ Moving Average</li>
@@ -384,6 +406,7 @@
                     <li>• MACD Signals - สัญญาณจาก MACD</li>
                     <li>• RSI Overbought/Oversold - สัญญาณ RSI</li>
                     <li>• Bollinger Bands - การสะท้อนจากแบนด์</li>
+                    <li><strong>🎯 Enhanced TP/SL:</strong> Fixed Points + Percentage-Based</li>
                 </ul>
                 <a href="F1_Basic.html" class="view-manual-btn">เรียนรู้สูตรพื้นฐาน</a>
             </div>
@@ -395,7 +418,7 @@
                 <h2 class="card-title">F2 Gold (11-20)</h2>
                 <p class="card-subtitle">สูตรเฉพาะสำหรับเทรดทอง</p>
                 <p class="card-description">
-                    สูตรขั้นกลางที่ออกแบบเฉพาะสำหรับการเทรดทอง ใช้เทคนิคขั้นสูงกว่า
+                    สูตรขั้นกลางสำหรับทอง พร้อมระบบ ATR-Based TP/SL และ Swing Points ที่ปรับตามความผันผวนของตลาด
                 </p>
                 <ul class="strategies-list">
                     <li>• Gold Scalping EMA - EMA 5/13/21 สำหรับ Scalping</li>
@@ -403,6 +426,7 @@
                     <li>• Fibonacci Retracement - การ Retracement</li>
                     <li>• CCI Divergence - การ Divergence ของ CCI</li>
                     <li>• Volume Price Analysis - วิเคราะห์ Volume</li>
+                    <li><strong>📊 Enhanced TP/SL:</strong> ATR-Based + Swing Points + Dynamic Adjustment</li>
                 </ul>
                 <a href="F2_Gold.html" class="view-manual-btn">เรียนรู้สูตรทอง</a>
             </div>
@@ -414,7 +438,7 @@
                 <h2 class="card-title">F3 Pro (21-30)</h2>
                 <p class="card-subtitle">Smart Money Concepts & ICT</p>
                 <p class="card-description">
-                    สูตรระดับ Professional ใช้แนวคิด SMC และ ICT สำหรับเทรดเดอร์มืออาชีพ
+                    สูตรระดับ Professional พร้อม Hybrid TP/SL, Multiple Targets System และ Dynamic Adjustment สำหรับเทรดเดอร์มืออาชีพ
                 </p>
                 <ul class="strategies-list">
                     <li>• SMC Order Block - บล็อกออเดอร์ของ Smart Money</li>
@@ -422,6 +446,7 @@
                     <li>• Liquidity Sweep - การกวาด Liquidity</li>
                     <li>• ICT Kill Zone - ช่วงเวลา Smart Money</li>
                     <li>• Wyckoff Method - การวิเคราะห์ Wyckoff</li>
+                    <li><strong>🚀 Enhanced TP/SL:</strong> Hybrid Method + Multiple Targets (3 Levels) + Full Dynamic System</li>
                 </ul>
                 <a href="F3_Pro.html" class="view-manual-btn">เรียนรู้สูตร Pro</a>
             </div>
@@ -433,6 +458,15 @@
             <p><strong>2.</strong> ศึกษาสูตรทีละตัว อย่าเร่งรีบ</p>
             <p><strong>3.</strong> ทดสอบใน Demo Account ก่อนใช้เงินจริง</p>
             <p><strong>4.</strong> ปรับ Risk Management ให้เหมาะสม</p>
+            <br>
+            <h3>🚀 ระบบ Enhanced TP/SL ใหม่!</h3>
+            <p><strong>🎯 Fixed Points:</strong> ระบบ TP/SL แบบจุดตายตัว เหมาะสำหรับผู้เริ่มต้น</p>
+            <p><strong>📊 ATR-Based:</strong> คำนวณ TP/SL จาก Average True Range ปรับตามความผันผวน</p>
+            <p><strong>🎯 Swing Points:</strong> ใช้จุด High-Low สำคัญในการกำหนด TP/SL</p>
+            <p><strong>📈 Percentage-Based:</strong> กำหนด TP/SL เป็นเปอร์เซ็นต์ของราคาเข้า</p>
+            <p><strong>🔀 Hybrid Method:</strong> ผสมผสาน ATR สำหรับ SL และ Swing Points สำหรับ TP</p>
+            <p><strong>🎯 Multiple Targets:</strong> แบ่ง Position เป็น 3 ส่วน มี TP หลายระดับ</p>
+            <p><strong>⚡ Dynamic Adjustment:</strong> ปรับ TP/SL อัตโนมัติตามสภาวะตลาด</p>
             <br>
             <p>💡 <strong>Tips:</strong> ใช้งานได้ทั้งบนคอมพิวเตอร์และมือถือ</p>
             <p>⚠️ <strong>คำเตือน:</strong> การเทรดมีความเสี่ยง ใช้เงินที่สามารถเสียได้เท่านั้น</p>

@@ -316,8 +316,28 @@
             font-size: 16px;
         } 
 
+        /* Enhanced TP/SL info box styles */
+        .header div[style*="background: rgba(52, 152, 219, 0.1)"] {
+            border-left: 4px solid #3498db;
+        }
+        
         /* Responsive สำหรับมือถือ */
         @media (max-width: 768px) {
+            
+            /* Enhanced TP/SL info responsive */
+            .header div[style*="background: rgba(52, 152, 219, 0.1)"] h3 {
+                font-size: 1rem;
+            }
+            
+            .header div[style*="background: rgba(52, 152, 219, 0.1)"] > div {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+            }
+            
+            .header div[style*="background: rgba(52, 152, 219, 0.1)"] > div > div {
+                margin-bottom: 5px;
+                font-size: 12px !important;
+            }
             .back-button {
                 padding: 10px 20px;
                 font-size: 0.9rem;
@@ -332,7 +352,15 @@
         <a href="summarize_manual.html" class="back-button">กลับ</a>
         <div class="header">
             <h1>🚀 F1 Basic Trading Strategies</h1>
-            <p>คู่มือสูตรการเทรดพื้นฐาน 10 สูตรแรก - เรียนรู้ง่าย ใช้งานได้จริง</p>
+            <p>คู่มือสูตรการเทรดพื้นฐาน 10 สูตรแรก พร้อมระบบ Enhanced TP/SL ใหม่!</p>
+            <div style="background: rgba(52, 152, 219, 0.1); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                <h3 style="margin-bottom: 10px; color: #3498db;">✨ เหมาะสำหรับระดับ F1 Basic:</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 14px;">
+                    <div style="background: #3498db; color: white; padding: 5px 10px; border-radius: 15px;">🎯 Fixed Points Method</div>
+                    <div style="background: #9b59b6; color: white; padding: 5px 10px; border-radius: 15px;">📊 Percentage-Based Method</div>
+                    <div style="background: #e74c3c; color: white; padding: 5px 10px; border-radius: 15px;">🔧 Basic Risk Management</div>
+                </div>
+            </div>
         </div>
 
         <div class="nav-tabs">
