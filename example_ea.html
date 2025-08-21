@@ -333,16 +333,132 @@
         <div class="header">
             <h1>🚀 ตัวอย่างการตั้งค่า EA Trading ใหม่!</h1>
             <p>รวมตัวอย่างการตั้งค่าที่เหมาะกับสไตล์การเทรดแต่ละประเภท พร้อมระบบ Enhanced TP/SL ใหม่!</p>
-            <div style="background: rgba(0, 255, 204, 0.1); padding: 15px; border-radius: 10px; margin-top: 15px;">
-                <h3 style="margin-bottom: 10px; color: #00ffcc;">✨ ฟีเจอร์ใหม่ที่เพิ่มเข้ามา:</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 14px;">
-                    <div>🎯 Fixed Points</div>
-                    <div>📊 ATR-Based</div>
-                    <div>🎯 Swing Points</div>
-                    <div>📈 Percentage-Based</div>
-                    <div>🔀 Hybrid Method</div>
-                    <div>🎯 Multiple Targets</div>
-                    <div>⚡ Dynamic Adjustment</div>
+            <div style="background: rgba(0, 255, 204, 0.1); padding: 20px; border-radius: 15px; margin-top: 20px;">
+                <h3 style="margin-bottom: 20px; color: #00ffcc; text-align: center;">📊 ภาพรวมการตั้งค่า EA</h3>
+                
+                <!-- Flow Chart Container -->
+                <div class="flowchart-container" style="position: relative; background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 30px; margin: 20px 0;">
+                    
+                    <!-- Step 1: Trading Direction -->
+                    <div class="flow-step" style="text-align: center; margin-bottom: 30px;">
+                        <div class="step-box" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 15px 25px; border-radius: 50px; display: inline-block; font-weight: 600; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);">
+                            <span style="font-size: 18px;">🎯 1. Trading Direction</span>
+                        </div>
+                        <div class="step-options" style="margin-top: 15px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                            <div class="option" style="background: rgba(102, 126, 234, 0.2); padding: 8px 15px; border-radius: 20px; font-size: 14px;">One Direction</div>
+                            <div class="option" style="background: rgba(102, 126, 234, 0.2); padding: 8px 15px; border-radius: 20px; font-size: 14px;">Two Direction</div>
+                        </div>
+                        <div class="arrow-down" style="text-align: center; font-size: 24px; margin: 15px 0; color: #00ffcc;">⬇️</div>
+                    </div>
+
+                    <!-- Step 2: Signal System -->
+                    <div class="flow-step" style="text-align: center; margin-bottom: 30px;">
+                        <div class="step-box" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white; padding: 15px 25px; border-radius: 50px; display: inline-block; font-weight: 600; box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);">
+                            <span style="font-size: 18px;">📡 2. Signal System</span>
+                        </div>
+                        <div class="step-options" style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                            <div class="option" style="background: rgba(240, 147, 251, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">Internal Signals (30 Types)</div>
+                            <div class="option" style="background: rgba(240, 147, 251, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">External Signals</div>
+                            <div class="option" style="background: rgba(240, 147, 251, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">Hybrid Mode</div>
+                        </div>
+                        <div class="arrow-down" style="text-align: center; font-size: 24px; margin: 15px 0; color: #00ffcc;">⬇️</div>
+                    </div>
+
+                    <!-- Step 3: Risk Management -->
+                    <div class="flow-step" style="text-align: center; margin-bottom: 30px;">
+                        <div class="step-box" style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; padding: 15px 25px; border-radius: 50px; display: inline-block; font-weight: 600; box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);">
+                            <span style="font-size: 18px;">🛡️ 3. Risk Management</span>
+                        </div>
+                        <div class="step-options" style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                            <div class="option" style="background: rgba(79, 172, 254, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">Fixed Lot Size</div>
+                            <div class="option" style="background: rgba(79, 172, 254, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">Martingale</div>
+                            <div class="option" style="background: rgba(79, 172, 254, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">Lot Plus</div>
+                            <div class="option" style="background: rgba(79, 172, 254, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">Magic Number</div>
+                        </div>
+                        <div class="arrow-down" style="text-align: center; font-size: 24px; margin: 15px 0; color: #00ffcc;">⬇️</div>
+                    </div>
+
+                    <!-- Step 4: TP/SL System -->
+                    <div class="flow-step" style="text-align: center; margin-bottom: 30px;">
+                        <div class="step-box" style="background: linear-gradient(135deg, #fa709a, #fee140); color: white; padding: 15px 25px; border-radius: 50px; display: inline-block; font-weight: 600; box-shadow: 0 5px 15px rgba(250, 112, 154, 0.4);">
+                            <span style="font-size: 18px;">🎯 4. Enhanced TP/SL Methods</span>
+                        </div>
+                        <div class="step-options" style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                            <div class="option" style="background: rgba(250, 112, 154, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">🎯 Fixed Points</div>
+                            <div class="option" style="background: rgba(250, 112, 154, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">📊 ATR-Based</div>
+                            <div class="option" style="background: rgba(250, 112, 154, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">🎯 Swing Points</div>
+                            <div class="option" style="background: rgba(250, 112, 154, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">📈 Percentage-Based</div>
+                            <div class="option" style="background: rgba(250, 112, 154, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center;">🔀 Hybrid Method</div>
+                        </div>
+                        <div class="arrow-down" style="text-align: center; font-size: 24px; margin: 15px 0; color: #00ffcc;">⬇️</div>
+                    </div>
+
+                    <!-- Step 5: Advanced Features -->
+                    <div class="flow-step" style="text-align: center; margin-bottom: 30px;">
+                        <div class="step-box" style="background: linear-gradient(135deg, #a8edea, #fed6e3); color: #333; padding: 15px 25px; border-radius: 50px; display: inline-block; font-weight: 600; box-shadow: 0 5px 15px rgba(168, 237, 234, 0.4);">
+                            <span style="font-size: 18px;">⚡ 5. Advanced Features</span>
+                        </div>
+                        <div class="step-options" style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                            <div class="option" style="background: rgba(168, 237, 234, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center; color: #333;">🎯 Multiple Targets (3 Levels)</div>
+                            <div class="option" style="background: rgba(168, 237, 234, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center; color: #333;">⚡ Dynamic Adjustment</div>
+                            <div class="option" style="background: rgba(168, 237, 234, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center; color: #333;">🔄 Trailing Stop</div>
+                        </div>
+                        <div class="arrow-down" style="text-align: center; font-size: 24px; margin: 15px 0; color: #00ffcc;">⬇️</div>
+                    </div>
+
+                    <!-- Step 6: Close System -->
+                    <div class="flow-step" style="text-align: center; margin-bottom: 20px;">
+                        <div class="step-box" style="background: linear-gradient(135deg, #ff9a9e, #fad0c4); color: #333; padding: 15px 25px; border-radius: 50px; display: inline-block; font-weight: 600; box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);">
+                            <span style="font-size: 18px;">🏁 6. Dual Close System</span>
+                        </div>
+                        <div class="step-options" style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                            <div class="option" style="background: rgba(255, 154, 158, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center; color: #333;">💰 Basic Close (Profit/Loss %/$)</div>
+                            <div class="option" style="background: rgba(255, 154, 158, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center; color: #333;">📊 Advanced Close (Balance/Equity)</div>
+                            <div class="option" style="background: rgba(255, 154, 158, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center; color: #333;">⏰ Time-Based Close</div>
+                            <div class="option" style="background: rgba(255, 154, 158, 0.2); padding: 8px 12px; border-radius: 15px; font-size: 13px; text-align: center; color: #333;">📈 Partial Close System</div>
+                        </div>
+                    </div>
+
+                    <!-- Final Step -->
+                    <div class="flow-final" style="text-align: center; margin-top: 30px;">
+                        <div class="final-box" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px 40px; border-radius: 25px; display: inline-block; font-weight: 700; font-size: 20px; box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);">
+                            🚀 Ready to Trade!
+                        </div>
+                        <div style="margin-top: 15px; font-size: 14px; color: #cccccc;">
+                            ⚡ Auto Trading ระบบจะทำงานตามการตั้งค่าที่กำหนด
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Points Summary -->
+                <div style="margin-top: 25px; background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 15px;">
+                    <h4 style="color: #00ffcc; margin-bottom: 15px; text-align: center;">📝 Key Configuration Points</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; font-size: 14px;">
+                        <div style="background: rgba(102, 126, 234, 0.1); padding: 12px; border-radius: 10px; border-left: 4px solid #667eea;">
+                            <strong>Trading Direction:</strong><br>
+                            OneDirection / TwoDirection
+                        </div>
+                        <div style="background: rgba(240, 147, 251, 0.1); padding: 12px; border-radius: 10px; border-left: 4px solid #f093fb;">
+                            <strong>Signal System:</strong><br>
+                            30 Internal Signals + External + Hybrid
+                        </div>
+                        <div style="background: rgba(79, 172, 254, 0.1); padding: 12px; border-radius: 10px; border-left: 4px solid #4facfe;">
+                            <strong>Risk Management:</strong><br>
+                            Lot Size + Magic Number + Slippage
+                        </div>
+                        <div style="background: rgba(250, 112, 154, 0.1); padding: 12px; border-radius: 10px; border-left: 4px solid #fa709a;">
+                            <strong>TP/SL Methods:</strong><br>
+                            5 Methods + Multiple Targets + Dynamic
+                        </div>
+                        <div style="background: rgba(168, 237, 234, 0.1); padding: 12px; border-radius: 10px; border-left: 4px solid #a8edea;">
+                            <strong>Close System:</strong><br>
+                            Dual System + Time-Based + Partial
+                        </div>
+                        <div style="background: rgba(255, 154, 158, 0.1); padding: 12px; border-radius: 10px; border-left: 4px solid #ff9a9e;">
+                            <strong>Notifications:</strong><br>
+                            Alerts + Logging + Mobile Push
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
