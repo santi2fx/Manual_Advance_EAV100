@@ -33,12 +33,12 @@
         }
 
         body {
-            font-family: 'Kanit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: var(--dark-text);
-            background: var(--primary-gradient);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
             min-height: 100vh;
-            scroll-behavior: smooth;
+            background-attachment: fixed;
         }
 
         .loading-overlay {
@@ -73,65 +73,47 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .header {
+        .main-header {
             text-align: center;
-            padding: 30px 0;
-            background: var(--primary-gradient);
-            color: white;
-            border-radius: 20px 20px 0 0;
-            margin: -20px -20px 30px -20px;
-            position: relative;
-            overflow: hidden;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 3px solid transparent;
+            background-clip: padding-box;
         }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .header h1 {
+        .main-header h1 {
+            color: #2c3e50;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
             font-size: 2.2rem;
             margin-bottom: 15px;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.3);
             font-weight: 700;
         }
 
-        .version {
-            background: rgba(255,255,255,0.25);
-            padding: 8px 20px;
-            border-radius: 25px;
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 500;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
+        .main-header p {
+            color: #7f8c8d;
+            font-size: 1.3rem;
+            margin-bottom: 30px;
         }
 
-        .header-subtitle {
-            margin-top: 15px;
+        .version {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            display: inline-block;
             font-size: 1rem;
-            opacity: 0.9;
-            font-weight: 300;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
         .warning {
@@ -183,101 +165,38 @@
             100% { width: 100%; }
         }
 
-        .nav-menu {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px 0;
-            position: sticky;
-            top: 15px;
-            z-index: 100;
-            box-shadow: var(--box-shadow);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
 
-        .nav-menu h3 {
-            color: var(--gray-text);
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
 
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-        }
 
-        .nav-btn {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-            padding: 6px 20px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .nav-btn:hover::before {
-            left: 100%;
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-        }
 
         .section {
-            margin: 40px 0;
+            margin: 30px 0;
             padding: 30px;
-            background: var(--white);
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            border-left: 6px solid #667eea;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            border: 2px solid transparent;
             position: relative;
+            overflow: hidden;
         }
 
         .section::before {
             content: '';
             position: absolute;
             top: 0;
+            left: 0;
             right: 0;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, rgba(102,126,234,0.1), transparent);
-            pointer-events: none;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
         }
 
         .section h2 {
-            color: #667eea;
+            color: #2c3e50;
             margin-bottom: 25px;
             font-size: 1.8rem;
-            font-weight: 600;
-            border-bottom: 3px solid #eee;
-            padding-bottom: 15px;
-            position: relative;
+            font-weight: 700;
+            text-align: center;
         }
 
         .section h2::after {
@@ -561,35 +480,28 @@
         }
 
         .back-button {
-            background: rgba(52, 152, 219, 0.9);
+            background: rgba(52, 152, 219, 0.8);
             color: #ffffff;
             text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 30px;
+            padding: 12px 24px;
+            border-radius: 25px;
             font-weight: 600;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             margin-bottom: 30px;
             border: 1px solid #3498db;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
         }
         
         .back-button:hover {
             background: rgba(52, 152, 219, 1);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
         }
         
         .back-button::before {
             content: '←';
-            margin-right: 10px;
-            font-size: 18px;
-            transition: var(--transition);
-        }
-
-        .back-button:hover::before {
-            transform: translateX(-3px);
+            margin-right: 8px;
+            font-size: 16px;
         }
 
         .stats-grid {
@@ -721,39 +633,43 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
-                margin: 10px;
                 padding: 15px;
             }
-            
-            .header h1 {
-                font-size: 1.8rem;
+
+            .main-header h1 {
+                font-size: 2.2rem;
             }
-            
-            .nav-grid {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 10px;
+
+            .main-header p {
+                font-size: 1.1rem;
             }
-            
-            .nav-btn {
-                padding: 8px 15px;
+
+            .section {
+                padding: 30px 20px;
+            }
+
+            .back-button {
+                padding: 10px 20px;
                 font-size: 0.9rem;
+                margin-bottom: 20px;
             }
-            
+
             .signal-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .parameter-table {
                 font-size: 0.85rem;
             }
-            
+
             .parameter-table th,
             .parameter-table td {
                 padding: 10px;
             }
 
             .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
 
             .floating-action {
@@ -780,7 +696,6 @@
 
         /* Print styles */
         @media print {
-            .nav-menu,
             .back-button,
             .floating-action {
                 display: none;
@@ -1046,14 +961,11 @@
     <div class="container fade-in">
         
         
-        <div class="header">
-            <a href="javascript:history.back()" class="back-button">กลับหน้าหลัก</a>
+        <a href="index.html" class="back-button">กลับหน้าหลัก</a>
+        <div class="main-header">
             <h1>🚀 Advanced Trading EA V1.00</h1>
-            <div class="version">Complete Enhanced Version</div>
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
-            </div>
-            <p class="header-subtitle">Created with ❤️ UU School Trading | สำหรับ MetaTrader 5</p>
+            <p>Complete Enhanced Version - คู่มือการใช้งานฉบับสมบูรณ์</p>
+            <div class="version">สำหรับ MetaTrader 5</div>
         </div>
 
         <div class="warning">
@@ -1063,23 +975,6 @@
 
         <input type="text" class="search-box" placeholder="🔍 ค้นหาในคู่มือ..." id="searchBox">
 
-        <div class="nav-menu">
-            <h3>📋 เมนูนำทาง</h3>
-            <div class="nav-grid">
-                <a href="#overview" class="nav-btn">📊 ภาพรวม</a>
-                <a href="#features" class="nav-btn">🌟 คุณสมบัติ</a>
-                <a href="#installation" class="nav-btn">⚙️ การติดตั้ง</a>
-                <a href="#quick-start" class="nav-btn">⚡ เริ่มต้นอย่างรวดเร็ว</a>
-                <a href="#basic-settings" class="nav-btn">🔧 การตั้งค่าพื้นฐาน</a>
-                <a href="#signal-system" class="nav-btn">📈 ระบบสัญญาณ</a>
-                <a href="#risk-management" class="nav-btn">🛡️ จัดการความเสี่ยง</a>
-                <a href="#close-system" class="nav-btn">🎯 ระบบปิดออเดอร์</a>
-                <a href="#optimization" class="nav-btn">🚀 การปรับแต่ง</a>
-                <a href="#troubleshooting" class="nav-btn">🔍 แก้ไขปัญหา</a>
-                <a href="#updates" class="nav-btn">🔄 อัพเดต</a>
-                <a href="#contact" class="nav-btn">📞 ติดต่อ</a>
-            </div>
-        </div>
 
         <section id="overview" class="section slide-in-left">
             <h2>📊 ภาพรวม EA</h2>
